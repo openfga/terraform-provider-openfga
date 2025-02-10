@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  openfga:
+    image: openfga/openfga:latest
+    command: run
+    ports:
+      - "8080:8080"
+    environment:
+      - OPENFGA_LOG_LEVEL=info
+      - OPENFGA_STORAGE_TYPE=memory
