@@ -224,7 +224,9 @@ func (p *OpenFgaProvider) Resources(ctx context.Context) []func() resource.Resou
 }
 
 func (p *OpenFgaProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
-	return []func() datasource.DataSource{}
+	return []func() datasource.DataSource{
+		NewStoreDataSource,
+	}
 }
 
 func (p *OpenFgaProvider) Functions(ctx context.Context) []func() function.Function {
