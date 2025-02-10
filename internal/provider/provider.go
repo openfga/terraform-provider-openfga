@@ -12,7 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 
-	client "github.com/openfga/go-sdk/client"
+	"github.com/openfga/go-sdk/client"
 	"github.com/openfga/go-sdk/credentials"
 )
 
@@ -218,7 +218,9 @@ func (p *OpenFgaProvider) Configure(ctx context.Context, req provider.ConfigureR
 }
 
 func (p *OpenFgaProvider) Resources(ctx context.Context) []func() resource.Resource {
-	return []func() resource.Resource{}
+	return []func() resource.Resource{
+		NewStoreResource,
+	}
 }
 
 func (p *OpenFgaProvider) DataSources(ctx context.Context) []func() datasource.DataSource {

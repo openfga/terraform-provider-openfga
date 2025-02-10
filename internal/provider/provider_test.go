@@ -1,6 +1,7 @@
 package provider
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
@@ -8,11 +9,15 @@ import (
 )
 
 const (
-	providerConfig = `
+	providerApiUrl = "http://localhost:8080"
+)
+
+var (
+	providerConfig = fmt.Sprintf(`
 provider "openfga" {
-  api_url = "http://localhost:8080"
+  api_url = %[1]q
 }
-`
+`, providerApiUrl)
 )
 
 var testAccProtoV6ProviderFactories = map[string]func() (tfprotov6.ProviderServer, error){
