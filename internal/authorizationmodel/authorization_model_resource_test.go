@@ -21,7 +21,9 @@ func TestAccAuthorizationModelResource(t *testing.T) {
 		Steps: []resource.TestStep{
 			// Create and Read testing
 			{
-				Config: testAccAuthorizationModelResourceConfig(modelJson("document")),
+				Config: testAccAuthorizationModelResourceConfig(
+					testAccAuthorizationModelResourceModelJson("document"),
+				),
 				ConfigStateChecks: []statecheck.StateCheck{
 					statecheck.ExpectKnownValue(
 						"openfga_authorization_model.test",
@@ -31,7 +33,9 @@ func TestAccAuthorizationModelResource(t *testing.T) {
 					statecheck.ExpectKnownValue(
 						"openfga_authorization_model.test",
 						tfjsonpath.New("model_json"),
-						knownvalue.StringExact(modelJson("document")),
+						knownvalue.StringExact(
+							testAccAuthorizationModelResourceModelJson("document"),
+						),
 					),
 				},
 			},
@@ -60,7 +64,9 @@ func TestAccAuthorizationModelResource(t *testing.T) {
 			},
 			// Update and Read testing
 			{
-				Config: testAccAuthorizationModelResourceConfig(modelJson("file")),
+				Config: testAccAuthorizationModelResourceConfig(
+					testAccAuthorizationModelResourceModelJson("file"),
+				),
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction(
@@ -78,7 +84,9 @@ func TestAccAuthorizationModelResource(t *testing.T) {
 					statecheck.ExpectKnownValue(
 						"openfga_authorization_model.test",
 						tfjsonpath.New("model_json"),
-						knownvalue.StringExact(modelJson("file")),
+						knownvalue.StringExact(
+							testAccAuthorizationModelResourceModelJson("file"),
+						),
 					),
 				},
 			},
@@ -87,7 +95,7 @@ func TestAccAuthorizationModelResource(t *testing.T) {
 	})
 }
 
-func modelJson(typeName string) string {
+func testAccAuthorizationModelResourceModelJson(typeName string) string {
 	return fmt.Sprintf(`{"schema_version":"1.1","type_definitions":[{"type":"user"},{"metadata":{"relations":{"viewer":{"directly_related_user_types":[{"condition":"non_expired_grant","type":"user"}]}}},"relations":{"viewer":{"this":{}}},"type":%[1]q}],"conditions":{"non_expired_grant":{"expression":"current_time == grant_time + grant_duration","name":"non_expired_grant","parameters":{"current_time":{"type_name":"TYPE_NAME_TIMESTAMP"},"grant_duration":{"type_name":"TYPE_NAME_DURATION"},"grant_time":{"type_name":"TYPE_NAME_TIMESTAMP"}}}}}`, typeName)
 }
 
