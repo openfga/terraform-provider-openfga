@@ -223,6 +223,7 @@ func (p *OpenFgaProvider) Configure(ctx context.Context, req provider.ConfigureR
 func (p *OpenFgaProvider) Resources(ctx context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
 		store.NewStoreResource,
+		authorizationmodel.NewAuthorizationModelResource,
 	}
 }
 
