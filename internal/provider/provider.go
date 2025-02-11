@@ -232,6 +232,7 @@ func (p *OpenFgaProvider) DataSources(ctx context.Context) []func() datasource.D
 		store.NewStoreDataSource,
 		store.NewStoresDataSource,
 		authorizationmodel.NewAuthorizationModelDocumentDataSource,
+		authorizationmodel.NewAuthorizationModelDataSource,
 	}
 }
 
