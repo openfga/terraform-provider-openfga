@@ -15,6 +15,7 @@ import (
 	"github.com/openfga/go-sdk/client"
 	"github.com/openfga/go-sdk/credentials"
 
+	"github.com/mauriceackel/terraform-provider-openfga/internal/authorizationmodel"
 	"github.com/mauriceackel/terraform-provider-openfga/internal/store"
 )
 
@@ -229,6 +230,7 @@ func (p *OpenFgaProvider) DataSources(ctx context.Context) []func() datasource.D
 	return []func() datasource.DataSource{
 		store.NewStoreDataSource,
 		store.NewStoresDataSource,
+		authorizationmodel.NewAuthorizationModelDocumentDataSource,
 	}
 }
 
