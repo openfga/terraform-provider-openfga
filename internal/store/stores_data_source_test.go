@@ -1,4 +1,4 @@
-package provider
+package store_test
 
 import (
 	"fmt"
@@ -8,12 +8,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-testing/knownvalue"
 	"github.com/hashicorp/terraform-plugin-testing/statecheck"
 	"github.com/hashicorp/terraform-plugin-testing/tfjsonpath"
+	"github.com/mauriceackel/terraform-provider-openfga/internal/acceptance"
 )
 
 func TestAccStoresDataSource(t *testing.T) {
 	resource.Test(t, resource.TestCase{
-		PreCheck:                 func() { testAccPreCheck(t) },
-		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		PreCheck:                 func() { acceptance.TestAccPreCheck(t) },
+		ProtoV6ProviderFactories: acceptance.TestAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			// Test Empty
 			{
@@ -76,5 +77,5 @@ resource "openfga_store" "store_%[1]d" {
 %[2]s
 
 data "openfga_stores" "test" {}
-`, providerConfig, resources)
+`, acceptance.ProviderConfig, resources)
 }
