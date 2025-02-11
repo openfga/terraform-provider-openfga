@@ -14,6 +14,8 @@ import (
 
 	"github.com/openfga/go-sdk/client"
 	"github.com/openfga/go-sdk/credentials"
+
+	"github.com/mauriceackel/terraform-provider-openfga/internal/store"
 )
 
 // Ensure OpenFgaProvider satisfies various provider interfaces.
@@ -219,14 +221,14 @@ func (p *OpenFgaProvider) Configure(ctx context.Context, req provider.ConfigureR
 
 func (p *OpenFgaProvider) Resources(ctx context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
-		NewStoreResource,
+		store.NewStoreResource,
 	}
 }
 
 func (p *OpenFgaProvider) DataSources(ctx context.Context) []func() datasource.DataSource {
 	return []func() datasource.DataSource{
-		NewStoreDataSource,
-		NewStoresDataSource,
+		store.NewStoreDataSource,
+		store.NewStoresDataSource,
 	}
 }
 

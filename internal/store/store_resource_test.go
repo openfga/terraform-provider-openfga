@@ -1,4 +1,4 @@
-package provider
+package store_test
 
 import (
 	"fmt"
@@ -9,12 +9,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-testing/plancheck"
 	"github.com/hashicorp/terraform-plugin-testing/statecheck"
 	"github.com/hashicorp/terraform-plugin-testing/tfjsonpath"
+	"github.com/mauriceackel/terraform-provider-openfga/internal/acceptance"
 )
 
 func TestAccStoreResource(t *testing.T) {
 	resource.Test(t, resource.TestCase{
-		PreCheck:                 func() { testAccPreCheck(t) },
-		ProtoV6ProviderFactories: testAccProtoV6ProviderFactories,
+		PreCheck:                 func() { acceptance.TestAccPreCheck(t) },
+		ProtoV6ProviderFactories: acceptance.TestAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			// Create and Read testing
 			{
@@ -74,5 +75,5 @@ func testAccStoreResourceConfig(name string) string {
 resource "openfga_store" "test" {
   name = %[2]q
 }
-`, providerConfig, name)
+`, acceptance.ProviderConfig, name)
 }

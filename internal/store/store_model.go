@@ -1,4 +1,4 @@
-package provider
+package store
 
 import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
