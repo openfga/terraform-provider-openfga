@@ -2,8 +2,10 @@ package relationshiptuple
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -88,6 +90,21 @@ func (d *RelationshipTuplesDataSource) Schema(ctx context.Context, req datasourc
 							MarkdownDescription: "The object of the OpenFGA relationship tuple",
 							Computed:            true,
 						},
+						"condition": schema.SingleNestedAttribute{
+							MarkdownDescription: "A condition of the OpenFGA relationship tuple",
+							Computed:            true,
+							Attributes: map[string]schema.Attribute{
+								"name": schema.StringAttribute{
+									MarkdownDescription: "The name of the condition",
+									Computed:            true,
+								},
+								"context_json": schema.StringAttribute{
+									MarkdownDescription: "The (partial) context under which the condition is evaluated",
+									CustomType:          jsontypes.NormalizedType{},
+									Computed:            true,
+								},
+							},
+						},
 					},
 				},
 			},
@@ -153,11 +170,31 @@ func (d *RelationshipTuplesDataSource) Read(ctx context.Context, req datasource.
 
 	state.RelationshipTuples = []RelationshipTupleModel{}
 	for _, tuple := range tuples {
+		var condition *RelationshipTupleCondition
+		if tuple.Key.Condition != nil {
+			context := jsontypes.NewNormalizedNull()
+			if tuple.Key.Condition.Context != nil {
+				jsonBytes, err := json.Marshal(tuple.Key.Condition.Context)
+				if err != nil {
+					resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to convert relationship tuple condition context to JSON, got error: %s", err))
+					return
+				}
+
+				context = jsontypes.NewNormalizedValue(string(jsonBytes))
+			}
+
+			condition = &RelationshipTupleCondition{
+				Name:    types.StringValue(tuple.Key.Condition.Name),
+				Context: context,
+			}
+		}
+
 		state.RelationshipTuples = append(state.RelationshipTuples, RelationshipTupleModel{
-			StoreId:  types.StringValue(*options.StoreId),
-			User:     types.StringValue(tuple.Key.User),
-			Relation: types.StringValue(tuple.Key.Relation),
-			Object:   types.StringValue(tuple.Key.Object),
+			StoreId:   types.StringValue(*options.StoreId),
+			User:      types.StringValue(tuple.Key.User),
+			Relation:  types.StringValue(tuple.Key.Relation),
+			Object:    types.StringValue(tuple.Key.Object),
+			Condition: condition,
 		})
 	}
 
