@@ -16,6 +16,7 @@ import (
 	"github.com/openfga/go-sdk/credentials"
 
 	"github.com/mauriceackel/terraform-provider-openfga/internal/authorizationmodel"
+	"github.com/mauriceackel/terraform-provider-openfga/internal/relationshiptuple"
 	"github.com/mauriceackel/terraform-provider-openfga/internal/store"
 )
 
@@ -224,6 +225,7 @@ func (p *OpenFgaProvider) Resources(ctx context.Context) []func() resource.Resou
 	return []func() resource.Resource{
 		store.NewStoreResource,
 		authorizationmodel.NewAuthorizationModelResource,
+		relationshiptuple.NewRelationshipTupleResource,
 	}
 }
 
