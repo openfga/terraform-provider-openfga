@@ -43,6 +43,14 @@ func TestAccRelationshipTupleResource(t *testing.T) {
 						tfjsonpath.New("object"),
 						knownvalue.StringExact("document:dummy"),
 					),
+					statecheck.ExpectKnownValue(
+						"openfga_relationship_tuple.test",
+						tfjsonpath.New("condition"),
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"name":         knownvalue.StringExact("non_expired_grant"),
+							"context_json": knownvalue.StringExact(`{"grant_duration":"10m","grant_time":"2023-01-01T00:00:00Z"}`),
+						}),
+					),
 				},
 			},
 			// ImportState testing
@@ -98,6 +106,14 @@ func TestAccRelationshipTupleResource(t *testing.T) {
 						tfjsonpath.New("object"),
 						knownvalue.StringExact("document:dummy"),
 					),
+					statecheck.ExpectKnownValue(
+						"openfga_relationship_tuple.test",
+						tfjsonpath.New("condition"),
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"name":         knownvalue.StringExact("non_expired_grant"),
+							"context_json": knownvalue.StringExact(`{"grant_duration":"10m","grant_time":"2023-01-01T00:00:00Z"}`),
+						}),
+					),
 				},
 			},
 			// Delete testing automatically occurs in TestCase
@@ -122,7 +138,11 @@ type user
 
 type document
   relations
-    define viewer: [user]
+    define viewer: [user with non_expired_grant]
+
+condition non_expired_grant(current_time: timestamp, grant_time: timestamp, grant_duration: duration) {
+  current_time < grant_time + grant_duration
+}
   EOT
 }
 
@@ -135,9 +155,16 @@ resource "openfga_authorization_model" "test" {
 resource "openfga_relationship_tuple" "test" {
   store_id = openfga_store.test.id
 
-  user     = "user:%[2]s"
-  relation = "viewer"
-  object   = "document:dummy"
+  user      = "user:%[2]s"
+  relation  = "viewer"
+  object    = "document:dummy"
+  condition = {
+    name         = "non_expired_grant"
+	context_json = jsonencode({
+      grant_time     = "2023-01-01T00:00:00Z"
+	  grant_duration = "10m"
+    })
+  }
 
   depends_on = [openfga_authorization_model.test]
 }

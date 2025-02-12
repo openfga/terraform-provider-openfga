@@ -2,12 +2,15 @@ package relationshiptuple
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"strings"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -67,6 +70,30 @@ func (r *RelationshipTupleResource) Schema(ctx context.Context, req resource.Sch
 					stringplanmodifier.RequiresReplace(),
 				},
 			},
+			"condition": schema.SingleNestedAttribute{
+				MarkdownDescription: "A condition of the OpenFGA relationship tuple",
+				Optional:            true,
+				Attributes: map[string]schema.Attribute{
+					"name": schema.StringAttribute{
+						MarkdownDescription: "The name of the condition",
+						Required:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.RequiresReplace(),
+						},
+					},
+					"context_json": schema.StringAttribute{
+						MarkdownDescription: "The (partial) context under which the condition is evaluated",
+						CustomType:          jsontypes.NormalizedType{},
+						Optional:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.RequiresReplace(),
+						},
+					},
+				},
+				PlanModifiers: []planmodifier.Object{
+					objectplanmodifier.RequiresReplace(),
+				},
+			},
 		},
 	}
 }
@@ -104,13 +131,38 @@ func (r *RelationshipTupleResource) Create(ctx context.Context, req resource.Cre
 		StoreId: openfga.PtrString(state.StoreId.ValueString()),
 	}
 
+	var (
+		context   *map[string]interface{}
+		condition *openfga.RelationshipCondition
+	)
+	if state.Condition != nil {
+		if !state.Condition.Context.IsNull() {
+			var result map[string]interface{}
+
+			resp.Diagnostics.Append(state.Condition.Context.Unmarshal(&result)...)
+			if resp.Diagnostics.HasError() {
+				return
+			}
+
+			context = &result
+		}
+
+		condition = &openfga.RelationshipCondition{
+			Name:    state.Condition.Name.ValueString(),
+			Context: context,
+		}
+	}
+
+	tuple := openfga.TupleKey{
+		User:      state.User.ValueString(),
+		Relation:  state.Relation.ValueString(),
+		Object:    state.Object.ValueString(),
+		Condition: condition,
+	}
+
 	body := client.ClientWriteRequest{
 		Writes: []client.ClientTupleKey{
-			{
-				User:     state.User.ValueString(),
-				Relation: state.Relation.ValueString(),
-				Object:   state.Object.ValueString(),
-			},
+			tuple,
 		},
 	}
 
@@ -118,6 +170,29 @@ func (r *RelationshipTupleResource) Create(ctx context.Context, req resource.Cre
 	if err != nil || response.Writes[0].Error != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create relationship tuple, got error: %s", err))
 		return
+	}
+
+	tupleResponse := response.Writes[0].TupleKey
+
+	state.User = types.StringValue(tupleResponse.User)
+	state.Relation = types.StringValue(tupleResponse.Relation)
+	state.Object = types.StringValue(tupleResponse.Object)
+	if tupleResponse.Condition != nil {
+		context := jsontypes.NewNormalizedNull()
+		if tupleResponse.Condition.Context != nil {
+			jsonBytes, err := json.Marshal(tupleResponse.Condition.Context)
+			if err != nil {
+				resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to convert relationship tuple condition context to JSON, got error: %s", err))
+				return
+			}
+
+			context = jsontypes.NewNormalizedValue(string(jsonBytes))
+		}
+
+		state.Condition = &RelationshipTupleCondition{
+			Name:    types.StringValue(tupleResponse.Condition.Name),
+			Context: context,
+		}
 	}
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
@@ -158,6 +233,23 @@ func (r *RelationshipTupleResource) Read(ctx context.Context, req resource.ReadR
 	state.User = types.StringValue(tuple.Key.User)
 	state.Relation = types.StringValue(tuple.Key.Relation)
 	state.Object = types.StringValue(tuple.Key.Object)
+	if tuple.Key.Condition != nil {
+		context := jsontypes.NewNormalizedNull()
+		if tuple.Key.Condition.Context != nil {
+			jsonBytes, err := json.Marshal(tuple.Key.Condition.Context)
+			if err != nil {
+				resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to convert relationship tuple condition context to JSON, got error: %s", err))
+				return
+			}
+
+			context = jsontypes.NewNormalizedValue(string(jsonBytes))
+		}
+
+		state.Condition = &RelationshipTupleCondition{
+			Name:    types.StringValue(tuple.Key.Condition.Name),
+			Context: context,
+		}
+	}
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }

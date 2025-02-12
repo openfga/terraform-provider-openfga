@@ -50,12 +50,20 @@ func TestAccRelationshipTuplesDataSource(t *testing.T) {
 								"user":     knownvalue.StringExact("user:user-1"),
 								"relation": knownvalue.StringExact("viewer"),
 								"object":   knownvalue.StringExact("document:document-1"),
+								"condition": knownvalue.ObjectExact(map[string]knownvalue.Check{
+									"name":         knownvalue.StringExact("non_expired_grant"),
+									"context_json": knownvalue.StringExact(`{"grant_duration":"10m","grant_time":"2023-01-01T00:00:00Z"}`),
+								}),
 							}),
 							knownvalue.ObjectExact(map[string]knownvalue.Check{
 								"store_id": knownvalue.NotNull(),
 								"user":     knownvalue.StringExact("user:user-1"),
 								"relation": knownvalue.StringExact("viewer"),
 								"object":   knownvalue.StringExact("document:document-2"),
+								"condition": knownvalue.ObjectExact(map[string]knownvalue.Check{
+									"name":         knownvalue.StringExact("non_expired_grant"),
+									"context_json": knownvalue.StringExact(`{"grant_duration":"10m","grant_time":"2023-01-01T00:00:00Z"}`),
+								}),
 							}),
 						}),
 					),
@@ -77,6 +85,10 @@ func TestAccRelationshipTuplesDataSource(t *testing.T) {
 								"user":     knownvalue.StringExact("user:user-1"),
 								"relation": knownvalue.StringExact("viewer"),
 								"object":   knownvalue.StringExact("document:document-1"),
+								"condition": knownvalue.ObjectExact(map[string]knownvalue.Check{
+									"name":         knownvalue.StringExact("non_expired_grant"),
+									"context_json": knownvalue.StringExact(`{"grant_duration":"10m","grant_time":"2023-01-01T00:00:00Z"}`),
+								}),
 							}),
 						}),
 					),
@@ -101,7 +113,11 @@ type user
 
 type document
   relations
-    define viewer: [user]
+    define viewer: [user with non_expired_grant]
+
+condition non_expired_grant(current_time: timestamp, grant_time: timestamp, grant_duration: duration) {
+  current_time < grant_time + grant_duration
+}
   EOT
 }
 
@@ -122,9 +138,16 @@ resource "openfga_authorization_model" "test" {
 resource "openfga_relationship_tuple" "tuple_%[1]d" {
   store_id = openfga_store.test.id
 
-  user     = "user:user-1"
-  relation = "viewer"
-  object   = "document:%[2]s"
+  user      = "user:user-1"
+  relation  = "viewer"
+  object    = "document:%[2]s"
+  condition = {
+    name         = "non_expired_grant"
+	context_json = jsonencode({
+      grant_time     = "2023-01-01T00:00:00Z"
+	  grant_duration = "10m"
+    })
+  }
   %[3]s
 }
 `, idx, objectName, dependsOn)
