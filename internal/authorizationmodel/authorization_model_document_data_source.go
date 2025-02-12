@@ -2,7 +2,6 @@ package authorizationmodel
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/datasourcevalidator"
@@ -97,33 +96,32 @@ func (d *AuthorizationModelDocumentDataSource) Read(ctx context.Context, req dat
 		return
 	}
 
-	var jsonData string
-	if !state.Dsl.IsNull() {
-		var err error
-		jsonData, err = transformer.TransformDSLToJSON(state.Dsl.ValueString())
+	jsonString := state.Json.ValueStringPointer()
+	dslString := state.Dsl.ValueStringPointer()
+
+	if jsonString != nil {
+		result, err := transformer.TransformJSONStringToDSL(*jsonString)
 		if err != nil {
-			resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable transform DSL into JSON, got error: %s", err))
+			resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable to transform JSON into DSL, got error: %s", err))
 			return
 		}
-	} else if !state.Json.IsNull() {
-		jsonData = state.Json.ValueString()
+
+		dslString = result
 	}
 
-	// JSON validation
-	authorizationModel, err := transformer.LoadJSONStringToProto(jsonData)
-	if err != nil {
-		resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable to parse JSON, got error: %s", err))
+	if dslString == nil {
+		resp.Diagnostics.AddError("Input Error", "DSL is undefined")
 		return
 	}
 
-	// Convert into canonical JSON form
-	jsonBytes, err := json.Marshal(authorizationModel)
+	// Transform DSL to canonical JSON form
+	result, err := transformer.TransformDSLToJSON(*dslString)
 	if err != nil {
-		resp.Diagnostics.AddError("InternalError", fmt.Sprintf("Unable to convert model to JSON, got error: %s", err))
+		resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable transform DSL into JSON, got error: %s", err))
 		return
 	}
 
-	state.Result = types.StringValue(string(jsonBytes))
+	state.Result = types.StringValue(result)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }

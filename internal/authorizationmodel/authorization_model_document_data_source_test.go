@@ -43,7 +43,7 @@ func TestAccAuthorizationModelDocumentDataSource(t *testing.T) {
 	})
 }
 
-const expectedAuthorizationModelDocumentDataSourcResult = `{"schema_version":"1.1","type_definitions":[{"type":"user"}]}`
+const expectedAuthorizationModelDocumentDataSourcResult = `{"schema_version":"1.1","type_definitions":[{"type":"user"},{"type":"document","relations":{"viewer":{"this":{}}},"metadata":{"relations":{"viewer":{"directly_related_user_types":[{"type":"user"}]}}}}]}`
 
 func testAccAuthorizationModelDocumentDataSourceConfigDsl() string {
 	return fmt.Sprintf(`
@@ -55,6 +55,10 @@ model
   schema 1.1
 
 type user
+
+type document
+  relations
+    define viewer: [user]
   EOT
 }
 `, acceptance.ProviderConfig)
@@ -68,7 +72,18 @@ data "openfga_authorization_model_document" "test" {
   json = <<EOT
 {
   "type_definitions": [
-    { "type": "user" }
+    { "type": "user" },
+    {
+      "type": "document",
+      "relations": {
+        "viewer": {
+          "this": {}
+        }
+      },
+	  "metadata": {
+        "relations":{"viewer":{"directly_related_user_types":[{"type":"user"}]}}
+      }
+    }
   ],
   "schema_version": "1.1"
 }
