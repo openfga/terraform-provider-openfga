@@ -29,6 +29,7 @@ type AuthorizationModelDocumentDataSource struct {
 type AuthorizationModelDocumentDataSourceModel struct {
 	Dsl  types.String `tfsdk:"dsl"`
 	Json types.String `tfsdk:"json"`
+	// Model *MyCustomModel       `tfsdk:"model"` // TODO: Type
 
 	Result types.String `tfsdk:"result"`
 }
@@ -50,6 +51,201 @@ func (d *AuthorizationModelDocumentDataSource) Schema(ctx context.Context, req d
 				MarkdownDescription: "The authorization model in JSON format",
 				Optional:            true,
 			},
+			// TODO: Fully represent the data type in TF
+			// "model": schema.SingleNestedAttribute{
+			// 	MarkdownDescription: "The authorization model as object",
+			// 	Optional:            true,
+			// 	Attributes: map[string]schema.Attribute{
+			// 		"schema_version": schema.StringAttribute{
+			// 			MarkdownDescription: "The schema's version",
+			// 			Required:            true,
+			// 		},
+			// 		"type_definitions": schema.ListNestedAttribute{
+			// 			MarkdownDescription: "The schema's types",
+			// 			Required:            true,
+			// 			NestedObject: schema.NestedAttributeObject{
+			// 				Attributes: map[string]schema.Attribute{
+			// 					"type": schema.StringAttribute{
+			// 						MarkdownDescription: "The type's name",
+			// 						Required:            true,
+			// 						Validators: []validator.String{
+			// 							stringvalidator.LengthAtLeast(1),
+			// 						},
+			// 					},
+			// 					"relations": schema.MapNestedAttribute{
+			// 						MarkdownDescription: "The type's relations",
+			// 						Optional:            true,
+			// 						NestedObject: schema.NestedAttributeObject{
+			// 							Attributes: map[string]schema.Attribute{
+			// 								// TODO
+			// 							},
+			// 						},
+			// 					},
+			// 					"metadata": schema.MapNestedAttribute{
+			// 						MarkdownDescription: "The type's metadata",
+			// 						Optional:            true,
+			// 						NestedObject: schema.NestedAttributeObject{
+			// 							Attributes: map[string]schema.Attribute{
+			// 								"relations": schema.MapNestedAttribute{
+			// 									MarkdownDescription: "The relations metadata",
+			// 									Optional:            true,
+			// 									NestedObject: schema.NestedAttributeObject{
+			// 										Attributes: map[string]schema.Attribute{
+			// 											"directly_related_usetypes": schema.ListNestedAttribute{
+			// 												MarkdownDescription: "List of related user types",
+			// 												Optional:            true,
+			// 												NestedObject: schema.NestedAttributeObject{
+			// 													Attributes: map[string]schema.Attribute{
+			// 														"type": schema.StringAttribute{
+			// 															MarkdownDescription: "The type's name",
+			// 															Required:            true,
+			// 															Validators: []validator.String{
+			// 																stringvalidator.LengthAtLeast(1),
+			// 															},
+			// 														},
+			// 														"relation": schema.StringAttribute{
+			// 															MarkdownDescription: "The relation's name",
+			// 															Optional:            true,
+			// 															Validators: []validator.String{
+			// 																stringvalidator.LengthAtLeast(1),
+			// 															},
+			// 														},
+			// 														"wildcard": schema.SingleNestedAttribute{
+			// 															MarkdownDescription: "Set, if the relationship is based on a wildcard",
+			// 															Optional:            true,
+			// 															Attributes:          map[string]schema.Attribute{},
+			// 														},
+			// 														"condition": schema.StringAttribute{
+			// 															MarkdownDescription: "The name of a condition that is enforced over the allowed relation",
+			// 															Optional:            true,
+			// 														},
+			// 													},
+			// 												},
+			// 											},
+			// 											"module": schema.StringAttribute{
+			// 												MarkdownDescription: "The module name",
+			// 												Optional:            true,
+			// 												Validators: []validator.String{
+			// 													stringvalidator.LengthAtLeast(1),
+			// 												},
+			// 											},
+			// 											"source_info": schema.SingleNestedAttribute{
+			// 												MarkdownDescription: "The source information",
+			// 												Optional:            true,
+			// 												Attributes: map[string]schema.Attribute{
+			// 													"file": schema.StringAttribute{
+			// 														MarkdownDescription: "The file source",
+			// 														Optional:            true,
+			// 														Validators: []validator.String{
+			// 															stringvalidator.LengthAtLeast(1),
+			// 														},
+			// 													},
+			// 												},
+			// 											},
+			// 										},
+			// 									},
+			// 								},
+			// 								"module": schema.StringAttribute{
+			// 									MarkdownDescription: "The module name",
+			// 									Optional:            true,
+			// 									Validators: []validator.String{
+			// 										stringvalidator.LengthAtLeast(1),
+			// 									},
+			// 								},
+			// 								"source_info": schema.SingleNestedAttribute{
+			// 									MarkdownDescription: "The source information",
+			// 									Optional:            true,
+			// 									Attributes: map[string]schema.Attribute{
+			// 										"file": schema.StringAttribute{
+			// 											MarkdownDescription: "The file source",
+			// 											Optional:            true,
+			// 											Validators: []validator.String{
+			// 												stringvalidator.LengthAtLeast(1),
+			// 											},
+			// 										},
+			// 									},
+			// 								},
+			// 							},
+			// 						},
+			// 					},
+			// 				},
+			// 			},
+			// 		},
+			// 		"conditions": schema.MapNestedAttribute{
+			// 			MarkdownDescription: "The schema's conditions",
+			// 			Optional:            true,
+			// 			NestedObject: schema.NestedAttributeObject{
+			// 				Attributes: map[string]schema.Attribute{
+			// 					"name": schema.StringAttribute{
+			// 						MarkdownDescription: "The condition name",
+			// 						Required:            true,
+			// 						Validators: []validator.String{
+			// 							stringvalidator.LengthAtLeast(1),
+			// 						},
+			// 					},
+			// 					"expression": schema.StringAttribute{
+			// 						MarkdownDescription: "The condition expression (in Google CEL format)",
+			// 						Required:            true,
+			// 						Validators: []validator.String{
+			// 							stringvalidator.LengthAtLeast(1),
+			// 						},
+			// 					},
+			// 					"parameters": schema.MapNestedAttribute{
+			// 						MarkdownDescription: "The condition parameters",
+			// 						Required:            true,
+			// 						NestedObject: schema.NestedAttributeObject{
+			// 							Attributes: map[string]schema.Attribute{
+			// 								"type_name": schema.StringAttribute{
+			// 									MarkdownDescription: "The parameter's type",
+			// 									Required:            true,
+			// 									Validators: []validator.String{
+			// 										stringvalidator.OneOf(
+			// 											"type_name_int",
+			// 											"type_name_uint",
+			// 											"type_name_double",
+			// 											"type_name_bool",
+			// 											"type_name_bytes",
+			// 											"type_name_string",
+			// 											"type_name_duration",
+			// 											"type_name_timestamp",
+			// 											"type_name_any",
+			// 											"type_name_list",
+			// 											"type_name_map",
+			// 											"type_name_ipaddress",
+			// 										),
+			// 									},
+			// 								},
+			// 								"generic_types": schema.ListAttribute{
+			// 									MarkdownDescription: "The parameter's generic types",
+			// 									ElementType:         types.StringType,
+			// 									Optional:            true,
+			// 									Validators: []validator.List{
+			// 										listvalidator.ValueStringsAre(
+			// 											stringvalidator.OneOf(
+			// 												"type_name_int",
+			// 												"type_name_uint",
+			// 												"type_name_double",
+			// 												"type_name_bool",
+			// 												"type_name_bytes",
+			// 												"type_name_string",
+			// 												"type_name_duration",
+			// 												"type_name_timestamp",
+			// 												"type_name_any",
+			// 												"type_name_list",
+			// 												"type_name_map",
+			// 												"type_name_ipaddress",
+			// 											),
+			// 										),
+			// 									},
+			// 								},
+			// 							},
+			// 						},
+			// 					},
+			// 				},
+			// 			},
+			// 		},
+			// 	},
+			// },
 			"result": schema.StringAttribute{
 				MarkdownDescription: "The resulting model in JSON format",
 				Computed:            true,
@@ -63,6 +259,7 @@ func (p AuthorizationModelDocumentDataSource) ConfigValidators(ctx context.Conte
 		datasourcevalidator.ExactlyOneOf(
 			path.MatchRoot("dsl"),
 			path.MatchRoot("json"),
+			// path.MatchRoot("model"), // TODO
 		),
 	}
 }
@@ -96,8 +293,19 @@ func (d *AuthorizationModelDocumentDataSource) Read(ctx context.Context, req dat
 		return
 	}
 
+	// model := state.Model
 	jsonString := state.Json.ValueStringPointer()
 	dslString := state.Dsl.ValueStringPointer()
+
+	// if model != nil {
+	// 	result, err := json.Marshal(state.Model)
+	// 	if err != nil {
+	// 		resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable to transform model into JSON, got error: %s", err))
+	// 		return
+	// 	}
+
+	// 	jsonString = openfga.PtrString(string(result))
+	// }
 
 	if jsonString != nil {
 		result, err := transformer.TransformJSONStringToDSL(*jsonString)

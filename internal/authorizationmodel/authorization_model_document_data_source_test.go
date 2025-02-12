@@ -39,6 +39,7 @@ func TestAccAuthorizationModelDocumentDataSource(t *testing.T) {
 					),
 				},
 			},
+			// TODO: Test model
 		},
 	})
 }
