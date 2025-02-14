@@ -1,0 +1,10 @@
+{
+    "image": "mcr.microsoft.com/devcontainers/go",
+    "features": {
+        "ghcr.io/devcontainers/features/terraform:1": {},
+        "ghcr.io/devcontainers-extra/features/gh-release:1": {
+            "repo": "openfga/cli",
+            "binaryNames": "fga"
+        }
+    }
+}
