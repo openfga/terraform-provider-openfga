@@ -240,6 +240,7 @@ func (p *OpenFgaProvider) DataSources(ctx context.Context) []func() datasource.D
 		relationshiptuple.NewRelationshipTupleDataSource,
 		relationshiptuple.NewRelationshipTuplesDataSource,
 		query.NewCheckQueryDataSource,
+		query.NewListObjectsQueryDataSource,
 	}
 }
 
