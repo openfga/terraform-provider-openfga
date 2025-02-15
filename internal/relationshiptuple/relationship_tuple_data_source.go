@@ -2,7 +2,6 @@ package relationshiptuple
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
@@ -22,10 +21,13 @@ func NewRelationshipTupleDataSource() datasource.DataSource {
 }
 
 type RelationshipTupleDataSource struct {
-	client *client.OpenFgaClient
+	client *RelationshipTupleClient
 }
 
-type RelationshipTupleDataSourceModel RelationshipTupleModel
+type RelationshipTupleDataSourceModel struct {
+	StoreId types.String `tfsdk:"store_id"`
+	RelationshipTupleWithConditionModel
+}
 
 func (d *RelationshipTupleDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_relationship_tuple"
@@ -88,7 +90,7 @@ func (d *RelationshipTupleDataSource) Configure(ctx context.Context, req datasou
 		return
 	}
 
-	d.client = client
+	d.client = NewRelationshipTupleClient(client)
 }
 
 func (d *RelationshipTupleDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
@@ -100,49 +102,13 @@ func (d *RelationshipTupleDataSource) Read(ctx context.Context, req datasource.R
 		return
 	}
 
-	options := client.ClientReadOptions{
-		StoreId: state.StoreId.ValueStringPointer(),
-	}
-
-	body := client.ClientReadRequest{
-		User:     state.User.ValueStringPointer(),
-		Relation: state.Relation.ValueStringPointer(),
-		Object:   state.Object.ValueStringPointer(),
-	}
-
-	response, err := d.client.Read(ctx).Options(options).Body(body).Execute()
+	relationshipTupleModel, err := d.client.ReadRelationshipTuple(ctx, state.StoreId.ValueString(), state.RelationshipTupleModel)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read relationship tuple, got error: %s", err))
 		return
 	}
 
-	if len(response.Tuples) != 1 {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read relationship tuple, expected one result but received: %d", len(response.Tuples)))
-		return
-	}
-
-	tuple := response.Tuples[0]
-
-	state.User = types.StringValue(tuple.Key.User)
-	state.Relation = types.StringValue(tuple.Key.Relation)
-	state.Object = types.StringValue(tuple.Key.Object)
-	if tuple.Key.Condition != nil {
-		context := jsontypes.NewNormalizedNull()
-		if tuple.Key.Condition.Context != nil {
-			jsonBytes, err := json.Marshal(tuple.Key.Condition.Context)
-			if err != nil {
-				resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to convert relationship tuple condition context to JSON, got error: %s", err))
-				return
-			}
-
-			context = jsontypes.NewNormalizedValue(string(jsonBytes))
-		}
-
-		state.Condition = &RelationshipTupleCondition{
-			Name:    types.StringValue(tuple.Key.Condition.Name),
-			Context: context,
-		}
-	}
+	state.RelationshipTupleWithConditionModel = *relationshipTupleModel
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }

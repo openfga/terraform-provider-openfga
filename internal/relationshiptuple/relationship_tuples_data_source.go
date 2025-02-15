@@ -2,7 +2,6 @@ package relationshiptuple
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
@@ -10,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 
-	openfga "github.com/openfga/go-sdk"
 	"github.com/openfga/go-sdk/client"
 )
 
@@ -23,19 +21,13 @@ func NewRelationshipTuplesDataSource() datasource.DataSource {
 }
 
 type RelationshipTuplesDataSource struct {
-	client *client.OpenFgaClient
+	client *RelationshipTupleClient
 }
 
 type RelationshipTuplesDataSourceModel struct {
-	StoreId            types.String             `tfsdk:"store_id"`
-	Query              *TupleQuery              `tfsdk:"query"`
-	RelationshipTuples []RelationshipTupleModel `tfsdk:"relationship_tuples"`
-}
-
-type TupleQuery struct {
-	User     types.String `tfsdk:"user"`
-	Relation types.String `tfsdk:"relation"`
-	Object   types.String `tfsdk:"object"`
+	StoreId            types.String                          `tfsdk:"store_id"`
+	Query              *RelationshipTupleModel               `tfsdk:"query"`
+	RelationshipTuples []RelationshipTupleWithConditionModel `tfsdk:"relationship_tuples"`
 }
 
 func (d *RelationshipTuplesDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
@@ -74,10 +66,6 @@ func (d *RelationshipTuplesDataSource) Schema(ctx context.Context, req datasourc
 				Computed:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
-						"store_id": schema.StringAttribute{
-							MarkdownDescription: "The unique ID of the OpenFGA store this relationship tuple belongs to",
-							Computed:            true,
-						},
 						"user": schema.StringAttribute{
 							MarkdownDescription: "The user of the OpenFGA relationship tuple",
 							Computed:            true,
@@ -129,7 +117,7 @@ func (d *RelationshipTuplesDataSource) Configure(ctx context.Context, req dataso
 		return
 	}
 
-	d.client = client
+	d.client = NewRelationshipTupleClient(client)
 }
 
 func (d *RelationshipTuplesDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
@@ -141,62 +129,13 @@ func (d *RelationshipTuplesDataSource) Read(ctx context.Context, req datasource.
 		return
 	}
 
-	var tuples []openfga.Tuple
-	options := client.ClientReadOptions{
-		StoreId:           state.StoreId.ValueStringPointer(),
-		ContinuationToken: openfga.PtrString(""),
+	relationshipTupleModels, err := d.client.ListRelationshipTuples(ctx, state.StoreId.ValueString(), state.Query)
+	if err != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read relationship tuples, got error: %s", err))
+		return
 	}
 
-	var body client.ClientReadRequest
-	if state.Query != nil {
-		body = client.ClientReadRequest{
-			User:     state.Query.User.ValueStringPointer(),
-			Relation: state.Query.Relation.ValueStringPointer(),
-			Object:   state.Query.Object.ValueStringPointer(),
-		}
-	}
-
-	for isLastPage := false; !isLastPage; isLastPage = *options.ContinuationToken == "" {
-		response, err := d.client.Read(ctx).Options(options).Body(body).Execute()
-		if err != nil {
-			resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read relationship tuples, got error: %s", err))
-			return
-		}
-
-		tuples = append(tuples, response.Tuples...)
-
-		options.ContinuationToken = openfga.PtrString(response.ContinuationToken)
-	}
-
-	state.RelationshipTuples = []RelationshipTupleModel{}
-	for _, tuple := range tuples {
-		var condition *RelationshipTupleCondition
-		if tuple.Key.Condition != nil {
-			context := jsontypes.NewNormalizedNull()
-			if tuple.Key.Condition.Context != nil {
-				jsonBytes, err := json.Marshal(tuple.Key.Condition.Context)
-				if err != nil {
-					resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to convert relationship tuple condition context to JSON, got error: %s", err))
-					return
-				}
-
-				context = jsontypes.NewNormalizedValue(string(jsonBytes))
-			}
-
-			condition = &RelationshipTupleCondition{
-				Name:    types.StringValue(tuple.Key.Condition.Name),
-				Context: context,
-			}
-		}
-
-		state.RelationshipTuples = append(state.RelationshipTuples, RelationshipTupleModel{
-			StoreId:   types.StringValue(*options.StoreId),
-			User:      types.StringValue(tuple.Key.User),
-			Relation:  types.StringValue(tuple.Key.Relation),
-			Object:    types.StringValue(tuple.Key.Object),
-			Condition: condition,
-		})
-	}
+	state.RelationshipTuples = *relationshipTupleModels
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }

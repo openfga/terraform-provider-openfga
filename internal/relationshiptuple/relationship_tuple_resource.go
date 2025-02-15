@@ -2,12 +2,10 @@ package relationshiptuple
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
-	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -15,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 
-	openfga "github.com/openfga/go-sdk"
 	"github.com/openfga/go-sdk/client"
 )
 
@@ -28,10 +25,13 @@ func NewRelationshipTupleResource() resource.Resource {
 }
 
 type RelationshipTupleResource struct {
-	client *client.OpenFgaClient
+	client *RelationshipTupleClient
 }
 
-type RelationshipTupleResourceModel RelationshipTupleModel
+type RelationshipTupleResourceModel struct {
+	StoreId types.String `tfsdk:"store_id"`
+	RelationshipTupleWithConditionModel
+}
 
 func (r *RelationshipTupleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_relationship_tuple"
@@ -111,11 +111,10 @@ func (r *RelationshipTupleResource) Configure(ctx context.Context, req resource.
 			"Unexpected Resource Configure Type",
 			fmt.Sprintf("Expected *client.OpenFgaClient, got: %T. Please report this issue to the provider developers.", req.ProviderData),
 		)
-
 		return
 	}
 
-	r.client = client
+	r.client = NewRelationshipTupleClient(client)
 }
 
 func (r *RelationshipTupleResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
@@ -127,73 +126,13 @@ func (r *RelationshipTupleResource) Create(ctx context.Context, req resource.Cre
 		return
 	}
 
-	options := client.ClientWriteOptions{
-		StoreId: openfga.PtrString(state.StoreId.ValueString()),
-	}
-
-	var (
-		context   *map[string]interface{}
-		condition *openfga.RelationshipCondition
-	)
-	if state.Condition != nil {
-		if !state.Condition.Context.IsNull() {
-			var result map[string]interface{}
-
-			resp.Diagnostics.Append(state.Condition.Context.Unmarshal(&result)...)
-			if resp.Diagnostics.HasError() {
-				return
-			}
-
-			context = &result
-		}
-
-		condition = &openfga.RelationshipCondition{
-			Name:    state.Condition.Name.ValueString(),
-			Context: context,
-		}
-	}
-
-	tuple := openfga.TupleKey{
-		User:      state.User.ValueString(),
-		Relation:  state.Relation.ValueString(),
-		Object:    state.Object.ValueString(),
-		Condition: condition,
-	}
-
-	body := client.ClientWriteRequest{
-		Writes: []client.ClientTupleKey{
-			tuple,
-		},
-	}
-
-	response, err := r.client.Write(ctx).Options(options).Body(body).Execute()
-	if err != nil || response.Writes[0].Error != nil {
+	relationshipTupleModel, err := r.client.CreateRelationshipTuple(ctx, state.StoreId.ValueString(), state.RelationshipTupleWithConditionModel)
+	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create relationship tuple, got error: %s", err))
 		return
 	}
 
-	tupleResponse := response.Writes[0].TupleKey
-
-	state.User = types.StringValue(tupleResponse.User)
-	state.Relation = types.StringValue(tupleResponse.Relation)
-	state.Object = types.StringValue(tupleResponse.Object)
-	if tupleResponse.Condition != nil {
-		context := jsontypes.NewNormalizedNull()
-		if tupleResponse.Condition.Context != nil {
-			jsonBytes, err := json.Marshal(tupleResponse.Condition.Context)
-			if err != nil {
-				resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to convert relationship tuple condition context to JSON, got error: %s", err))
-				return
-			}
-
-			context = jsontypes.NewNormalizedValue(string(jsonBytes))
-		}
-
-		state.Condition = &RelationshipTupleCondition{
-			Name:    types.StringValue(tupleResponse.Condition.Name),
-			Context: context,
-		}
-	}
+	state.RelationshipTupleWithConditionModel = *relationshipTupleModel
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }
@@ -207,49 +146,13 @@ func (r *RelationshipTupleResource) Read(ctx context.Context, req resource.ReadR
 		return
 	}
 
-	options := client.ClientReadOptions{
-		StoreId: state.StoreId.ValueStringPointer(),
-	}
-
-	body := client.ClientReadRequest{
-		User:     state.User.ValueStringPointer(),
-		Relation: state.Relation.ValueStringPointer(),
-		Object:   state.Object.ValueStringPointer(),
-	}
-
-	response, err := r.client.Read(ctx).Options(options).Body(body).Execute()
+	relationshipTupleModel, err := r.client.ReadRelationshipTuple(ctx, state.StoreId.ValueString(), state.RelationshipTupleModel)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read relationship tuple, got error: %s", err))
 		return
 	}
 
-	if len(response.Tuples) != 1 {
-		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read relationship tuple, expected one result but received: %d", len(response.Tuples)))
-		return
-	}
-
-	tuple := response.Tuples[0]
-
-	state.User = types.StringValue(tuple.Key.User)
-	state.Relation = types.StringValue(tuple.Key.Relation)
-	state.Object = types.StringValue(tuple.Key.Object)
-	if tuple.Key.Condition != nil {
-		context := jsontypes.NewNormalizedNull()
-		if tuple.Key.Condition.Context != nil {
-			jsonBytes, err := json.Marshal(tuple.Key.Condition.Context)
-			if err != nil {
-				resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to convert relationship tuple condition context to JSON, got error: %s", err))
-				return
-			}
-
-			context = jsontypes.NewNormalizedValue(string(jsonBytes))
-		}
-
-		state.Condition = &RelationshipTupleCondition{
-			Name:    types.StringValue(tuple.Key.Condition.Name),
-			Context: context,
-		}
-	}
+	state.RelationshipTupleWithConditionModel = *relationshipTupleModel
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }
@@ -271,22 +174,8 @@ func (r *RelationshipTupleResource) Delete(ctx context.Context, req resource.Del
 		return
 	}
 
-	options := client.ClientWriteOptions{
-		StoreId: openfga.PtrString(state.StoreId.ValueString()),
-	}
-
-	body := client.ClientWriteRequest{
-		Deletes: []client.ClientTupleKeyWithoutCondition{
-			{
-				User:     state.User.ValueString(),
-				Relation: state.Relation.ValueString(),
-				Object:   state.Object.ValueString(),
-			},
-		},
-	}
-
-	response, err := r.client.Write(ctx).Options(options).Body(body).Execute()
-	if err != nil || response.Deletes[0].Error != nil {
+	err := r.client.DeleteRelationshipTuple(ctx, state.StoreId.ValueString(), state.RelationshipTupleWithConditionModel)
+	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete relationship tuple, got error: %s", err))
 		return
 	}
@@ -300,8 +189,10 @@ func (r *RelationshipTupleResource) ImportState(ctx context.Context, req resourc
 		return
 	}
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("store_id"), parts[0])...)
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("user"), parts[1])...)
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("relation"), parts[2])...)
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("object"), parts[3])...)
+	state := RelationshipTupleResourceModel{
+		StoreId:                             types.StringValue(parts[0]),
+		RelationshipTupleWithConditionModel: *NewRelationshipTupleWithConditionModel(parts[1], parts[2], parts[3], nil),
+	}
+
+	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }

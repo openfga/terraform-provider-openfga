@@ -46,7 +46,6 @@ func TestAccRelationshipTuplesDataSource(t *testing.T) {
 						tfjsonpath.New("relationship_tuples"),
 						knownvalue.ListExact([]knownvalue.Check{
 							knownvalue.ObjectExact(map[string]knownvalue.Check{
-								"store_id": knownvalue.NotNull(),
 								"user":     knownvalue.StringExact("user:user-1"),
 								"relation": knownvalue.StringExact("viewer"),
 								"object":   knownvalue.StringExact("document:document-1"),
@@ -56,7 +55,6 @@ func TestAccRelationshipTuplesDataSource(t *testing.T) {
 								}),
 							}),
 							knownvalue.ObjectExact(map[string]knownvalue.Check{
-								"store_id": knownvalue.NotNull(),
 								"user":     knownvalue.StringExact("user:user-1"),
 								"relation": knownvalue.StringExact("viewer"),
 								"object":   knownvalue.StringExact("document:document-2"),
@@ -81,7 +79,6 @@ func TestAccRelationshipTuplesDataSource(t *testing.T) {
 						tfjsonpath.New("relationship_tuples"),
 						knownvalue.ListExact([]knownvalue.Check{
 							knownvalue.ObjectExact(map[string]knownvalue.Check{
-								"store_id": knownvalue.NotNull(),
 								"user":     knownvalue.StringExact("user:user-1"),
 								"relation": knownvalue.StringExact("viewer"),
 								"object":   knownvalue.StringExact("document:document-1"),
