@@ -2,6 +2,7 @@ package authorizationmodel
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/datasourcevalidator"
@@ -10,7 +11,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 
-	"github.com/openfga/go-sdk/client"
 	"github.com/openfga/language/pkg/go/transformer"
 )
 
@@ -22,9 +22,7 @@ func NewAuthorizationModelDocumentDataSource() datasource.DataSource {
 	return &AuthorizationModelDocumentDataSource{}
 }
 
-type AuthorizationModelDocumentDataSource struct {
-	client *client.OpenFgaClient
-}
+type AuthorizationModelDocumentDataSource struct{}
 
 type AuthorizationModelDocumentDataSourceModel struct {
 	Dsl  types.String `tfsdk:"dsl"`
@@ -72,19 +70,6 @@ func (d *AuthorizationModelDocumentDataSource) Configure(ctx context.Context, re
 	if req.ProviderData == nil {
 		return
 	}
-
-	client, ok := req.ProviderData.(*client.OpenFgaClient)
-
-	if !ok {
-		resp.Diagnostics.AddError(
-			"Unexpected Data Source Configure Type",
-			fmt.Sprintf("Expected *client.OpenFgaClient, got: %T. Please report this issue to the provider developers.", req.ProviderData),
-		)
-
-		return
-	}
-
-	d.client = client
 }
 
 func (d *AuthorizationModelDocumentDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
@@ -115,13 +100,27 @@ func (d *AuthorizationModelDocumentDataSource) Read(ctx context.Context, req dat
 	}
 
 	// Transform DSL to canonical JSON form
-	result, err := transformer.TransformDSLToJSON(*dslString)
+	unstableResult, err := transformer.TransformDSLToJSON(*dslString)
 	if err != nil {
-		resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable transform DSL into JSON, got error: %s", err))
+		resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable to transform DSL into JSON, got error: %s", err))
 		return
 	}
 
-	state.Result = types.StringValue(result)
+	var tmp any
+	err = json.Unmarshal([]byte(unstableResult), &tmp)
+	if err != nil {
+		resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable to bring JSON in canonical form, got error: %s", err))
+		return
+	}
+	stableResultBytes, err := json.Marshal(tmp)
+	if err != nil {
+		resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable to bring JSON in canonical form, got error: %s", err))
+		return
+	}
+
+	stableResult := string(stableResultBytes)
+
+	state.Result = types.StringValue(stableResult)
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }

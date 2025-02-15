@@ -2,12 +2,10 @@ package authorizationmodel
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
-	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -26,10 +24,13 @@ func NewAuthorizationModelResource() resource.Resource {
 }
 
 type AuthorizationModelResource struct {
-	client *client.OpenFgaClient
+	client *AuthorizationModelClient
 }
 
-type AuthorizationModelResourceModel AuthorizationModelModel
+type AuthorizationModelResourceModel struct {
+	StoreId types.String `tfsdk:"store_id"`
+	AuthorizationModelModel
+}
 
 func (r *AuthorizationModelResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_authorization_model"
@@ -40,16 +41,16 @@ func (r *AuthorizationModelResource) Schema(ctx context.Context, req resource.Sc
 		MarkdownDescription: "An authorization model combines one or more type definitions. This is used to define the permission model of a system.",
 
 		Attributes: map[string]schema.Attribute{
-			"id": schema.StringAttribute{
-				MarkdownDescription: "The unique ID of the OpenFGA authorization model",
-				Computed:            true,
-			},
 			"store_id": schema.StringAttribute{
 				MarkdownDescription: "The unique ID of the OpenFGA store this authorization model belongs to",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
+			},
+			"id": schema.StringAttribute{
+				MarkdownDescription: "The unique ID of the OpenFGA authorization model",
+				Computed:            true,
 			},
 			"model_json": schema.StringAttribute{
 				MarkdownDescription: "The full authorization model definition in JSON format",
@@ -80,7 +81,7 @@ func (r *AuthorizationModelResource) Configure(ctx context.Context, req resource
 		return
 	}
 
-	r.client = client
+	r.client = NewAuthorizationModelClient(client)
 }
 
 func (r *AuthorizationModelResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
@@ -92,30 +93,13 @@ func (r *AuthorizationModelResource) Create(ctx context.Context, req resource.Cr
 		return
 	}
 
-	var authorizationModel AuthorizationModelWithoutId
-	err := json.Unmarshal([]byte(state.ModelJson.ValueString()), &authorizationModel)
-	if err != nil {
-		resp.Diagnostics.AddError("Invalid Model JSON", fmt.Sprintf("Unable to parse model JSON, got error: %s", err))
-		return
-	}
-
-	options := client.ClientWriteAuthorizationModelOptions{
-		StoreId: state.StoreId.ValueStringPointer(),
-	}
-
-	body := client.ClientWriteAuthorizationModelRequest{
-		SchemaVersion:   authorizationModel.SchemaVersion,
-		TypeDefinitions: authorizationModel.TypeDefinitions,
-		Conditions:      authorizationModel.Conditions,
-	}
-
-	response, err := r.client.WriteAuthorizationModel(ctx).Options(options).Body(body).Execute()
+	authorizationModelModel, err := r.client.CreateAuthorizationModel(ctx, state.StoreId.ValueString(), state.AuthorizationModelModel)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create authorization model, got error: %s", err))
 		return
 	}
 
-	state.Id = types.StringValue(response.AuthorizationModelId)
+	state.AuthorizationModelModel = *authorizationModelModel
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }
@@ -129,31 +113,13 @@ func (r *AuthorizationModelResource) Read(ctx context.Context, req resource.Read
 		return
 	}
 
-	options := client.ClientReadAuthorizationModelOptions{
-		StoreId:              state.StoreId.ValueStringPointer(),
-		AuthorizationModelId: state.Id.ValueStringPointer(),
-	}
-
-	response, err := r.client.ReadAuthorizationModel(ctx).Options(options).Execute()
+	authorizationModelModel, err := r.client.ReadAuthorizationModel(ctx, state.StoreId.ValueString(), state.AuthorizationModelModel)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read authorization model, got error: %s", err))
 		return
 	}
 
-	state.Id = types.StringValue(response.AuthorizationModel.Id)
-
-	authorizationModelWithoutId := AuthorizationModelWithoutId{
-		SchemaVersion:   response.AuthorizationModel.SchemaVersion,
-		TypeDefinitions: response.AuthorizationModel.TypeDefinitions,
-		Conditions:      response.AuthorizationModel.Conditions,
-	}
-
-	jsonBytes, err := json.Marshal(authorizationModelWithoutId)
-	if err != nil {
-		resp.Diagnostics.AddError("Invalid Response Data", fmt.Sprintf("Unable to convert to model JSON, got error: %s", err))
-		return
-	}
-	state.ModelJson = jsontypes.NewNormalizedValue(string(jsonBytes))
+	state.AuthorizationModelModel = *authorizationModelModel
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }
@@ -178,6 +144,10 @@ func (r *AuthorizationModelResource) ImportState(ctx context.Context, req resour
 		return
 	}
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("store_id"), parts[0])...)
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), parts[1])...)
+	state := AuthorizationModelResourceModel{
+		StoreId:                 types.StringValue(parts[0]),
+		AuthorizationModelModel: *NewAuthorizationModelModel(parts[1]),
+	}
+
+	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }

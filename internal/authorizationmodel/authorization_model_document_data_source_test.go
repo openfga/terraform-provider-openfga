@@ -24,7 +24,7 @@ func TestAccAuthorizationModelDocumentDataSource(t *testing.T) {
 					statecheck.ExpectKnownValue(
 						"data.openfga_authorization_model_document.test",
 						tfjsonpath.New("result"),
-						knownvalue.StringExact(expectedAuthorizationModelDocumentDataSourcResult),
+						knownvalue.StringExact(expectedAuthorizationModelDocumentDataSourceResult),
 					),
 				},
 			},
@@ -35,7 +35,7 @@ func TestAccAuthorizationModelDocumentDataSource(t *testing.T) {
 					statecheck.ExpectKnownValue(
 						"data.openfga_authorization_model_document.test",
 						tfjsonpath.New("result"),
-						knownvalue.StringExact(expectedAuthorizationModelDocumentDataSourcResult),
+						knownvalue.StringExact(expectedAuthorizationModelDocumentDataSourceResult),
 					),
 				},
 			},
@@ -43,7 +43,7 @@ func TestAccAuthorizationModelDocumentDataSource(t *testing.T) {
 	})
 }
 
-const expectedAuthorizationModelDocumentDataSourcResult = `{"schema_version":"1.1","type_definitions":[{"type":"user"},{"type":"document","relations":{"viewer":{"this":{}}},"metadata":{"relations":{"viewer":{"directly_related_user_types":[{"type":"user"}]}}}}]}`
+const expectedAuthorizationModelDocumentDataSourceResult = `{"conditions":{"larger_than":{"expression":"a \u003e b","name":"larger_than","parameters":{"a":{"type_name":"TYPE_NAME_INT"},"b":{"type_name":"TYPE_NAME_INT"}}}},"schema_version":"1.1","type_definitions":[{"type":"user"},{"metadata":{"relations":{"viewer":{"directly_related_user_types":[{"type":"user"}]}}},"relations":{"viewer":{"this":{}}},"type":"document"}]}`
 
 func testAccAuthorizationModelDocumentDataSourceConfigDsl() string {
 	return fmt.Sprintf(`
@@ -59,6 +59,10 @@ type user
 type document
   relations
     define viewer: [user]
+
+condition larger_than(a: int, b: int) {
+  a > b
+}
   EOT
 }
 `, acceptance.ProviderConfig)
@@ -85,7 +89,8 @@ data "openfga_authorization_model_document" "test" {
       }
     }
   ],
-  "schema_version": "1.1"
+  "schema_version": "1.1",
+  "conditions":{"larger_than":{"expression":"a > b","name":"larger_than","parameters":{"a":{"type_name":"TYPE_NAME_INT"},"b":{"type_name":"TYPE_NAME_INT"}}}}
 }
   EOT
 }

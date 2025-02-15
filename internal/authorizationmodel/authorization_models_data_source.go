@@ -2,7 +2,6 @@ package authorizationmodel
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
@@ -10,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 
-	openfga "github.com/openfga/go-sdk"
 	"github.com/openfga/go-sdk/client"
 )
 
@@ -23,7 +21,7 @@ func NewAuthorizationModelsDataSource() datasource.DataSource {
 }
 
 type AuthorizationModelsDataSource struct {
-	client *client.OpenFgaClient
+	client *AuthorizationModelClient
 }
 
 type AuthorizationModelsDataSourceModel struct {
@@ -51,10 +49,6 @@ func (d *AuthorizationModelsDataSource) Schema(ctx context.Context, req datasour
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
 							MarkdownDescription: "The unique ID of the OpenFGA authorization model",
-							Computed:            true,
-						},
-						"store_id": schema.StringAttribute{
-							MarkdownDescription: "The unique ID of the OpenFGA store this authorization model belongs to",
 							Computed:            true,
 						},
 						"model_json": schema.StringAttribute{
@@ -86,7 +80,7 @@ func (d *AuthorizationModelsDataSource) Configure(ctx context.Context, req datas
 		return
 	}
 
-	d.client = client
+	d.client = NewAuthorizationModelClient(client)
 }
 
 func (d *AuthorizationModelsDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
@@ -98,44 +92,13 @@ func (d *AuthorizationModelsDataSource) Read(ctx context.Context, req datasource
 		return
 	}
 
-	var authorizationModels []openfga.AuthorizationModel
-	options := client.ClientReadAuthorizationModelsOptions{
-		StoreId:           state.StoreId.ValueStringPointer(),
-		ContinuationToken: nil,
+	authorizationModelModels, err := d.client.ListAuthorizationModels(ctx, state.StoreId.ValueString())
+	if err != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read authorization models, got error: %s", err))
+		return
 	}
 
-	for isLastPage := false; !isLastPage; isLastPage = options.ContinuationToken == nil {
-		response, err := d.client.ReadAuthorizationModels(ctx).Options(options).Execute()
-		if err != nil {
-			resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read authorization models, got error: %s", err))
-			return
-		}
-
-		authorizationModels = append(authorizationModels, response.AuthorizationModels...)
-
-		options.ContinuationToken = response.ContinuationToken
-	}
-
-	state.AuthorizationModels = []AuthorizationModelModel{}
-	for _, authorizationModel := range authorizationModels {
-		authorizationModelWithoutId := AuthorizationModelWithoutId{
-			SchemaVersion:   authorizationModel.SchemaVersion,
-			TypeDefinitions: authorizationModel.TypeDefinitions,
-			Conditions:      authorizationModel.Conditions,
-		}
-
-		jsonBytes, err := json.Marshal(authorizationModelWithoutId)
-		if err != nil {
-			resp.Diagnostics.AddError("Invalid Response Data", fmt.Sprintf("Unable to convert to model JSON, got error: %s", err))
-			return
-		}
-
-		state.AuthorizationModels = append(state.AuthorizationModels, AuthorizationModelModel{
-			Id:        types.StringValue(authorizationModel.Id),
-			StoreId:   types.StringValue(*options.StoreId),
-			ModelJson: jsontypes.NewNormalizedValue(string(jsonBytes)),
-		})
-	}
+	state.AuthorizationModels = *authorizationModelModels
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }

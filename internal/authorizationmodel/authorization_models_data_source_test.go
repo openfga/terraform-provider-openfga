@@ -46,15 +46,13 @@ func TestAccAuthorizationModelsDataSource(t *testing.T) {
 						tfjsonpath.New("authorization_models"),
 						knownvalue.ListExact([]knownvalue.Check{
 							knownvalue.ObjectExact(map[string]knownvalue.Check{
-								"id":       knownvalue.NotNull(),
-								"store_id": knownvalue.NotNull(),
+								"id": knownvalue.NotNull(),
 								"model_json": knownvalue.StringExact(
 									testAccAuthorizationModelsDataSourceModelJson("file"),
 								),
 							}),
 							knownvalue.ObjectExact(map[string]knownvalue.Check{
-								"id":       knownvalue.NotNull(),
-								"store_id": knownvalue.NotNull(),
+								"id": knownvalue.NotNull(),
 								"model_json": knownvalue.StringExact(
 									testAccAuthorizationModelsDataSourceModelJson("document"),
 								),
