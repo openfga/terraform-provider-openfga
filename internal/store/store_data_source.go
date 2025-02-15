@@ -6,7 +6,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 
 	"github.com/openfga/go-sdk/client"
 )
@@ -20,10 +19,12 @@ func NewStoreDataSource() datasource.DataSource {
 }
 
 type StoreDataSource struct {
-	client *client.OpenFgaClient
+	client *StoreClient
 }
 
-type StoreDataSourceModel StoreModel
+type StoreDataSourceModel struct {
+	StoreModel
+}
 
 func (d *StoreDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_store"
@@ -63,7 +64,7 @@ func (d *StoreDataSource) Configure(ctx context.Context, req datasource.Configur
 		return
 	}
 
-	d.client = client
+	d.client = NewStoreClient(client)
 }
 
 func (d *StoreDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
@@ -75,18 +76,13 @@ func (d *StoreDataSource) Read(ctx context.Context, req datasource.ReadRequest, 
 		return
 	}
 
-	options := client.ClientGetStoreOptions{
-		StoreId: state.Id.ValueStringPointer(),
-	}
-
-	response, err := d.client.GetStore(ctx).Options(options).Execute()
+	storeModel, err := d.client.ReadStore(ctx, state.StoreModel)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read store, got error: %s", err))
 		return
 	}
 
-	state.Id = types.StringValue(response.Id)
-	state.Name = types.StringValue(response.Name)
+	state.StoreModel = *storeModel
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }

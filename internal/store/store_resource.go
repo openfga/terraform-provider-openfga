@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 
 	"github.com/openfga/go-sdk/client"
 )
@@ -23,10 +22,12 @@ func NewStoreResource() resource.Resource {
 }
 
 type StoreResource struct {
-	client *client.OpenFgaClient
+	client *StoreClient
 }
 
-type StoreResourceModel StoreModel
+type StoreResourceModel struct {
+	StoreModel
+}
 
 func (r *StoreResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
 	resp.TypeName = req.ProviderTypeName + "_store"
@@ -72,7 +73,7 @@ func (r *StoreResource) Configure(ctx context.Context, req resource.ConfigureReq
 		return
 	}
 
-	r.client = client
+	r.client = NewStoreClient(client)
 }
 
 func (r *StoreResource) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
@@ -84,18 +85,13 @@ func (r *StoreResource) Create(ctx context.Context, req resource.CreateRequest, 
 		return
 	}
 
-	body := client.ClientCreateStoreRequest{
-		Name: state.Name.ValueString(),
-	}
-
-	response, err := r.client.CreateStore(ctx).Body(body).Execute()
+	storeModel, err := r.client.CreateStore(ctx, state.StoreModel)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create store, got error: %s", err))
 		return
 	}
 
-	state.Id = types.StringValue(response.Id)
-	state.Name = types.StringValue(response.Name)
+	state.StoreModel = *storeModel
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }
@@ -109,18 +105,13 @@ func (r *StoreResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		return
 	}
 
-	options := client.ClientGetStoreOptions{
-		StoreId: state.Id.ValueStringPointer(),
-	}
-
-	response, err := r.client.GetStore(ctx).Options(options).Execute()
+	storeModel, err := r.client.ReadStore(ctx, state.StoreModel)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read store, got error: %s", err))
 		return
 	}
 
-	state.Id = types.StringValue(response.Id)
-	state.Name = types.StringValue(response.Name)
+	state.StoreModel = *storeModel
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }
@@ -142,11 +133,7 @@ func (r *StoreResource) Delete(ctx context.Context, req resource.DeleteRequest, 
 		return
 	}
 
-	options := client.ClientDeleteStoreOptions{
-		StoreId: state.Id.ValueStringPointer(),
-	}
-
-	_, err := r.client.DeleteStore(ctx).Options(options).Execute()
+	err := r.client.DeleteStore(ctx, state.StoreModel)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete store, got error: %s", err))
 		return

@@ -6,9 +6,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 
-	openfga "github.com/openfga/go-sdk"
 	"github.com/openfga/go-sdk/client"
 )
 
@@ -21,7 +19,7 @@ func NewStoresDataSource() datasource.DataSource {
 }
 
 type StoresDataSource struct {
-	client *client.OpenFgaClient
+	client *StoreClient
 }
 
 type StoresDataSourceModel struct {
@@ -74,7 +72,7 @@ func (d *StoresDataSource) Configure(ctx context.Context, req datasource.Configu
 		return
 	}
 
-	d.client = client
+	d.client = NewStoreClient(client)
 }
 
 func (d *StoresDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
@@ -86,30 +84,13 @@ func (d *StoresDataSource) Read(ctx context.Context, req datasource.ReadRequest,
 		return
 	}
 
-	var stores []openfga.Store
-	options := client.ClientListStoresOptions{
-		ContinuationToken: openfga.PtrString(""),
+	storeModels, err := d.client.ListStores(ctx)
+	if err != nil {
+		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read stores, got error: %s", err))
+		return
 	}
 
-	for isLastPage := false; !isLastPage; isLastPage = *options.ContinuationToken == "" {
-		response, err := d.client.ListStores(ctx).Options(options).Execute()
-		if err != nil {
-			resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read stores, got error: %s", err))
-			return
-		}
-
-		stores = append(stores, response.Stores...)
-
-		options.ContinuationToken = openfga.PtrString(response.ContinuationToken)
-	}
-
-	state.Stores = []StoreModel{}
-	for _, store := range stores {
-		state.Stores = append(state.Stores, StoreModel{
-			Id:   types.StringValue(store.Id),
-			Name: types.StringValue(store.Name),
-		})
-	}
+	state.Stores = *storeModels
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }
