@@ -9,7 +9,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 
-	openfga "github.com/openfga/go-sdk"
 	"github.com/openfga/go-sdk/client"
 )
 
@@ -22,31 +21,16 @@ func NewCheckQueryDataSource() datasource.DataSource {
 }
 
 type CheckQueryDataSource struct {
-	client *client.OpenFgaClient
+	client *QueryClient
 }
 
 type CheckQueryDataSourceModel struct {
-	StoreId              types.String         `tfsdk:"store_id"`
-	AuthorizationModelId types.String         `tfsdk:"authorization_model_id"`
-	User                 types.String         `tfsdk:"user"`
-	Relation             types.String         `tfsdk:"relation"`
-	Object               types.String         `tfsdk:"object"`
-	ContextualTuples     *[]ContextualTuple   `tfsdk:"contextual_tuples"`
-	Context              jsontypes.Normalized `tfsdk:"context_json"`
+	StoreId              types.String `tfsdk:"store_id"`
+	AuthorizationModelId types.String `tfsdk:"authorization_model_id"`
+
+	CheckQueryModel
 
 	Result types.Bool `tfsdk:"result"`
-}
-
-type ContextualTuple struct {
-	User      types.String                `tfsdk:"user"`
-	Relation  types.String                `tfsdk:"relation"`
-	Object    types.String                `tfsdk:"object"`
-	Condition *RelationshipTupleCondition `tfsdk:"condition"`
-}
-
-type RelationshipTupleCondition struct {
-	Name    types.String         `tfsdk:"name"`
-	Context jsontypes.Normalized `tfsdk:"context_json"`
 }
 
 func (d *CheckQueryDataSource) Metadata(ctx context.Context, req datasource.MetadataRequest, resp *datasource.MetadataResponse) {
@@ -55,7 +39,7 @@ func (d *CheckQueryDataSource) Metadata(ctx context.Context, req datasource.Meta
 
 func (d *CheckQueryDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "A 'check' query can be called to establish whether a particular user has a specific relationship with a particular object.",
+		MarkdownDescription: "A 'check' query can be performed to establish whether a particular user has a specific relationship with a particular object.",
 
 		Attributes: map[string]schema.Attribute{
 			"store_id": schema.StringAttribute{
@@ -79,7 +63,7 @@ func (d *CheckQueryDataSource) Schema(ctx context.Context, req datasource.Schema
 				Required:            true,
 			},
 			"contextual_tuples": schema.ListNestedAttribute{
-				MarkdownDescription: "The object of the query",
+				MarkdownDescription: "The contextual tuples that should be considered for the query",
 				Optional:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
@@ -119,7 +103,7 @@ func (d *CheckQueryDataSource) Schema(ctx context.Context, req datasource.Schema
 				Optional:            true,
 			},
 			"result": schema.BoolAttribute{
-				MarkdownDescription: "The result of the check query",
+				MarkdownDescription: "Boolean value indicating whether the user has a relation to the object",
 				Computed:            true,
 			},
 		},
@@ -143,7 +127,7 @@ func (d *CheckQueryDataSource) Configure(ctx context.Context, req datasource.Con
 		return
 	}
 
-	d.client = client
+	d.client = NewQueryClient(client)
 }
 
 func (d *CheckQueryDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
@@ -155,70 +139,13 @@ func (d *CheckQueryDataSource) Read(ctx context.Context, req datasource.ReadRequ
 		return
 	}
 
-	options := client.ClientCheckOptions{
-		StoreId:              state.StoreId.ValueStringPointer(),
-		AuthorizationModelId: state.AuthorizationModelId.ValueStringPointer(),
-	}
-
-	var contextualTuples []client.ClientContextualTupleKey = []client.ClientContextualTupleKey{}
-	if state.ContextualTuples != nil {
-		for _, contextualTuple := range *state.ContextualTuples {
-			var condition *openfga.RelationshipCondition
-			if contextualTuple.Condition != nil {
-				var context *map[string]interface{}
-				if !contextualTuple.Condition.Context.IsNull() {
-					var result map[string]interface{}
-
-					resp.Diagnostics.Append(contextualTuple.Condition.Context.Unmarshal(&result)...)
-					if resp.Diagnostics.HasError() {
-						return
-					}
-
-					context = &result
-				}
-
-				condition = &openfga.RelationshipCondition{
-					Name:    contextualTuple.Condition.Name.ValueString(),
-					Context: context,
-				}
-			}
-
-			contextualTuples = append(contextualTuples, client.ClientContextualTupleKey{
-				User:      contextualTuple.User.ValueString(),
-				Relation:  contextualTuple.Relation.ValueString(),
-				Object:    contextualTuple.Object.ValueString(),
-				Condition: condition,
-			})
-		}
-	}
-
-	var context *map[string]interface{}
-	if !state.Context.IsNull() {
-		var result map[string]interface{}
-
-		resp.Diagnostics.Append(state.Context.Unmarshal(&result)...)
-		if resp.Diagnostics.HasError() {
-			return
-		}
-
-		context = &result
-	}
-
-	body := client.ClientCheckRequest{
-		User:             state.User.ValueString(),
-		Relation:         state.Relation.ValueString(),
-		Object:           state.Object.ValueString(),
-		ContextualTuples: contextualTuples,
-		Context:          context,
-	}
-
-	response, err := d.client.Check(ctx).Options(options).Body(body).Execute()
+	result, err := d.client.Check(ctx, state.StoreId.ValueString(), state.AuthorizationModelId.ValueString(), state.CheckQueryModel)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to perform check query, got error: %s", err))
 		return
 	}
 
-	state.Result = types.BoolValue(response.GetAllowed())
+	state.Result = result
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }
