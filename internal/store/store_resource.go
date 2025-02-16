@@ -35,18 +35,24 @@ func (r *StoreResource) Metadata(ctx context.Context, req resource.MetadataReque
 
 func (r *StoreResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "A store is a logical container for authorization data, including authorization models and tuples.",
+		MarkdownDescription: `
+Provides the ability to create and manage OpenFGA stores.
+
+A store is a logical container for authorization data. Each store contains one or more versions of an authorization model and can contain various relationship tuples.
+
+Separate stores can be created for separate authorization needs or isolated environments, e.g. development/ prod.
+`,
 
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
-				MarkdownDescription: "The unique ID of the OpenFGA store",
+				MarkdownDescription: "The unique ID of the store.",
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"name": schema.StringAttribute{
-				MarkdownDescription: "The name of the OpenFGA store",
+				MarkdownDescription: "The name of the store.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),

@@ -32,20 +32,20 @@ func (d *StoresDataSource) Metadata(ctx context.Context, req datasource.Metadata
 
 func (d *StoresDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "A store is a logical container for authorization data, including authorization models and tuples.",
+		MarkdownDescription: "Provides the ability to list and retrieve details of existing OpenFGA stores.",
 
 		Attributes: map[string]schema.Attribute{
 			"stores": schema.ListNestedAttribute{
-				MarkdownDescription: "List of OpenFGA stores",
+				MarkdownDescription: "List of existing stores.",
 				Computed:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							MarkdownDescription: "The unique ID of the OpenFGA store",
+							MarkdownDescription: "The unique ID of the store.",
 							Computed:            true,
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "The name of the OpenFGA store",
+							MarkdownDescription: "The name of the store.",
 							Computed:            true,
 						},
 					},

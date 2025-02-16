@@ -36,58 +36,58 @@ func (d *RelationshipTuplesDataSource) Metadata(ctx context.Context, req datasou
 
 func (d *RelationshipTuplesDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "A relationship tuple is a tuple consisting of a user, relation, and object. Tuples may add an optional condition.",
+		MarkdownDescription: "Provides the ability to list and retrieve details of existing relationship tuples in a specific store.",
 
 		Attributes: map[string]schema.Attribute{
 			"store_id": schema.StringAttribute{
-				MarkdownDescription: "The unique ID of the OpenFGA store this relationship tuple belongs to",
+				MarkdownDescription: "The unique ID of the store to list relationship tuples for.",
 				Required:            true,
 			},
 			"query": schema.SingleNestedAttribute{
-				MarkdownDescription: "A query to filter the returned tuples (leave empty to read all tuples)",
+				MarkdownDescription: "A query to filter the returned relationship tuples. Can be left blank to retrieve all relationship tuples.",
 				Optional:            true,
 				Attributes: map[string]schema.Attribute{
 					"user": schema.StringAttribute{
-						MarkdownDescription: "The user of the OpenFGA relationship tuple",
+						MarkdownDescription: "The user of the resulting relationship tuples.",
 						Optional:            true,
 					},
 					"relation": schema.StringAttribute{
-						MarkdownDescription: "The relation of the OpenFGA relationship tuple",
+						MarkdownDescription: "The relation of the resulting relationship tuples.",
 						Optional:            true,
 					},
 					"object": schema.StringAttribute{
-						MarkdownDescription: "The object of the OpenFGA relationship tuple",
+						MarkdownDescription: "The object of the resulting relationship tuples.",
 						Required:            true,
 					},
 				},
 			},
 			"relationship_tuples": schema.ListNestedAttribute{
-				MarkdownDescription: "List of OpenFGA relationship tuples",
+				MarkdownDescription: "List of existing relationship tuples in the specific store, matching the query.",
 				Computed:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"user": schema.StringAttribute{
-							MarkdownDescription: "The user of the OpenFGA relationship tuple",
+							MarkdownDescription: "The user of the relationship tuple.",
 							Computed:            true,
 						},
 						"relation": schema.StringAttribute{
-							MarkdownDescription: "The relation of the OpenFGA relationship tuple",
+							MarkdownDescription: "The relation of the relationship tuple.",
 							Computed:            true,
 						},
 						"object": schema.StringAttribute{
-							MarkdownDescription: "The object of the OpenFGA relationship tuple",
+							MarkdownDescription: "The object of the relationship tuple.",
 							Computed:            true,
 						},
 						"condition": schema.SingleNestedAttribute{
-							MarkdownDescription: "A condition of the OpenFGA relationship tuple",
+							MarkdownDescription: "A condition of the relationship tuple.",
 							Computed:            true,
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "The name of the condition",
+									MarkdownDescription: "The name of the condition.",
 									Computed:            true,
 								},
 								"context_json": schema.StringAttribute{
-									MarkdownDescription: "The (partial) context under which the condition is evaluated",
+									MarkdownDescription: "The (partial) context under which the condition is evaluated.",
 									CustomType:          jsontypes.NormalizedType{},
 									Computed:            true,
 								},

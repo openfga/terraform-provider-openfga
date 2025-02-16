@@ -39,24 +39,32 @@ func (d *AuthorizationModelDocumentDataSource) Metadata(ctx context.Context, req
 
 func (d *AuthorizationModelDocumentDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "An authorization model document represents the configuration of an authorization model. It can be used to convert between DSL and JSON or to represent a JSON model in canonical form.",
+		MarkdownDescription: `
+Generates an authorization model in JSON format for use with resources that expect authorization models such as ` + "`openfga_authorization_model`" + `.
+
+Can be used to convert an authorization model from DSL format to JSON format. It is also possible to provide an authorization model in JSON format or as native Terraform object.
+
+It will always generate a stable output that is not influenced by the format of the input data.
+
+Using this data source to generate authorization models is optional. It is also valid to use literal JSON strings in your configuration.
+`,
 
 		Attributes: map[string]schema.Attribute{
 			"dsl": schema.StringAttribute{
-				MarkdownDescription: "The authorization model in DSL format",
+				MarkdownDescription: "An authorization model in DSL format. Conflicts with `json` and `model` fields.",
 				Optional:            true,
 			},
 			"json": schema.StringAttribute{
-				MarkdownDescription: "The authorization model in JSON format",
+				MarkdownDescription: "An authorization model in JSON format. Conflicts with `dsl` and `model` fields.",
 				Optional:            true,
 			},
 			"model": schema.SingleNestedAttribute{
-				MarkdownDescription: "The authorization model as object",
+				MarkdownDescription: "An authorization model as Terraform object. Conflicts with `dsl` and `json` fields.",
 				Optional:            true,
 				Attributes:          CustomAuthorizationModelSchema(),
 			},
 			"result": schema.StringAttribute{
-				MarkdownDescription: "The resulting model in JSON format",
+				MarkdownDescription: "The authorization model definition in a stable JSON format.",
 				Computed:            true,
 			},
 		},

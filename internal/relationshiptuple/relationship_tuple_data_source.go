@@ -35,35 +35,35 @@ func (d *RelationshipTupleDataSource) Metadata(ctx context.Context, req datasour
 
 func (d *RelationshipTupleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "A relationship tuple is a tuple consisting of a user, relation, and object. Tuples may add an optional condition.",
+		MarkdownDescription: "Provides the ability to retrieve details of an existing OpenFGA relationship tuple.",
 
 		Attributes: map[string]schema.Attribute{
 			"store_id": schema.StringAttribute{
-				MarkdownDescription: "The unique ID of the OpenFGA store this relationship tuple belongs to",
+				MarkdownDescription: "The unique ID of the store this relationship tuple model belongs to.",
 				Required:            true,
 			},
 			"user": schema.StringAttribute{
-				MarkdownDescription: "The user of the OpenFGA relationship tuple",
+				MarkdownDescription: "The user of the relationship tuple.",
 				Required:            true,
 			},
 			"relation": schema.StringAttribute{
-				MarkdownDescription: "The relation of the OpenFGA relationship tuple",
+				MarkdownDescription: "The relation of the relationship tuple.",
 				Required:            true,
 			},
 			"object": schema.StringAttribute{
-				MarkdownDescription: "The object of the OpenFGA relationship tuple",
+				MarkdownDescription: "The object of the relationship tuple.",
 				Required:            true,
 			},
 			"condition": schema.SingleNestedAttribute{
-				MarkdownDescription: "A condition of the OpenFGA relationship tuple",
+				MarkdownDescription: "A condition of the relationship tuple.",
 				Computed:            true,
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "The name of the condition",
+						MarkdownDescription: "The name of the condition.",
 						Computed:            true,
 					},
 					"context_json": schema.StringAttribute{
-						MarkdownDescription: "The (partial) context under which the condition is evaluated",
+						MarkdownDescription: "The (partial) context under which the condition is evaluated.",
 						CustomType:          jsontypes.NormalizedType{},
 						Computed:            true,
 					},

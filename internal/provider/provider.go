@@ -46,26 +46,32 @@ func (p *OpenFgaProvider) Metadata(ctx context.Context, req provider.MetadataReq
 
 func (p *OpenFgaProvider) Schema(ctx context.Context, req provider.SchemaRequest, resp *provider.SchemaResponse) {
 	resp.Schema = schema.Schema{
+		MarkdownDescription: `
+The OpenFGA provider is used to interact with a OpenFGA server.
+
+It can be used to create resources (like Stores, Authorization Models, Relationship Tuples) or to perform queries (e.g. Check, List Objects, List Users).
+`,
+
 		Attributes: map[string]schema.Attribute{
 			"api_url": schema.StringAttribute{
-				MarkdownDescription: "URL of the OpenFGA server",
+				MarkdownDescription: "URL of the OpenFGA server. This can also be sourced from the `FGA_API_URL` environment variable.",
 				Optional:            true,
 			},
 			"api_token": schema.StringAttribute{
-				MarkdownDescription: "Access token for authentication to the OpenFGA server",
+				MarkdownDescription: "Access token for authentication to the OpenFGA server. This can also be sourced from the `FGA_API_TOKEN` environment variable.",
 				Optional:            true,
 			},
 			"client_id": schema.StringAttribute{
-				MarkdownDescription: "Client ID for client credentials authentication",
+				MarkdownDescription: "Client ID for client credentials authentication. This can also be sourced from the `FGA_CLIENT_ID` environment variable.",
 				Optional:            true,
 			},
 			"client_secret": schema.StringAttribute{
-				MarkdownDescription: "Client secret for client credentials authentication",
+				MarkdownDescription: "Client secret for client credentials authentication. This can also be sourced from the `FGA_CLIENT_SECRET` environment variable.",
 				Optional:            true,
 				Sensitive:           true,
 			},
 			"token_endpoint_url": schema.StringAttribute{
-				MarkdownDescription: "The token endpoint URL for client credentials authentication",
+				MarkdownDescription: "The token endpoint URL for client credentials authentication. This can also be sourced from the `FGA_TOKEN_ENDPOINT_URL` environment variable.",
 				Optional:            true,
 			},
 		},
