@@ -5,6 +5,8 @@
         "ghcr.io/devcontainers-extra/features/gh-release:1": {
             "repo": "openfga/cli",
             "binaryNames": "fga"
-        }
-    }
+        },
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    },
+    "postCreateCommand": "echo 'export GPG_TTY=\"$(tty)\"' >> ~/.bashrc"
 }

@@ -77,9 +77,5 @@ data "openfga_authorization_model" "latest" {
 
 	depends_on = [openfga_authorization_model.latest]
 }
-
-data "openfga_store" "test" {
-	id = openfga_store.test.id
-}
 `, acceptance.ProviderConfig, expectedFirstAuthorizationModelDataSourceModelJson, expectedLatestAuthorizationModelDataSourceModelJson)
 }
