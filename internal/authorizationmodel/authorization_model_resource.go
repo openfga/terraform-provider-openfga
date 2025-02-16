@@ -38,22 +38,30 @@ func (r *AuthorizationModelResource) Metadata(ctx context.Context, req resource.
 
 func (r *AuthorizationModelResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "An authorization model combines one or more type definitions. This is used to define the permission model of a system.",
+		MarkdownDescription: `
+Provides the ability to create and manage OpenFGA authorization models.
+
+An authorization model defines one or more type definitions and optionally a set of conditions.
+
+Together with relationship tuples, the authorization model determines whether a relationship exists between a user and an object.
+
+~> **NOTE:** We suggest using [` + "`openfga_authorization_model_document`" + `](/docs/data-sources/authorization_model_document.html) when assigning a value to ` + "`model_json`" + `. This allows to use models in different formats (e.g. DSL, JSON, Terraform native) and prevents potential complications arising from formatting discrepancies, whitespace inconsistencies, and other nuances inherent to JSON.
+`,
 
 		Attributes: map[string]schema.Attribute{
 			"store_id": schema.StringAttribute{
-				MarkdownDescription: "The unique ID of the OpenFGA store this authorization model belongs to",
+				MarkdownDescription: "The unique ID of the store this authorization model belongs to.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
 			},
 			"id": schema.StringAttribute{
-				MarkdownDescription: "The unique ID of the OpenFGA authorization model",
+				MarkdownDescription: "The unique ID of the authorization model.",
 				Computed:            true,
 			},
 			"model_json": schema.StringAttribute{
-				MarkdownDescription: "The full authorization model definition in JSON format",
+				MarkdownDescription: "The authorization model definition in JSON format. Consider using [`openfga_authorization_model_document`](/docs/data-sources/authorization_model_document.html) to set this field.",
 				Required:            true,
 				CustomType:          jsontypes.NormalizedType{},
 				PlanModifiers: []planmodifier.String{

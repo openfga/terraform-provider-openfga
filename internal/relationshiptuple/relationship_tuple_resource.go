@@ -40,57 +40,63 @@ func (r *RelationshipTupleResource) Metadata(ctx context.Context, req resource.M
 
 func (r *RelationshipTupleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "A relationship tuple is a tuple consisting of a user, relation, and object. Tuples may add an optional condition.",
+		MarkdownDescription: `
+Provides the ability to create and manage OpenFGA relationship tuples.
+
+A relationship tuple consists of a user, a relation, and an object. Tuples may include an additional condition, which has to be fulfilled for the tuple to be considered.
+
+Together with an authorization model, the relationship tuples determine whether a relationship exists between a user and an object.
+`,
 
 		Attributes: map[string]schema.Attribute{
 			"store_id": schema.StringAttribute{
-				MarkdownDescription: "The unique ID of the OpenFGA store this relationship tuple belongs to",
+				MarkdownDescription: "The unique ID of the store this relationship tuple belongs to.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
 			},
 			"authorization_model_id": schema.StringAttribute{
-				MarkdownDescription: "The unique ID of the OpenFGA authorization model this relationship tuple is related with",
+				MarkdownDescription: "The unique ID of the authorization model this relationship tuple is related with. Can be left blank to refer to the latest authorization model.",
 				Optional:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
 			},
 			"user": schema.StringAttribute{
-				MarkdownDescription: "The user of the OpenFGA relationship tuple",
+				MarkdownDescription: "The user of the relationship tuple.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
 			},
 			"relation": schema.StringAttribute{
-				MarkdownDescription: "The relation of the OpenFGA relationship tuple",
+				MarkdownDescription: "The relation of the relationship tuple.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
 			},
 			"object": schema.StringAttribute{
-				MarkdownDescription: "The object of the OpenFGA relationship tuple",
+				MarkdownDescription: "The object of the relationship tuple.",
 				Required:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
 			},
 			"condition": schema.SingleNestedAttribute{
-				MarkdownDescription: "A condition of the OpenFGA relationship tuple",
+				MarkdownDescription: "A condition of the relationship tuple.",
 				Optional:            true,
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "The name of the condition",
+						MarkdownDescription: "The name of the condition.",
 						Required:            true,
 						PlanModifiers: []planmodifier.String{
 							stringplanmodifier.RequiresReplace(),
 						},
 					},
 					"context_json": schema.StringAttribute{
-						MarkdownDescription: "The (partial) context under which the condition is evaluated",
+						MarkdownDescription: "The (partial) context under which the condition is evaluated.",
 						CustomType:          jsontypes.NormalizedType{},
 						Optional:            true,
 						PlanModifiers: []planmodifier.String{

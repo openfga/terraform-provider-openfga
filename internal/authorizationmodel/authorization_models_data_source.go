@@ -35,24 +35,24 @@ func (d *AuthorizationModelsDataSource) Metadata(ctx context.Context, req dataso
 
 func (d *AuthorizationModelsDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "An authorization model combines one or more type definitions. This is used to define the permission model of a system.",
+		MarkdownDescription: "Provides the ability to list and retrieve details of existing authorization models in a specific store.",
 
 		Attributes: map[string]schema.Attribute{
 			"store_id": schema.StringAttribute{
-				MarkdownDescription: "The unique ID of the OpenFGA store this authorization model belongs to",
+				MarkdownDescription: "The unique ID of the store to list authorization models for.",
 				Required:            true,
 			},
 			"authorization_models": schema.ListNestedAttribute{
-				MarkdownDescription: "List of OpenFGA authorization models",
+				MarkdownDescription: "List of existing authorization models in the specific store.",
 				Computed:            true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							MarkdownDescription: "The unique ID of the OpenFGA authorization model",
+							MarkdownDescription: "The unique ID of the authorization model.",
 							Computed:            true,
 						},
 						"model_json": schema.StringAttribute{
-							MarkdownDescription: "The full authorization model definition in JSON format",
+							MarkdownDescription: "The authorization model definition in JSON format.",
 							Computed:            true,
 							CustomType:          jsontypes.NormalizedType{},
 						},
