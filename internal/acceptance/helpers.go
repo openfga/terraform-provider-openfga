@@ -17,7 +17,7 @@ const (
 var (
 	ProviderConfig = fmt.Sprintf(`
 provider "openfga" {
-  api_url = %[1]q
+	api_url = %[1]q
 }
 `, ProviderApiUrl)
 )

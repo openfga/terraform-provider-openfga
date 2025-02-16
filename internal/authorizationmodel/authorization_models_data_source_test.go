@@ -72,7 +72,7 @@ func testAccAuthorizationModelsDataSourceModelJson(typeName string) string {
 func testAccAuthorizationModelsDataSourceConfig(modelJsons ...string) string {
 	var resources string = `
 resource "openfga_store" "test" {
-  name = "test"
+	name = "test"
 }
 	`
 
@@ -84,9 +84,9 @@ resource "openfga_store" "test" {
 
 		resources += fmt.Sprintf(`
 resource "openfga_authorization_model" "model_%[1]d" {
-  store_id = openfga_store.test.id
+	store_id = openfga_store.test.id
 
-  model_json = %[2]q
+	model_json = %[2]q
   %[3]s
 }
 `, idx, modelJson, dependsOn)
@@ -98,7 +98,7 @@ resource "openfga_authorization_model" "model_%[1]d" {
 %[2]s
 
 data "openfga_authorization_models" "test" {
-  store_id = openfga_store.test.id
+	store_id = openfga_store.test.id
 }
 `, acceptance.ProviderConfig, resources)
 }

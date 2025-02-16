@@ -63,133 +63,133 @@ func testAccListUsersDataSourceConfig() string {
 %[1]s
 
 resource "openfga_store" "test" {
-  name = "test"
+	name = "test"
 }
 
 data "openfga_authorization_model_document" "test" {
-  dsl = <<EOT
+	dsl = <<EOT
 model
-  schema 1.1
+	schema 1.1
 
 type user
 
 type document
-  relations
-    define viewer: [user, user with larger_than]
+	relations
+		define viewer: [user, user with larger_than]
 
 condition larger_than(required: int, provided: int) {
-  provided > required
+	provided > required
 }
-  EOT
+	EOT
 }
 
 resource "openfga_authorization_model" "test" {
-  store_id = openfga_store.test.id
+	store_id = openfga_store.test.id
 
-  model_json = data.openfga_authorization_model_document.test.result
+	model_json = data.openfga_authorization_model_document.test.result
 }
 
 resource "openfga_relationship_tuple" "test" {
-  store_id = openfga_store.test.id
+	store_id = openfga_store.test.id
 
-  user      = "user:user-1"
-  relation  = "viewer"
-  object    = "document:document-1"
+	user      = "user:user-1"
+	relation  = "viewer"
+	object    = "document:document-1"
 
-  depends_on = [openfga_authorization_model.test]
+	depends_on = [openfga_authorization_model.test]
 }
 
 data "openfga_list_users_query" "with_results" {
-  depends_on = [openfga_relationship_tuple.test]
+	depends_on = [openfga_relationship_tuple.test]
 
-  store_id = openfga_store.test.id
-  authorization_model_id = openfga_authorization_model.test.id
+	store_id = openfga_store.test.id
+	authorization_model_id = openfga_authorization_model.test.id
 
-  type     = "user"
-  relation = "viewer"
-  object   = "document:document-1"
+	type     = "user"
+	relation = "viewer"
+	object   = "document:document-1"
 }
 
 data "openfga_list_users_query" "without_results" {
-  depends_on = [openfga_relationship_tuple.test]
+	depends_on = [openfga_relationship_tuple.test]
 
-  store_id = openfga_store.test.id
-  authorization_model_id = openfga_authorization_model.test.id
+	store_id = openfga_store.test.id
+	authorization_model_id = openfga_authorization_model.test.id
 
-  type     = "user"
-  relation = "viewer"
-  object   = "document:document-2"
+	type     = "user"
+	relation = "viewer"
+	object   = "document:document-2"
 }
 
 data "openfga_list_users_query" "with_contextual_results" {
-  depends_on = [openfga_relationship_tuple.test]
+	depends_on = [openfga_relationship_tuple.test]
 
-  store_id = openfga_store.test.id
-  authorization_model_id = openfga_authorization_model.test.id
+	store_id = openfga_store.test.id
+	authorization_model_id = openfga_authorization_model.test.id
 
-  type     = "user"
-  relation = "viewer"
-  object   = "document:document-2"
-  
-  contextual_tuples = [{
-    user     = "user:user-2"
-    relation = "viewer"
-    object   = "document:document-2"
-  }]
+	type     = "user"
+	relation = "viewer"
+	object   = "document:document-2"
+
+	contextual_tuples = [{
+		user     = "user:user-2"
+		relation = "viewer"
+		object   = "document:document-2"
+	}]
 }
 
 data "openfga_list_users_query" "with_contextual_context_results" {
-  depends_on = [openfga_relationship_tuple.test]
+	depends_on = [openfga_relationship_tuple.test]
 
-  store_id = openfga_store.test.id
-  authorization_model_id = openfga_authorization_model.test.id
+	store_id = openfga_store.test.id
+	authorization_model_id = openfga_authorization_model.test.id
 
-  type     = "user"
-  relation = "viewer"
-  object   = "document:document-2"
-  
-  contextual_tuples = [{
-    user      = "user:user-2"
-    relation  = "viewer"
-    object    = "document:document-2"
-	  condition = {
-      name = "larger_than"
-      context_json = jsonencode({
-	      provided = 100
-      })
-    }
-  }]
+	type     = "user"
+	relation = "viewer"
+	object   = "document:document-2"
 
-  context_json = jsonencode({
-    required = 50
-  })
+	contextual_tuples = [{
+		user      = "user:user-2"
+		relation  = "viewer"
+		object    = "document:document-2"
+		condition = {
+			name = "larger_than"
+			context_json = jsonencode({
+				provided = 100
+			})
+		}
+	}]
+
+	context_json = jsonencode({
+		required = 50
+	})
 }
 
 data "openfga_list_users_query" "without_contextual_context_results" {
-  depends_on = [openfga_relationship_tuple.test]
+	depends_on = [openfga_relationship_tuple.test]
 
-  store_id = openfga_store.test.id
-  authorization_model_id = openfga_authorization_model.test.id
+	store_id = openfga_store.test.id
+	authorization_model_id = openfga_authorization_model.test.id
 
-  type     = "user"
-  relation = "viewer"
-  object   = "document:document-2"
-  
-  contextual_tuples = [{
-    user      = "user:user-2"
-    relation  = "viewer"
-    object    = "document:document-2"
-	  condition = {
-      name = "larger_than"
-      context_json = jsonencode({
-	      provided = 100
-      })
-    }
-  }]
+	type     = "user"
+	relation = "viewer"
+	object   = "document:document-2"
 
-  context_json = jsonencode({
-    required = 100
-  })
+	contextual_tuples = [{
+		user      = "user:user-2"
+		relation  = "viewer"
+		object    = "document:document-2"
+		condition = {
+			name = "larger_than"
+			context_json = jsonencode({
+				provided = 100
+			})
+		}
+	}]
+
+	context_json = jsonencode({
+		required = 100
+	})
 }
 `, acceptance.ProviderConfig)
 }

@@ -104,13 +104,13 @@ func testAccAuthorizationModelResourceConfig(modelJson string) string {
 %[1]s
 
 resource "openfga_store" "test" {
-  name = "test"
+	name = "test"
 }
 
 resource "openfga_authorization_model" "test" {
-  store_id = openfga_store.test.id
+	store_id = openfga_store.test.id
 
-  model_json = %[2]q
+	model_json = %[2]q
 }
 `, acceptance.ProviderConfig, modelJson)
 }

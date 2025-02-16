@@ -65,8 +65,8 @@ func testAccStoresDataSourceConfig(names ...string) string {
 
 		resources += fmt.Sprintf(`
 resource "openfga_store" "store_%[1]d" {
-  name = %[2]q
-  %[3]s
+	name = %[2]q
+	%[3]s
 }
 `, idx, name, dependsOn)
 	}

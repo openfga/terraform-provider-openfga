@@ -73,7 +73,7 @@ func testAccStoreResourceConfig(name string) string {
 %[1]s
 
 resource "openfga_store" "test" {
-  name = %[2]q
+	name = %[2]q
 }
 `, acceptance.ProviderConfig, name)
 }

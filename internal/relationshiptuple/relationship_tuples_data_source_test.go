@@ -98,30 +98,30 @@ func TestAccRelationshipTuplesDataSource(t *testing.T) {
 func testAccRelationshipTuplesDataSourceConfig(objectNames ...string) string {
 	var resources string = `
 resource "openfga_store" "test" {
-  name = "test"
+	name = "test"
 }
 
 data "openfga_authorization_model_document" "test" {
-  dsl = <<EOT
+	dsl = <<EOT
 model
-  schema 1.1
+	schema 1.1
 
 type user
 
 type document
-  relations
-    define viewer: [user with non_expired_grant]
+	relations
+		define viewer: [user with non_expired_grant]
 
 condition non_expired_grant(current_time: timestamp, grant_time: timestamp, grant_duration: duration) {
-  current_time < grant_time + grant_duration
+	current_time < grant_time + grant_duration
 }
-  EOT
+	EOT
 }
 
 resource "openfga_authorization_model" "test" {
-  store_id = openfga_store.test.id
+	store_id = openfga_store.test.id
 
-  model_json = data.openfga_authorization_model_document.test.result
+	model_json = data.openfga_authorization_model_document.test.result
 }
 	`
 
@@ -133,19 +133,19 @@ resource "openfga_authorization_model" "test" {
 
 		resources += fmt.Sprintf(`
 resource "openfga_relationship_tuple" "tuple_%[1]d" {
-  store_id = openfga_store.test.id
+	store_id = openfga_store.test.id
 
-  user      = "user:user-1"
-  relation  = "viewer"
-  object    = "document:%[2]s"
-  condition = {
-    name         = "non_expired_grant"
-	context_json = jsonencode({
-      grant_time     = "2023-01-01T00:00:00Z"
-	  grant_duration = "10m"
-    })
-  }
-  %[3]s
+	user      = "user:user-1"
+	relation  = "viewer"
+	object    = "document:%[2]s"
+	condition = {
+		name         = "non_expired_grant"
+		context_json = jsonencode({
+			grant_time     = "2023-01-01T00:00:00Z"
+			grant_duration = "10m"
+		})
+	}
+	%[3]s
 }
 `, idx, objectName, dependsOn)
 	}
@@ -156,15 +156,15 @@ resource "openfga_relationship_tuple" "tuple_%[1]d" {
 %[2]s
 
 data "openfga_relationship_tuples" "all" {
-  store_id = openfga_store.test.id
+	store_id = openfga_store.test.id
 }
 
 data "openfga_relationship_tuples" "query" {
-  store_id = openfga_store.test.id
+	store_id = openfga_store.test.id
 
-  query = {
-    object = "document:document-1" 
-  }
+	query = {
+		object = "document:document-1" 
+	}
 }
 `, acceptance.ProviderConfig, resources)
 }

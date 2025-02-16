@@ -50,20 +50,20 @@ func testAccAuthorizationModelDocumentDataSourceConfigDsl() string {
 %[1]s
 
 data "openfga_authorization_model_document" "test" {
-  dsl = <<EOT
+	dsl = <<EOT
 model
-  schema 1.1
+	schema 1.1
 
 type user
 
 type document
-  relations
-    define viewer: [user]
+	relations
+		define viewer: [user]
 
 condition larger_than(a: int, b: int) {
-  a > b
+	a > b
 }
-  EOT
+	EOT
 }
 `, acceptance.ProviderConfig)
 }
@@ -73,26 +73,26 @@ func testAccAuthorizationModelDocumentDataSourceConfigJson() string {
 %[1]s
 
 data "openfga_authorization_model_document" "test" {
-  json = <<EOT
+	json = <<EOT
 {
-  "type_definitions": [
-    { "type": "user" },
-    {
-      "type": "document",
-      "relations": {
-        "viewer": {
-          "this": {}
-        }
-      },
-	  "metadata": {
-        "relations":{"viewer":{"directly_related_user_types":[{"type":"user"}]}}
-      }
-    }
-  ],
-  "schema_version": "1.1",
-  "conditions":{"larger_than":{"expression":"a > b","name":"larger_than","parameters":{"a":{"type_name":"TYPE_NAME_INT"},"b":{"type_name":"TYPE_NAME_INT"}}}}
+	"type_definitions": [
+		{ "type": "user" },
+		{
+			"type": "document",
+			"relations": {
+				"viewer": {
+					"this": {}
+				}
+			},
+			"metadata": {
+				"relations":{"viewer":{"directly_related_user_types":[{"type":"user"}]}}
+			}
+    	}
+	],
+	"schema_version": "1.1",
+	"conditions":{"larger_than":{"expression":"a > b","name":"larger_than","parameters":{"a":{"type_name":"TYPE_NAME_INT"},"b":{"type_name":"TYPE_NAME_INT"}}}}
 }
-  EOT
+	EOT
 }
 `, acceptance.ProviderConfig)
 }

@@ -33,11 +33,11 @@ func (query ListObjectsQueryModel) GetContextualTuples() []relationshiptuple.Rel
 	return *query.ContextualTuples
 }
 
-func NewListObjectsQueryModel(user string, relation string, typ string, contextualTuples *[]relationshiptuple.RelationshipTupleWithConditionModel, context *map[string]interface{}) *ListObjectsQueryModel {
+func NewListObjectsQueryModel(user string, relation string, type_ string, contextualTuples *[]relationshiptuple.RelationshipTupleWithConditionModel, context *map[string]interface{}) *ListObjectsQueryModel {
 	return &ListObjectsQueryModel{
 		User:             types.StringValue(user),
 		Relation:         types.StringValue(relation),
-		Type:             types.StringValue(typ),
+		Type:             types.StringValue(type_),
 		ContextualTuples: contextualTuples,
 		ContextModel:     *relationshiptuple.NewContextModel(context),
 	}

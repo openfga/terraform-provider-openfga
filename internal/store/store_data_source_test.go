@@ -42,11 +42,11 @@ func testAccStoreDataSourceConfig(name string) string {
 %[1]s
 
 resource "openfga_store" "test" {
-  name = %[2]q
+	name = %[2]q
 }
 
 data "openfga_store" "test" {
-  id = openfga_store.test.id
+	id = openfga_store.test.id
 }
 `, acceptance.ProviderConfig, name)
 }

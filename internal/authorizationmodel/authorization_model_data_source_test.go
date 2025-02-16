@@ -50,36 +50,36 @@ func testAccAuthorizationModelDataSourceConfig() string {
 %[1]s
 
 resource "openfga_store" "test" {
-  name = "test"
+	name = "test"
 }
 
 resource "openfga_authorization_model" "first" {
-  store_id = openfga_store.test.id
- 
-  model_json = %[2]q
+	store_id = openfga_store.test.id
+
+	model_json = %[2]q
 }
 
 resource "openfga_authorization_model" "latest" {
-  store_id = openfga_store.test.id
- 
-  model_json = %[3]q
+	store_id = openfga_store.test.id
 
-  depends_on = [openfga_authorization_model.first]
+	model_json = %[3]q
+
+	depends_on = [openfga_authorization_model.first]
 }
 
 data "openfga_authorization_model" "specific" {
-  id       = openfga_authorization_model.first.id
-  store_id = openfga_store.test.id
+	id       = openfga_authorization_model.first.id
+	store_id = openfga_store.test.id
 }
 
 data "openfga_authorization_model" "latest" {
-  store_id = openfga_store.test.id
+	store_id = openfga_store.test.id
 
-  depends_on = [openfga_authorization_model.latest]
+	depends_on = [openfga_authorization_model.latest]
 }
 
 data "openfga_store" "test" {
-  id = openfga_store.test.id
+	id = openfga_store.test.id
 }
 `, acceptance.ProviderConfig, expectedFirstAuthorizationModelDataSourceModelJson, expectedLatestAuthorizationModelDataSourceModelJson)
 }
