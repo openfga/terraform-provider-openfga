@@ -39,6 +39,17 @@ func TestAccAuthorizationModelDocumentDataSource(t *testing.T) {
 					),
 				},
 			},
+			// Test model
+			{
+				Config: testAccAuthorizationModelDocumentDataSourceConfigModel(),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(
+						"data.openfga_authorization_model_document.test",
+						tfjsonpath.New("result"),
+						knownvalue.StringExact(expectedAuthorizationModelDocumentDataSourceResult),
+					),
+				},
+			},
 		},
 	})
 }
@@ -93,6 +104,54 @@ data "openfga_authorization_model_document" "test" {
 	"conditions":{"larger_than":{"expression":"a > b","name":"larger_than","parameters":{"a":{"type_name":"TYPE_NAME_INT"},"b":{"type_name":"TYPE_NAME_INT"}}}}
 }
 	EOT
+}
+`, acceptance.ProviderConfig)
+}
+
+func testAccAuthorizationModelDocumentDataSourceConfigModel() string {
+	return fmt.Sprintf(`
+%[1]s
+
+data "openfga_authorization_model_document" "test" {
+	model = {
+		schema_version   = "1.1"
+		type_definitions = [
+			{
+				type = "user"
+			},
+			{
+				type      = "document"
+				relations = {
+					viewer = {
+						this = {}
+					}
+				}
+				metadata  = {
+					relations = {
+						viewer = {
+							directly_related_user_types = [
+								{ type = "user" }
+							]
+						}
+					}
+				}
+			},
+		]
+		conditions       = {
+			larger_than = {
+				name       = "larger_than"
+				expression = "a > b"
+				parameters = {
+					a = {
+						type_name = "TYPE_NAME_INT"
+					}
+					b = {
+						type_name = "TYPE_NAME_INT"
+					} 
+				}
+			}
+		}
+	}
 }
 `, acceptance.ProviderConfig)
 }

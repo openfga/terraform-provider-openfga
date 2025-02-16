@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 
+	openfga "github.com/openfga/go-sdk"
 	"github.com/openfga/language/pkg/go/transformer"
 )
 
@@ -25,8 +26,9 @@ func NewAuthorizationModelDocumentDataSource() datasource.DataSource {
 type AuthorizationModelDocumentDataSource struct{}
 
 type AuthorizationModelDocumentDataSourceModel struct {
-	Dsl  types.String `tfsdk:"dsl"`
-	Json types.String `tfsdk:"json"`
+	Dsl   types.String              `tfsdk:"dsl"`
+	Json  types.String              `tfsdk:"json"`
+	Model *CustomAuthorizationModel `tfsdk:"model"`
 
 	Result types.String `tfsdk:"result"`
 }
@@ -48,6 +50,11 @@ func (d *AuthorizationModelDocumentDataSource) Schema(ctx context.Context, req d
 				MarkdownDescription: "The authorization model in JSON format",
 				Optional:            true,
 			},
+			"model": schema.SingleNestedAttribute{
+				MarkdownDescription: "The authorization model as object",
+				Optional:            true,
+				Attributes:          CustomAuthorizationModelSchema(),
+			},
 			"result": schema.StringAttribute{
 				MarkdownDescription: "The resulting model in JSON format",
 				Computed:            true,
@@ -61,6 +68,7 @@ func (p AuthorizationModelDocumentDataSource) ConfigValidators(ctx context.Conte
 		datasourcevalidator.ExactlyOneOf(
 			path.MatchRoot("dsl"),
 			path.MatchRoot("json"),
+			path.MatchRoot("model"),
 		),
 	}
 }
@@ -81,8 +89,19 @@ func (d *AuthorizationModelDocumentDataSource) Read(ctx context.Context, req dat
 		return
 	}
 
+	model := state.Model
 	jsonString := state.Json.ValueStringPointer()
 	dslString := state.Dsl.ValueStringPointer()
+
+	if model != nil {
+		result, err := json.Marshal(state.Model)
+		if err != nil {
+			resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable to transform model into JSON, got error: %s", err))
+			return
+		}
+
+		jsonString = openfga.PtrString(string(result))
+	}
 
 	if jsonString != nil {
 		result, err := transformer.TransformJSONStringToDSL(*jsonString)
