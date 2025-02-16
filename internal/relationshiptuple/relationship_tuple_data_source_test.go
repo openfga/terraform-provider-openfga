@@ -82,7 +82,8 @@ resource "openfga_authorization_model" "test" {
 }
 
 resource "openfga_relationship_tuple" "test" {
-	store_id = openfga_store.test.id
+	store_id               = openfga_store.test.id
+	authorization_model_id = openfga_authorization_model.test.id
 
 	user      = "user:user-1"
 	relation  = "viewer"
@@ -94,8 +95,6 @@ resource "openfga_relationship_tuple" "test" {
 			grant_duration = "10m"
 		})
 	}
-
-	depends_on = [openfga_authorization_model.test]
 }
 
 data "openfga_relationship_tuple" "test" {

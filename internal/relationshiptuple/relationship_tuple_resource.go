@@ -29,7 +29,8 @@ type RelationshipTupleResource struct {
 }
 
 type RelationshipTupleResourceModel struct {
-	StoreId types.String `tfsdk:"store_id"`
+	StoreId              types.String `tfsdk:"store_id"`
+	AuthorizationModelId types.String `tfsdk:"authorization_model_id"`
 	RelationshipTupleWithConditionModel
 }
 
@@ -45,6 +46,13 @@ func (r *RelationshipTupleResource) Schema(ctx context.Context, req resource.Sch
 			"store_id": schema.StringAttribute{
 				MarkdownDescription: "The unique ID of the OpenFGA store this relationship tuple belongs to",
 				Required:            true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.RequiresReplace(),
+				},
+			},
+			"authorization_model_id": schema.StringAttribute{
+				MarkdownDescription: "The unique ID of the OpenFGA authorization model this relationship tuple is related with",
+				Optional:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
@@ -126,7 +134,7 @@ func (r *RelationshipTupleResource) Create(ctx context.Context, req resource.Cre
 		return
 	}
 
-	relationshipTupleModel, err := r.client.CreateRelationshipTuple(ctx, state.StoreId.ValueString(), state.RelationshipTupleWithConditionModel)
+	relationshipTupleModel, err := r.client.CreateRelationshipTuple(ctx, state.StoreId.ValueString(), state.AuthorizationModelId.ValueStringPointer(), state.RelationshipTupleWithConditionModel)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to create relationship tuple, got error: %s", err))
 		return
@@ -174,7 +182,7 @@ func (r *RelationshipTupleResource) Delete(ctx context.Context, req resource.Del
 		return
 	}
 
-	err := r.client.DeleteRelationshipTuple(ctx, state.StoreId.ValueString(), state.RelationshipTupleWithConditionModel)
+	err := r.client.DeleteRelationshipTuple(ctx, state.StoreId.ValueString(), state.AuthorizationModelId.ValueStringPointer(), state.RelationshipTupleWithConditionModel)
 	if err != nil {
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete relationship tuple, got error: %s", err))
 		return
@@ -184,14 +192,21 @@ func (r *RelationshipTupleResource) Delete(ctx context.Context, req resource.Del
 func (r *RelationshipTupleResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
 	parts := strings.Split(req.ID, "/")
 
-	if len(parts) != 4 {
-		resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Input ID has to be in the format of <store_id>/<user>/<relation>/<object>, but received: %s", req.ID))
+	var state RelationshipTupleResourceModel
+	if len(parts) == 4 {
+		state = RelationshipTupleResourceModel{
+			StoreId:                             types.StringValue(parts[0]),
+			RelationshipTupleWithConditionModel: *NewRelationshipTupleWithConditionModel(parts[1], parts[2], parts[3], nil),
+		}
+	} else if len(parts) == 5 {
+		state = RelationshipTupleResourceModel{
+			StoreId:                             types.StringValue(parts[0]),
+			AuthorizationModelId:                types.StringValue(parts[1]),
+			RelationshipTupleWithConditionModel: *NewRelationshipTupleWithConditionModel(parts[2], parts[3], parts[4], nil),
+		}
+	} else {
+		resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Input ID has to be in the format of <store_id>/<user>/<relation>/<object> or <store_id>/<authorization_model_id>/<user>/<relation>/<object>, but received: %s", req.ID))
 		return
-	}
-
-	state := RelationshipTupleResourceModel{
-		StoreId:                             types.StringValue(parts[0]),
-		RelationshipTupleWithConditionModel: *NewRelationshipTupleWithConditionModel(parts[1], parts[2], parts[3], nil),
 	}
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)

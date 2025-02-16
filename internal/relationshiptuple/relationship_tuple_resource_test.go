@@ -30,6 +30,11 @@ func TestAccRelationshipTupleResource(t *testing.T) {
 					),
 					statecheck.ExpectKnownValue(
 						"openfga_relationship_tuple.test",
+						tfjsonpath.New("authorization_model_id"),
+						knownvalue.NotNull(),
+					),
+					statecheck.ExpectKnownValue(
+						"openfga_relationship_tuple.test",
 						tfjsonpath.New("user"),
 						knownvalue.StringExact("user:user-1"),
 					),
@@ -65,9 +70,15 @@ func TestAccRelationshipTupleResource(t *testing.T) {
 						return "", fmt.Errorf("Unable to find resource openfga_store.test")
 					}
 
+					authorizationModel, ok := s.RootModule().Resources["openfga_authorization_model.test"]
+					if !ok {
+						return "", fmt.Errorf("Unable to find resource openfga_authorization_model.test")
+					}
+
 					return fmt.Sprintf(
-						"%s/%s/%s/%s",
+						"%s/%s/%s/%s/%s",
 						store.Primary.Attributes["id"],
+						authorizationModel.Primary.Attributes["id"],
 						"user:user-1",
 						"viewer",
 						"document:document-1",
@@ -153,7 +164,8 @@ resource "openfga_authorization_model" "test" {
 }
 
 resource "openfga_relationship_tuple" "test" {
-	store_id = openfga_store.test.id
+	store_id               = openfga_store.test.id
+	authorization_model_id = openfga_authorization_model.test.id
 
 	user      = "user:%[2]s"
 	relation  = "viewer"
@@ -165,8 +177,6 @@ resource "openfga_relationship_tuple" "test" {
 			grant_duration = "10m"
 		})
 	}
-
-	depends_on = [openfga_authorization_model.test]
 }
 `, acceptance.ProviderConfig, userName)
 }

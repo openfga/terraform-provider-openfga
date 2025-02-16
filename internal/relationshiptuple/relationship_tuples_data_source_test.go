@@ -133,7 +133,8 @@ resource "openfga_authorization_model" "test" {
 
 		resources += fmt.Sprintf(`
 resource "openfga_relationship_tuple" "tuple_%[1]d" {
-	store_id = openfga_store.test.id
+	store_id               = openfga_store.test.id
+	authorization_model_id = openfga_authorization_model.test.id
 
 	user      = "user:user-1"
 	relation  = "viewer"

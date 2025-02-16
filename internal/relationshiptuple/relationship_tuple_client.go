@@ -27,9 +27,10 @@ func (model RelationshipTupleWithConditionModel) ToCreateRequest() (*client.Clie
 	}, nil
 }
 
-func (wrapper *RelationshipTupleClient) CreateRelationshipTuple(ctx context.Context, storeId string, model RelationshipTupleWithConditionModel) (*RelationshipTupleWithConditionModel, error) {
+func (wrapper *RelationshipTupleClient) CreateRelationshipTuple(ctx context.Context, storeId string, authorizationModelId *string, model RelationshipTupleWithConditionModel) (*RelationshipTupleWithConditionModel, error) {
 	options := client.ClientWriteOptions{
-		StoreId: openfga.PtrString(storeId),
+		StoreId:              openfga.PtrString(storeId),
+		AuthorizationModelId: authorizationModelId,
 	}
 
 	body, err := model.ToCreateRequest()
@@ -128,9 +129,10 @@ func (model RelationshipTupleModel) ToDeleteRequest() *client.ClientDeleteTuples
 	}
 }
 
-func (wrapper *RelationshipTupleClient) DeleteRelationshipTuple(ctx context.Context, storeId string, model RelationshipTupleWithConditionModel) error {
+func (wrapper *RelationshipTupleClient) DeleteRelationshipTuple(ctx context.Context, storeId string, authorizationModelId *string, model RelationshipTupleWithConditionModel) error {
 	options := client.ClientWriteOptions{
-		StoreId: openfga.PtrString(storeId),
+		StoreId:              openfga.PtrString(storeId),
+		AuthorizationModelId: authorizationModelId,
 	}
 
 	body := model.ToDeleteRequest()
