@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-testing/terraform"
 	"github.com/hashicorp/terraform-plugin-testing/tfjsonpath"
 
-	"github.com/mauriceackel/terraform-provider-openfga/internal/acceptance"
+	"github.com/mauriceackel/terraform-provider-openfga/internal/provider/acceptance"
 )
 
 func TestAccRelationshipTupleResource(t *testing.T) {

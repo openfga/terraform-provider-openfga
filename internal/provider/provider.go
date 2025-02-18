@@ -15,10 +15,10 @@ import (
 	"github.com/openfga/go-sdk/client"
 	"github.com/openfga/go-sdk/credentials"
 
-	"github.com/mauriceackel/terraform-provider-openfga/internal/authorizationmodel"
-	"github.com/mauriceackel/terraform-provider-openfga/internal/query"
-	"github.com/mauriceackel/terraform-provider-openfga/internal/relationshiptuple"
-	"github.com/mauriceackel/terraform-provider-openfga/internal/store"
+	"github.com/mauriceackel/terraform-provider-openfga/internal/provider/authorizationmodel"
+	"github.com/mauriceackel/terraform-provider-openfga/internal/provider/query"
+	"github.com/mauriceackel/terraform-provider-openfga/internal/provider/relationshiptuple"
+	"github.com/mauriceackel/terraform-provider-openfga/internal/provider/store"
 )
 
 // Ensure OpenFgaProvider satisfies various provider interfaces.

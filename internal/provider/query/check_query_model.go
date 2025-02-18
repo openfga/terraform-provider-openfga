@@ -1,7 +1,7 @@
 package query
 
 import (
-	"github.com/mauriceackel/terraform-provider-openfga/internal/relationshiptuple"
+	"github.com/mauriceackel/terraform-provider-openfga/internal/provider/relationshiptuple"
 )
 
 type CheckQueryModel struct {

@@ -2,7 +2,7 @@ package query
 
 import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/mauriceackel/terraform-provider-openfga/internal/relationshiptuple"
+	"github.com/mauriceackel/terraform-provider-openfga/internal/provider/relationshiptuple"
 )
 
 type ListUsersQueryModel struct {

@@ -76,7 +76,7 @@ jobs:
       - run: docker run -d --name openfga -p 8080:8080 openfga/openfga:v${{ matrix.openfga-version }} run
       - env:
           TF_ACC: "1"
-        run: go test -v -cover -p=1 ./internal/provider/
+        run: go test -v -cover -p=1 ./internal/provider/...
         timeout-minutes: 10
       - name: Clean up
         run: docker stop openfga && docker rm openfga

@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-testing/knownvalue"
 	"github.com/hashicorp/terraform-plugin-testing/statecheck"
 	"github.com/hashicorp/terraform-plugin-testing/tfjsonpath"
-	"github.com/mauriceackel/terraform-provider-openfga/internal/acceptance"
+	"github.com/mauriceackel/terraform-provider-openfga/internal/provider/acceptance"
 )
 
 func TestAccRelationshipTuplesDataSource(t *testing.T) {

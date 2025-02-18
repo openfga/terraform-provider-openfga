@@ -9,48 +9,42 @@ import (
 	"github.com/hashicorp/terraform-plugin-testing/statecheck"
 	"github.com/hashicorp/terraform-plugin-testing/tfjsonpath"
 
-	"github.com/mauriceackel/terraform-provider-openfga/internal/acceptance"
+	"github.com/mauriceackel/terraform-provider-openfga/internal/provider/acceptance"
 )
 
-func TestAccListObjectsDataSource(t *testing.T) {
+func TestAccCheckQueryDataSource(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck:                 func() { acceptance.TestAccPreCheck(t) },
 		ProtoV6ProviderFactories: acceptance.TestAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			// Read testing
 			{
-				Config: testAccListObjectsDataSourceConfig(),
+				Config: testAccCheckQueryDataSourceConfig(),
 				ConfigStateChecks: []statecheck.StateCheck{
 					statecheck.ExpectKnownValue(
-						"data.openfga_list_objects_query.with_results",
+						"data.openfga_check_query.allowed",
 						tfjsonpath.New("result"),
-						knownvalue.ListExact([]knownvalue.Check{
-							knownvalue.StringExact("document:document-1"),
-						}),
+						knownvalue.Bool(true),
 					),
 					statecheck.ExpectKnownValue(
-						"data.openfga_list_objects_query.without_results",
+						"data.openfga_check_query.forbidden",
 						tfjsonpath.New("result"),
-						knownvalue.ListSizeExact(0),
+						knownvalue.Bool(false),
 					),
 					statecheck.ExpectKnownValue(
-						"data.openfga_list_objects_query.with_contextual_results",
+						"data.openfga_check_query.contextually_allowed",
 						tfjsonpath.New("result"),
-						knownvalue.ListExact([]knownvalue.Check{
-							knownvalue.StringExact("document:document-1"),
-						}),
+						knownvalue.Bool(true),
 					),
 					statecheck.ExpectKnownValue(
-						"data.openfga_list_objects_query.with_contextual_context_results",
+						"data.openfga_check_query.contextually_allowed_with_context",
 						tfjsonpath.New("result"),
-						knownvalue.ListExact([]knownvalue.Check{
-							knownvalue.StringExact("document:document-1"),
-						}),
+						knownvalue.Bool(true),
 					),
 					statecheck.ExpectKnownValue(
-						"data.openfga_list_objects_query.without_contextual_context_results",
+						"data.openfga_check_query.contextually_forbidden_with_context",
 						tfjsonpath.New("result"),
-						knownvalue.ListSizeExact(0),
+						knownvalue.Bool(false),
 					),
 				},
 			},
@@ -58,7 +52,7 @@ func TestAccListObjectsDataSource(t *testing.T) {
 	})
 }
 
-func testAccListObjectsDataSourceConfig() string {
+func testAccCheckQueryDataSourceConfig() string {
 	return fmt.Sprintf(`
 %[1]s
 
@@ -98,7 +92,7 @@ resource "openfga_relationship_tuple" "test" {
 	object    = "document:document-1"
 }
 
-data "openfga_list_objects_query" "with_results" {
+data "openfga_check_query" "allowed" {
 	depends_on = [openfga_relationship_tuple.test]
 
 	store_id = openfga_store.test.id
@@ -106,10 +100,10 @@ data "openfga_list_objects_query" "with_results" {
 
 	user     = "user:user-1"
 	relation = "viewer"
-	type     = "document"
+	object   = "document:document-1"
 }
 
-data "openfga_list_objects_query" "without_results" {
+data "openfga_check_query" "forbidden" {
 	depends_on = [openfga_relationship_tuple.test]
 
 	store_id = openfga_store.test.id
@@ -117,10 +111,10 @@ data "openfga_list_objects_query" "without_results" {
 
 	user     = "user:user-2"
 	relation = "viewer"
-	type     = "document"
+	object   = "document:document-1"
 }
 
-data "openfga_list_objects_query" "with_contextual_results" {
+data "openfga_check_query" "contextually_allowed" {
 	depends_on = [openfga_relationship_tuple.test]
 
 	store_id = openfga_store.test.id
@@ -128,7 +122,7 @@ data "openfga_list_objects_query" "with_contextual_results" {
 
 	user     = "user:user-2"
 	relation = "viewer"
-	type     = "document"
+	object   = "document:document-1"
 
 	contextual_tuples = [{
 		user     = "user:user-2"
@@ -137,7 +131,7 @@ data "openfga_list_objects_query" "with_contextual_results" {
 	}]
 }
 
-data "openfga_list_objects_query" "with_contextual_context_results" {
+data "openfga_check_query" "contextually_allowed_with_context" {
 	depends_on = [openfga_relationship_tuple.test]
 
 	store_id = openfga_store.test.id
@@ -145,8 +139,8 @@ data "openfga_list_objects_query" "with_contextual_context_results" {
 
 	user     = "user:user-2"
 	relation = "viewer"
-	type     = "document"
-
+	object   = "document:document-1"
+  
 	contextual_tuples = [{
 		user      = "user:user-2"
 		relation  = "viewer"
@@ -164,7 +158,7 @@ data "openfga_list_objects_query" "with_contextual_context_results" {
 	})
 }
 
-data "openfga_list_objects_query" "without_contextual_context_results" {
+data "openfga_check_query" "contextually_forbidden_with_context" {
 	depends_on = [openfga_relationship_tuple.test]
 
 	store_id = openfga_store.test.id
@@ -172,8 +166,8 @@ data "openfga_list_objects_query" "without_contextual_context_results" {
 
 	user     = "user:user-2"
 	relation = "viewer"
-	type     = "document"
-
+	object   = "document:document-1"
+  
 	contextual_tuples = [{
 		user      = "user:user-2"
 		relation  = "viewer"
