@@ -86,12 +86,12 @@ func (wrapper *AuthorizationModelClient) ReadLatestAuthorizationModel(ctx contex
 func (wrapper *AuthorizationModelClient) ListAuthorizationModels(ctx context.Context, storeId string) (*[]AuthorizationModelModel, error) {
 	options := client.ClientReadAuthorizationModelsOptions{
 		StoreId:           openfga.PtrString(storeId),
-		ContinuationToken: nil,
+		ContinuationToken: openfga.PtrString(""),
 	}
 
 	authorizationModels := []openfga.AuthorizationModel{}
 
-	for isLastPage := false; !isLastPage; isLastPage = options.ContinuationToken == nil {
+	for isLastPage := false; !isLastPage; isLastPage = *options.ContinuationToken == "" {
 		response, err := wrapper.client.ReadAuthorizationModels(ctx).Options(options).Execute()
 		if err != nil {
 			return nil, err
@@ -99,7 +99,9 @@ func (wrapper *AuthorizationModelClient) ListAuthorizationModels(ctx context.Con
 
 		authorizationModels = append(authorizationModels, response.AuthorizationModels...)
 
-		options.ContinuationToken = response.ContinuationToken
+		if response.ContinuationToken != nil {
+			options.ContinuationToken = response.ContinuationToken
+		}
 	}
 
 	authorizationModelModels := []AuthorizationModelModel{}
