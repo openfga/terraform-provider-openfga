@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"google.golang.org/protobuf/encoding/protojson"
 
 	openfga "github.com/openfga/go-sdk"
 	"github.com/openfga/language/pkg/go/transformer"
@@ -98,8 +99,8 @@ func (d *AuthorizationModelDocumentDataSource) Read(ctx context.Context, req dat
 	}
 
 	model := state.Model
-	jsonString := state.Json.ValueStringPointer()
 	dslString := state.Dsl.ValueStringPointer()
+	jsonString := state.Json.ValueStringPointer()
 
 	if model != nil {
 		result, err := json.Marshal(state.Model)
@@ -111,43 +112,48 @@ func (d *AuthorizationModelDocumentDataSource) Read(ctx context.Context, req dat
 		jsonString = openfga.PtrString(string(result))
 	}
 
-	if jsonString != nil {
-		result, err := transformer.TransformJSONStringToDSL(*jsonString)
+	if dslString != nil {
+		result, err := transformer.TransformDSLToJSON(*dslString)
 		if err != nil {
-			resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable to transform JSON into DSL, got error: %s", err))
+			resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable to transform DSL into JSON, got error: %s", err))
 			return
 		}
 
-		dslString = result
+		jsonString = openfga.PtrString(result)
 	}
 
-	if dslString == nil {
-		resp.Diagnostics.AddError("Input Error", "DSL is undefined")
+	if jsonString == nil {
+		resp.Diagnostics.AddError("Input Error", "JSON is undefined")
 		return
 	}
 
-	// Transform DSL to canonical JSON form
-	unstableResult, err := transformer.TransformDSLToJSON(*dslString)
+	modelProto, err := transformer.LoadJSONStringToProto(*jsonString)
 	if err != nil {
-		resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable to transform DSL into JSON, got error: %s", err))
+		resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable to transform JSON into Proto, got error: %s", err))
 		return
 	}
 
-	var tmp any
-	err = json.Unmarshal([]byte(unstableResult), &tmp)
-	if err != nil {
-		resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable to bring JSON in canonical form, got error: %s", err))
-		return
-	}
-	stableResultBytes, err := json.Marshal(tmp)
+	marshaller := protojson.MarshalOptions{EmitDefaultValues: true}
+	unstableJsonBytes, err := marshaller.Marshal(modelProto)
 	if err != nil {
 		resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable to bring JSON in canonical form, got error: %s", err))
 		return
 	}
 
-	stableResult := string(stableResultBytes)
+	var sanitizedAuthorizationModel AuthorizationModelWithoutId
+	err = json.Unmarshal(unstableJsonBytes, &sanitizedAuthorizationModel)
+	if err != nil {
+		resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable to bring JSON in canonical form, got error: %s", err))
+		return
+	}
 
-	state.Result = types.StringValue(stableResult)
+	stableResultBytes, err := json.Marshal(sanitizedAuthorizationModel)
+	if err != nil {
+		resp.Diagnostics.AddError("Input Error", fmt.Sprintf("Unable to bring JSON in canonical form, got error: %s", err))
+		return
+	}
+
+	state.Result = types.StringValue(string(stableResultBytes))
 
 	resp.Diagnostics.Append(resp.State.Set(ctx, &state)...)
 }

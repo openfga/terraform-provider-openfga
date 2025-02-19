@@ -96,7 +96,7 @@ func TestAccAuthorizationModelResource(t *testing.T) {
 }
 
 func testAccAuthorizationModelResourceModelJson(typeName string) string {
-	return fmt.Sprintf(`{"conditions":{"non_expired_grant":{"expression":"current_time == grant_time + grant_duration","name":"non_expired_grant","parameters":{"current_time":{"type_name":"TYPE_NAME_TIMESTAMP"},"grant_duration":{"type_name":"TYPE_NAME_DURATION"},"grant_time":{"type_name":"TYPE_NAME_TIMESTAMP"}}}},"schema_version":"1.1","type_definitions":[{"type":"user"},{"metadata":{"relations":{"viewer":{"directly_related_user_types":[{"condition":"non_expired_grant","type":"user"}]}}},"relations":{"viewer":{"this":{}}},"type":%[1]q}]}`, typeName)
+	return fmt.Sprintf(`{"conditions":{"non_expired_grant":{"expression":"current_time == grant_time + grant_duration","name":"non_expired_grant","parameters":{"current_time":{"generic_types":[],"type_name":"TYPE_NAME_TIMESTAMP"},"grant_duration":{"generic_types":[],"type_name":"TYPE_NAME_DURATION"},"grant_time":{"generic_types":[],"type_name":"TYPE_NAME_TIMESTAMP"}}}},"schema_version":"1.1","type_definitions":[{"relations":{},"type":"user"},{"metadata":{"module":"","relations":{"viewer":{"directly_related_user_types":[{"condition":"non_expired_grant","type":"user"}],"module":""}}},"relations":{"viewer":{"this":{}}},"type":%[1]q}]}`, typeName)
 }
 
 func testAccAuthorizationModelResourceConfig(modelJson string) string {

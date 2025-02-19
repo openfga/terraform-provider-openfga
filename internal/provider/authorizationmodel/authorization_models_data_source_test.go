@@ -66,7 +66,7 @@ func TestAccAuthorizationModelsDataSource(t *testing.T) {
 }
 
 func testAccAuthorizationModelsDataSourceModelJson(typeName string) string {
-	return fmt.Sprintf(`{"schema_version":"1.1","type_definitions":[{"type":%[1]q}]}`, typeName)
+	return fmt.Sprintf(`{"conditions":{},"schema_version":"1.1","type_definitions":[{"relations":{},"type":%[1]q}]}`, typeName)
 }
 
 func testAccAuthorizationModelsDataSourceConfig(modelJsons ...string) string {

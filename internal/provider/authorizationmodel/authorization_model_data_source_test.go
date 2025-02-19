@@ -42,8 +42,8 @@ func TestAccAuthorizationModelDataSource(t *testing.T) {
 	})
 }
 
-const expectedFirstAuthorizationModelDataSourceModelJson = `{"schema_version":"1.1","type_definitions":[{"type":"document"}]}`
-const expectedLatestAuthorizationModelDataSourceModelJson = `{"schema_version":"1.1","type_definitions":[{"type":"file"}]}`
+const expectedFirstAuthorizationModelDataSourceModelJson = `{"conditions":{},"schema_version":"1.1","type_definitions":[{"relations":{},"type":"document"}]}`
+const expectedLatestAuthorizationModelDataSourceModelJson = `{"conditions":{},"schema_version":"1.1","type_definitions":[{"relations":{},"type":"file"}]}`
 
 func testAccAuthorizationModelDataSourceConfig() string {
 	return fmt.Sprintf(`
