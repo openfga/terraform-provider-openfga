@@ -36,6 +36,8 @@ type OpenFgaProviderModel struct {
 	ApiToken         types.String `tfsdk:"api_token"`
 	ClientId         types.String `tfsdk:"client_id"`
 	ClientSecret     types.String `tfsdk:"client_secret"`
+	Scopes           types.String `tfsdk:"scopes"`
+	Audience         types.String `tfsdk:"audience"`
 	TokenEndpointUrl types.String `tfsdk:"token_endpoint_url"`
 }
 
@@ -69,6 +71,14 @@ It can be used to create resources (like Stores, Authorization Models, Relations
 				MarkdownDescription: "Client secret for client credentials authentication. This can also be sourced from the `FGA_CLIENT_SECRET` environment variable.",
 				Optional:            true,
 				Sensitive:           true,
+			},
+			"scopes": schema.StringAttribute{
+				MarkdownDescription: "Scopes for client credentials authentication. This can also be sourced from the `FGA_SCOPES` environment variable.",
+				Optional:            true,
+			},
+			"audience": schema.StringAttribute{
+				MarkdownDescription: "Audience for client credentials authentication. This can also be sourced from the `FGA_AUDIENCE` environment variable.",
+				Optional:            true,
 			},
 			"token_endpoint_url": schema.StringAttribute{
 				MarkdownDescription: "The token endpoint URL for client credentials authentication. This can also be sourced from the `FGA_TOKEN_ENDPOINT_URL` environment variable.",
@@ -123,6 +133,24 @@ func (p *OpenFgaProvider) Configure(ctx context.Context, req provider.ConfigureR
 		)
 	}
 
+	if config.Scopes.IsUnknown() {
+		resp.Diagnostics.AddAttributeError(
+			path.Root("scopes"),
+			"Unknown OpenFGA scopes",
+			"The provider cannot create the OpenFGA API client as there is an unknown configuration value for the OpenFGA scopes. "+
+				"Either target apply the source of the value first, set the value statically in the configuration, or use the FGA_SCOPES environment variable.",
+		)
+	}
+
+	if config.Audience.IsUnknown() {
+		resp.Diagnostics.AddAttributeError(
+			path.Root("audience"),
+			"Unknown OpenFGA audience",
+			"The provider cannot create the OpenFGA API client as there is an unknown configuration value for the OpenFGA audience. "+
+				"Either target apply the source of the value first, set the value statically in the configuration, or use the FGA_AUDIENCE environment variable.",
+		)
+	}
+
 	if config.TokenEndpointUrl.IsUnknown() {
 		resp.Diagnostics.AddAttributeError(
 			path.Root("token_endpoint_url"),
@@ -140,6 +168,8 @@ func (p *OpenFgaProvider) Configure(ctx context.Context, req provider.ConfigureR
 	apiToken := os.Getenv("FGA_API_TOKEN")
 	clientId := os.Getenv("FGA_CLIENT_ID")
 	clientSecret := os.Getenv("FGA_CLIENT_SECRET")
+	scopes := os.Getenv("FGA_SCOPES")
+	audience := os.Getenv("FGA_AUDIENCE")
 	tokenEndpointUrl := os.Getenv("FGA_TOKEN_ENDPOINT_URL")
 
 	if !config.ApiUrl.IsNull() {
@@ -156,6 +186,14 @@ func (p *OpenFgaProvider) Configure(ctx context.Context, req provider.ConfigureR
 
 	if !config.ClientSecret.IsNull() {
 		clientSecret = config.ClientSecret.ValueString()
+	}
+
+	if !config.Scopes.IsNull() {
+		scopes = config.Scopes.ValueString()
+	}
+
+	if !config.Audience.IsNull() {
+		audience = config.Audience.ValueString()
 	}
 
 	if !config.TokenEndpointUrl.IsNull() {
@@ -201,6 +239,8 @@ func (p *OpenFgaProvider) Configure(ctx context.Context, req provider.ConfigureR
 			Config: &credentials.Config{
 				ClientCredentialsClientId:       clientId,
 				ClientCredentialsClientSecret:   clientSecret,
+				ClientCredentialsScopes:         scopes,
+				ClientCredentialsApiAudience:    audience,
 				ClientCredentialsApiTokenIssuer: tokenEndpointUrl,
 			},
 		}
