@@ -1,4 +1,10 @@
-## 0.1.0
+## 0.2.0 (February 22, 2025)
+
+FEATURES:
+
+* provider: Added `scopes` and `audience` attributes
+
+## 0.1.0 (February 19, 2025)
 
 FEATURES:
 
