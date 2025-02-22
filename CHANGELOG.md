@@ -1,3 +1,9 @@
+## 0.2.1 (February 22, 2025)
+
+BUG FIXES:
+
+* docs: Fixed missing provider attributes
+
 ## 0.2.0 (February 22, 2025)
 
 FEATURES:
