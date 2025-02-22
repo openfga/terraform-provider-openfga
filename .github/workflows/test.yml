@@ -6,8 +6,13 @@ on:
     paths-ignore:
       - 'README.md'
   push:
+    branches:
+      - main
+    tags-ignore:
+      - 'v*'
     paths-ignore:
       - 'README.md'
+  workflow_call:
 
 permissions:
   contents: read
