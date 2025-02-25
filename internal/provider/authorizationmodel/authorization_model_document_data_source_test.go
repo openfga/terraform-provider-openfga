@@ -28,6 +28,17 @@ func TestAccAuthorizationModelDocumentDataSource(t *testing.T) {
 					),
 				},
 			},
+			// Test mod file
+			{
+				Config: testAccAuthorizationModelDocumentDataSourceConfigModFile(),
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(
+						"data.openfga_authorization_model_document.test",
+						tfjsonpath.New("result"),
+						knownvalue.StringExact(expectedModularAuthorizationModelDocumentDataSourceResult),
+					),
+				},
+			},
 			// Test JSON
 			{
 				Config: testAccAuthorizationModelDocumentDataSourceConfigJson(),
@@ -55,6 +66,7 @@ func TestAccAuthorizationModelDocumentDataSource(t *testing.T) {
 }
 
 const expectedAuthorizationModelDocumentDataSourceResult = `{"conditions":{"larger_than":{"expression":"a \u003e b","name":"larger_than","parameters":{"a":{"generic_types":[],"type_name":"TYPE_NAME_INT"},"b":{"generic_types":[],"type_name":"TYPE_NAME_INT"}}}},"schema_version":"1.1","type_definitions":[{"relations":{},"type":"user"},{"metadata":{"module":"","relations":{"viewer":{"directly_related_user_types":[{"condition":"","type":"user"}],"module":""}}},"relations":{"viewer":{"this":{}}},"type":"document"}]}`
+const expectedModularAuthorizationModelDocumentDataSourceResult = `{"conditions":{"larger_than":{"expression":"a \u003e b","metadata":{"module":"conditions","source_info":{"file":"../acceptance/modularmodel/conditions/larger_than.fga"}},"name":"larger_than","parameters":{"a":{"generic_types":[],"type_name":"TYPE_NAME_INT"},"b":{"generic_types":[],"type_name":"TYPE_NAME_INT"}}}},"schema_version":"1.2","type_definitions":[{"metadata":{"module":"user","relations":{},"source_info":{"file":"../acceptance/modularmodel/user.fga"}},"relations":{},"type":"user"},{"metadata":{"module":"document","relations":{"viewer":{"directly_related_user_types":[{"condition":"","type":"user"}],"module":""}},"source_info":{"file":"../acceptance/modularmodel/document.fga"}},"relations":{"viewer":{"this":{}}},"type":"document"}]}`
 
 func testAccAuthorizationModelDocumentDataSourceConfigDsl() string {
 	return fmt.Sprintf(`
@@ -77,6 +89,15 @@ condition larger_than(a: int, b: int) {
 	EOT
 }
 `, acceptance.ProviderConfig)
+}
+
+func testAccAuthorizationModelDocumentDataSourceConfigModFile() string {
+	return fmt.Sprintf(`
+%[1]s
+
+data "openfga_authorization_model_document" "test" {
+	mod_file_path = "${path.root}/../acceptance/modularmodel/fga.mod"
+}`, acceptance.ProviderConfig)
 }
 
 func testAccAuthorizationModelDocumentDataSourceConfigJson() string {

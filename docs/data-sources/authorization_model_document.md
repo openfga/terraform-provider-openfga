@@ -45,9 +45,10 @@ data "openfga_authorization_model_document" "model" {
 
 ### Optional
 
-- `dsl` (String) An authorization model in DSL format. Conflicts with `json` and `model` fields.
-- `json` (String) An authorization model in JSON format. Conflicts with `dsl` and `model` fields.
-- `model` (Attributes) An authorization model as Terraform object. Conflicts with `dsl` and `json` fields. (see [below for nested schema](#nestedatt--model))
+- `dsl` (String) An authorization model in DSL format. Conflicts with `json`, `model` and `mod_file_path` fields.
+- `json` (String) An authorization model in JSON format. Conflicts with `dsl`, `model` and `mod_file_path` fields.
+- `mod_file_path` (String) A file path to an `fga.mod` file. Conflicts with `json`, `model` and `dsl` fields.
+- `model` (Attributes) An authorization model as Terraform object. Conflicts with `dsl`, `json` and `mod_file_path` fields. (see [below for nested schema](#nestedatt--model))
 
 ### Read-Only
 

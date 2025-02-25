@@ -1,0 +1,5 @@
+module conditions
+
+condition larger_than(a: int, b: int) {
+	a > b
+}
