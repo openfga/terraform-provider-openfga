@@ -184,7 +184,7 @@ func parseModFileToAuthorizationModelProto(modFilePath string) (*openfgav1.Autho
 		}
 
 		moduleFile := transformer.ModuleFile{
-			Name:     moduleFilePath,
+			Name:     moduleFilePathProperty.Value,
 			Contents: string(moduleFileBytes),
 		}
 
