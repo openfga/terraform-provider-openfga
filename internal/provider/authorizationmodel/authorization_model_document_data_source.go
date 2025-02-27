@@ -176,15 +176,16 @@ func parseModFileToAuthorizationModelProto(modFilePath string) (*openfgav1.Autho
 
 	moduleFiles := []transformer.ModuleFile{}
 	for _, moduleFilePathProperty := range modFile.Contents.Value {
-		moduleFilePath := filepath.Join(modFileDirectory, moduleFilePathProperty.Value)
+		originalModuleFilePath := moduleFilePathProperty.Value
 
-		moduleFileBytes, err := os.ReadFile(moduleFilePath)
+		resolvedModuleFilePath := filepath.Join(modFileDirectory, originalModuleFilePath)
+		moduleFileBytes, err := os.ReadFile(resolvedModuleFilePath)
 		if err != nil {
 			return nil, fmt.Errorf("unable to read module file, got error: %s", err)
 		}
 
 		moduleFile := transformer.ModuleFile{
-			Name:     moduleFilePathProperty.Value,
+			Name:     originalModuleFilePath,
 			Contents: string(moduleFileBytes),
 		}
 
