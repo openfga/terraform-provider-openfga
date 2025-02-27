@@ -68,6 +68,17 @@ func TestAccAuthorizationModelDocumentDataSource(t *testing.T) {
 const expectedAuthorizationModelDocumentDataSourceResult = `{"conditions":{"larger_than":{"expression":"a \u003e b","name":"larger_than","parameters":{"a":{"generic_types":[],"type_name":"TYPE_NAME_INT"},"b":{"generic_types":[],"type_name":"TYPE_NAME_INT"}}}},"schema_version":"1.1","type_definitions":[{"relations":{},"type":"user"},{"metadata":{"module":"","relations":{"viewer":{"directly_related_user_types":[{"condition":"","type":"user"}],"module":""}}},"relations":{"viewer":{"this":{}}},"type":"document"}]}`
 const expectedModularAuthorizationModelDocumentDataSourceResult = `{"conditions":{"larger_than":{"expression":"a \u003e b","metadata":{"module":"conditions","source_info":{"file":"conditions/larger_than.fga"}},"name":"larger_than","parameters":{"a":{"generic_types":[],"type_name":"TYPE_NAME_INT"},"b":{"generic_types":[],"type_name":"TYPE_NAME_INT"}}}},"schema_version":"1.2","type_definitions":[{"metadata":{"module":"user","relations":{},"source_info":{"file":"user.fga"}},"relations":{},"type":"user"},{"metadata":{"module":"document","relations":{"viewer":{"directly_related_user_types":[{"condition":"","type":"user"}],"module":""}},"source_info":{"file":"document.fga"}},"relations":{"viewer":{"this":{}}},"type":"document"}]}`
 
+const authorizationModelResource = `
+resource "openfga_store" "test" {
+	name = "test"
+}
+
+resource "openfga_authorization_model" "test" {
+  store_id = openfga_store.test.id
+
+  model_json = data.openfga_authorization_model_document.test.result
+}`
+
 func testAccAuthorizationModelDocumentDataSourceConfigDsl() string {
 	return fmt.Sprintf(`
 %[1]s
@@ -88,7 +99,9 @@ condition larger_than(a: int, b: int) {
 }
 	EOT
 }
-`, acceptance.ProviderConfig)
+
+%[2]s
+`, acceptance.ProviderConfig, authorizationModelResource)
 }
 
 func testAccAuthorizationModelDocumentDataSourceConfigModFile() string {
@@ -97,7 +110,10 @@ func testAccAuthorizationModelDocumentDataSourceConfigModFile() string {
 
 data "openfga_authorization_model_document" "test" {
 	mod_file_path = "${path.root}/../acceptance/modularmodel/fga.mod"
-}`, acceptance.ProviderConfig)
+}
+
+%[2]s
+`, acceptance.ProviderConfig, authorizationModelResource)
 }
 
 func testAccAuthorizationModelDocumentDataSourceConfigJson() string {
@@ -126,7 +142,9 @@ data "openfga_authorization_model_document" "test" {
 }
 	EOT
 }
-`, acceptance.ProviderConfig)
+
+%[2]s
+`, acceptance.ProviderConfig, authorizationModelResource)
 }
 
 func testAccAuthorizationModelDocumentDataSourceConfigModel() string {
@@ -174,5 +192,7 @@ data "openfga_authorization_model_document" "test" {
 		}
 	}
 }
-`, acceptance.ProviderConfig)
+
+%[2]s
+`, acceptance.ProviderConfig, authorizationModelResource)
 }
