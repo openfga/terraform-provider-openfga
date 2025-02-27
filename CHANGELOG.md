@@ -1,3 +1,9 @@
+## 0.3.0 (February 27, 2025)
+
+FEATURES:
+
+* data_source/authorization_model_document: Added support for modular models
+
 ## 0.2.1 (February 22, 2025)
 
 BUG FIXES:
