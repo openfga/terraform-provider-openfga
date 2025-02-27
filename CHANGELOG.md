@@ -1,3 +1,9 @@
+## 0.3.1 (February 27, 2025)
+
+BUG FIXES:
+
+* data_source/authorization_model_document: Fixed broken module file names
+
 ## 0.3.0 (February 27, 2025)
 
 FEATURES:
