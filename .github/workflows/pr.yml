@@ -1,8 +1,14 @@
-name: PR Conventional Commit Validation
+name: Pull Request
 
 on:
   pull_request:
-    types: [opened, reopened, edited]
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - edited
+    branches:
+      - main
 
 jobs:
   validate-pr-title:
@@ -17,3 +23,7 @@ jobs:
           task_types: '["feat","fix","docs","test","refactor","ci","perf","chore","revert"]'
           add_scope_label: 'true'
           custom_labels: '{"feat": "feature", "fix": "fix", "docs": "documentation", "test": "test", "refactor": "refactor", "ci": "CI/CD", "perf": "performance", "chore": "chore", "revert": "revert"}'
+
+  test:
+    name: Test
+    uses: ./.github/workflows/test.yml
