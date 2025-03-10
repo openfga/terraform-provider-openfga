@@ -2,6 +2,7 @@ package authorizationmodel_test
 
 import (
 	"fmt"
+	"regexp"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
@@ -17,6 +18,11 @@ func TestAccAuthorizationModelDataSource(t *testing.T) {
 		PreCheck:                 func() { acceptance.TestAccPreCheck(t) },
 		ProtoV6ProviderFactories: acceptance.TestAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
+			// Test no model
+			{
+				Config:      testAccAuthorizationModelDataSourceConfigNoModel(),
+				ExpectError: regexp.MustCompile("Client Error"),
+			},
 			// Read testing
 			{
 				Config: testAccAuthorizationModelDataSourceConfig(),
@@ -44,6 +50,20 @@ func TestAccAuthorizationModelDataSource(t *testing.T) {
 
 const expectedFirstAuthorizationModelDataSourceModelJson = `{"conditions":{},"schema_version":"1.1","type_definitions":[{"relations":{},"type":"document"}]}`
 const expectedLatestAuthorizationModelDataSourceModelJson = `{"conditions":{},"schema_version":"1.1","type_definitions":[{"relations":{},"type":"file"}]}`
+
+func testAccAuthorizationModelDataSourceConfigNoModel() string {
+	return fmt.Sprintf(`
+%[1]s
+
+resource "openfga_store" "test" {
+	name = "test"
+}
+
+data "openfga_authorization_model" "latest" {
+	store_id = openfga_store.test.id
+}
+`, acceptance.ProviderConfig)
+}
 
 func testAccAuthorizationModelDataSourceConfig() string {
 	return fmt.Sprintf(`
