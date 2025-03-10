@@ -2,6 +2,7 @@ package authorizationmodel
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework/types"
 
@@ -76,6 +77,10 @@ func (wrapper *AuthorizationModelClient) ReadLatestAuthorizationModel(ctx contex
 	response, err := wrapper.client.ReadLatestAuthorizationModel(ctx).Options(options).Execute()
 	if err != nil {
 		return nil, err
+	}
+
+	if response.AuthorizationModel == nil {
+		return nil, fmt.Errorf("unable to find authorization model")
 	}
 
 	authorizationModel := *response.AuthorizationModel
