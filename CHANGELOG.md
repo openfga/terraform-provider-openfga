@@ -1,3 +1,10 @@
+## 0.3.2 (March 10, 2025)
+
+BUG FIXES:
+
+* data_source/authorization_model: Fixed nil pointer for non-existing latest authorization model
+* data_source/\*_query: Added missing documentation
+
 ## 0.3.1 (February 27, 2025)
 
 BUG FIXES:
