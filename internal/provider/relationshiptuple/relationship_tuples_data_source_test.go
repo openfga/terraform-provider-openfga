@@ -96,7 +96,7 @@ func TestAccRelationshipTuplesDataSource(t *testing.T) {
 }
 
 func testAccRelationshipTuplesDataSourceConfig(objectNames ...string) string {
-	var resources string = `
+	var resources = `
 resource "openfga_store" "test" {
 	name = "test"
 }

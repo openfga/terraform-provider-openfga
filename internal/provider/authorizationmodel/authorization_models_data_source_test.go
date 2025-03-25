@@ -70,7 +70,7 @@ func testAccAuthorizationModelsDataSourceModelJson(typeName string) string {
 }
 
 func testAccAuthorizationModelsDataSourceConfig(modelJsons ...string) string {
-	var resources string = `
+	var resources = `
 resource "openfga_store" "test" {
 	name = "test"
 }
