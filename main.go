@@ -7,7 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 
-	"github.com/mauriceackel/terraform-provider-openfga/internal/provider"
+	"github.com/openfga/terraform-provider-openfga/internal/provider"
 )
 
 var (
@@ -26,7 +26,7 @@ func main() {
 	flag.Parse()
 
 	opts := providerserver.ServeOpts{
-		Address: "registry.terraform.io/mauriceackel/openfga",
+		Address: "registry.terraform.io/openfga/openfga",
 		Debug:   debug,
 	}
 

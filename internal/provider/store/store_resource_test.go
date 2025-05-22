@@ -9,7 +9,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-testing/plancheck"
 	"github.com/hashicorp/terraform-plugin-testing/statecheck"
 	"github.com/hashicorp/terraform-plugin-testing/tfjsonpath"
-	"github.com/mauriceackel/terraform-provider-openfga/internal/provider/acceptance"
+
+	"github.com/openfga/terraform-provider-openfga/internal/provider/acceptance"
 )
 
 func TestAccStoreResource(t *testing.T) {
