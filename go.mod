@@ -1,4 +1,4 @@
-module github.com/mauriceackel/terraform-provider-openfga
+module github.com/openfga/terraform-provider-openfga
 
 go 1.23.0
 

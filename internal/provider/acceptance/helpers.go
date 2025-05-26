@@ -7,7 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 
-	"github.com/mauriceackel/terraform-provider-openfga/internal/provider"
+	"github.com/openfga/terraform-provider-openfga/internal/provider"
 )
 
 const (
