@@ -455,6 +455,10 @@ See [CONTRIBUTING](https://github.com/openfga/.github/blob/main/CONTRIBUTING.md)
 [OpenFGA](https://github.com/openfga)
 [Maurice Ackel](https://github.com/mauriceackel)
 
+This provider was created by [Maurice Ackel](https://github.com/mauriceackel), and then donated to the OpenFGA team, and Maurice stayed on as a maintainer.
+
+Versions <v0.4.0 can be found at: https://registry.terraform.io/providers/mauriceackel/openfga, licensed as MIT.
+
 ## License
 
 This project is licensed under the Apache-2.0 license. See the [LICENSE](https://github.com/openfga/terraform-provider-openfga/blob/main/LICENSE) file for more info.
