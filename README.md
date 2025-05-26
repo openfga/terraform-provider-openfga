@@ -8,7 +8,7 @@
 [![Join our community](https://img.shields.io/badge/slack-cncf_%23openfga-40abb8.svg?logo=slack)](https://openfga.dev/community)
 [![Twitter](https://img.shields.io/twitter/follow/openfga?color=%23179CF0&logo=twitter&style=flat-square "@openfga on Twitter")](https://twitter.com/openfga)
 
-This is a Terraform/ OpenTofu provider for OpenFGA. It allows to manage OpenFGA resources with code. for more details, check the [provider documentation](https://registry.terraform.io/providers/openfga/openfga/latest/docs).
+This is a Terraform/OpenTofu provider for OpenFGA. It enables managing the state of OpenFGA resources with code. for more details, check the [provider documentation](https://registry.terraform.io/providers/openfga/openfga/latest/docs).
 
 ## Table of Contents
 
