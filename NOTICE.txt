@@ -1,0 +1,3736 @@
+================================================================================
+================================================================================
+
+              Third-Party Software for terraform-provider-openfga
+
+--------------------------------------------------------------------------------
+
+The following 3rd-party software packages may be used by or distributed with terraform-provider-openfga. Any information relevant to third-party vendors listed below are collected using common, reasonable means.
+
+Date generated: 2025-5-28
+
+Revision ID: 81c47006136e86a07a4ba5283650b7c8259a95d9
+
+================================================================================
+================================================================================
+
+
+
+
+================================================================================
+
+                                Declared License
+
+================================================================================
+
+Apache License
+Version 2.0, January 2004
+http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting ...
+
+
+
+
+
+================================================================================
+
+                              First Party Licenses
+
+================================================================================
+
+
+* Apache-2.0 *
+
+
+File Count: 1
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE
+--------------------------------------------------------------------------------
+
+License Text:
+
+Apache License
+Version 2.0, January 2004
+http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting ...
+
+
+
+
+
+================================================================================
+
+                                  Dependencies
+
+================================================================================
+
+- antlr (v4.13.1) [BSD-3-Clause]
+- api (f9709139a3693f6624efda12a001e242c5d506b6) [Apache-2.0]
+- appengine (v1.6.7) [Apache-2.0, BSD-3-Clause]
+- appengine (v2.0.5) [Apache-2.0, BSD-3-Clause]
+- atomic (v1.7.0) [MIT]
+- cast (v1.5.0) [MIT]
+- circl (v1.6.0) [BSD-3-Clause]
+- circl (v1.3.7) [BSD-3-Clause]
+- cli (v1.1.7) [MPL-2.0]
+- cobra (v1.6.1) [Apache-2.0]
+- color (v1.16.0) [MIT]
+- complete (v1.2.3) [MIT]
+- conc (v0.3.0) [MIT]
+- copywrite (v0.22.0) [MPL-2.0, ssh-short, Python-2.0, CNRI-Python, BSD-2-Clause, BitTorrent-1.0, Artistic-1.0-cl8, AFL-1.2, AFL-1.1, Apache-2.0, BSD-3-Clause]
+- crypto (v0.32.0) [BSD-3-Clause, openssl-ssleay]
+- crypto (v0.38.0) [BSD-3-Clause, openssl-ssleay]
+- doublestar (v4.8.1) [MIT]
+- errwrap (v1.1.0) [MPL-2.0]
+- exp (97b1e661b5df27f4fa041362fdee6953961e595e) [BSD-3-Clause, Apache-2.0]
+- exp (e7e105dedf7e2bd7a7db7003ed6711b3337f26b8) [BSD-3-Clause, Apache-2.0]
+- fsnotify (v1.5.4) [BSD-3-Clause]
+- ghinstallation (v2.5.0) [Apache-2.0]
+- github.com/agext/levenshtein (v1.2.2) [Apache-2.0]
+- github.com/go-openapi/errors (v0.20.2) [Apache-2.0]
+- github.com/go-openapi/strfmt (v0.21.3) [Apache-2.0]
+- github.com/golang-jwt/jwt/v4 (v4.5.1) [MIT]
+- github.com/google/go-querystring (v1.1.0) [BSD-3-Clause]
+- github.com/grpc-ecosystem/grpc-gateway/v2 (v2.25.1) [BSD-3-Clause]
+- github.com/hashicorp/go-checkpoint (v0.5.0) [MPL-2.0]
+- github.com/hashicorp/go-version (v1.7.0) [MPL-2.0]
+- github.com/hashicorp/hcl/v2 (v2.23.0) [MPL-2.0, Apache-2.0]
+- github.com/hashicorp/yamux (v0.1.1) [MPL-2.0]
+- github.com/huandu/xstrings (v1.3.3) [MIT]
+- github.com/jedib0t/go-pretty (v4.3.0) [MIT, Apache-2.0, BSD-3-Clause, BSD-2-Clause, ISC]
+- github.com/jedib0t/go-pretty/v6 (v6.4.6) [MIT]
+- github.com/joho/godotenv (v1.3.0) [MIT]
+- github.com/kballard/go-shellquote (95032a82bc51) [MIT]
+- github.com/Masterminds/goutils (v1.1.1) [Apache-2.0]
+- github.com/Masterminds/sprig/v3 (v3.2.3) [MIT]
+- github.com/mgutz/ansi (d51e80ef957d) [MIT]
+
+
+--------------------------------------------------------------------------------
+Package Title: antlr (v4.13.1)
+
+Package Locator: git+github.com/antlr4-go/antlr$4d7e18847d8881a176db3d7cca909e3f3942a05f
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+BSD-3-Clause
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE
+README.md
+--------------------------------------------------------------------------------
+
+Copyright (c) 2012-2023 The ANTLR Project. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+1. Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or o...
+
+
+--------------------------------------------------------------------------------
+Package Title: api (f9709139a3693f6624efda12a001e242c5d506b6)
+
+Package Locator: git+github.com/openfga/api$f9709139a3693f6624efda12a001e242c5d506b6
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+Apache-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE
+NOTICE.txt
+--------------------------------------------------------------------------------
+
+Copyright 2022 Okta, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+See the License for the specific language govern...
+
+
+--------------------------------------------------------------------------------
+Package Title: appengine (v1.6.7)
+
+Package Locator: git+github.com/golang/appengine$5d1c1d03f8703c2e81478d9a30e9afa2d3e4bd8a
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+Apache-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+user/oauth.go
+--------------------------------------------------------------------------------
+
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner tha...
+
+
+* Other Licenses *
+BSD-3-Clause
+
+--------------------------------------------------------------------------------
+File matches:
+cmd/aefix/fix.go
+--------------------------------------------------------------------------------
+
+
+Copyright (c) 2011 The Go Authors.  All rights reserved. . All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+   1. Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+
+   2. Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following discla...
+
+
+--------------------------------------------------------------------------------
+Package Title: appengine (v2.0.5)
+
+Package Locator: git+github.com/golang/appengine$aa58fcd18e4ab7ac816760ee266fa30a0907ab9e
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+Apache-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+appengine_test.go
+appengine_vm.go
+appengine.go
+blobstore/blobstore_test.go
+blobstore/blobstore.go
+blobstore/read.go
+capability/capability.go
+channel/channel_test.go
+channel/channel.go
+cloudsql/cloudsql_classic.go
+cloudsql/cloudsql_vm.go
+cloudsql/cloudsql.go
+cmd/aebundler/aebundler.go
+cmd/aedeploy/aedeploy.go
+cmd/aefix/ae_test.go
+cmd/aefix/ae.go
+datastore/datastore_test.go
+datastore/datastore.go
+datastore/doc.go
+datastore/internal/cloudkey/cloudkey.go
+datastore/internal/cloudpb/entity.pb.go
+datastore/key_test.go
+datastore/key.go
+datastore/keycompat_test.go
+datastore/keycompat.go
+datastore/load_test.go
+datastore/load.go
+datastore/metadata.go
+datastore/prop_test.go
+datastore/prop.go
+datastore/query_test.go
+datastore/query.go
+datastore/save.go
+datastore/time_test.go
+datastore/transaction.go
+delay/delay_test.go
+delay/delay.go
+demos/helloworld/helloworld.go
+errors.go
+file/file.go
+identity.go
+image/image.go
+internal/aetesting/fake.go
+internal/api_classic.go
+internal/api_common.go
+internal/api_race_test.go
+internal/api_test.go
+internal/api.go
+internal/app_id_test.go
+internal/app_id.go
+internal/identity_classic.go
+internal/identity_flex.go
+internal/identity_vm.go
+internal/identity.go
+internal/internal_vm_test.go
+internal/internal.go
+internal/main_vm.go
+internal/main.go
+internal/metadata.go
+internal/net_test.go
+internal/net.go
+internal/transaction.go
+LICENSE
+log/api.go
+log/log_test.go
+log/log.go
+mail/mail_test.go
+mail/mail.go
+memcache/memcache_test.go
+memcache/memcache.go
+module/module_test.go
+module/module.go
+namespace_test.go
+namespace.go
+remote_api/client_test.go
+remote_api/client.go
+remote_api/remote_api.go
+runtime/runtime_test.go
+runtime/runtime.go
+search/doc.go
+search/field.go
+search/search_test.go
+search/search.go
+search/struct_test.go
+search/struct.go
+socket/doc.go
+socket/socket_classic.go
+socket/socket_vm.go
+taskqueue/taskqueue_test.go
+taskqueue/taskqueue.go
+timeout.go
+urlfetch/urlfetch.go
+user/oauth.go
+user/user_classic.go
+user/user_test.go
+user/user_vm.go
+user/user.go
+v2/appengine_test.go
+v2/appengine.go
+v2/blobstore/blobstore_test.go
+v2/blobstore/blobstore.go
+v2/blobstore/read.go
+v2/capability/capability.go
+v2/cmd/aebundler/aebundler.go
+v2/cmd/aefix/ae_test.go
+v2/cmd/aefix/ae.go
+v2/datastore/datastore_test.go
+v2/datastore/datastore.go
+v2/datastore/doc.go
+v2/datastore/internal/cloudkey/cloudkey.go
+v2/datastore/internal/cloudpb/entity.pb.go
+v2/datastore/key_test.go
+v2/datastore/key.go
+v2/datastore/keycompat_test.go
+v2/datastore/keycompat.go
+v2/datastore/load_test.go
+v2/datastore/load.go
+v2/datastore/metadata.go
+v2/datastore/prop_test.go
+v2/datastore/prop.go
+v2/datastore/query_test.go
+v2/datastore/query.go
+v2/datastore/save.go
+v2/datastore/time_test.go
+v2/datastore/transaction.go
+v2/delay/delay_test.go
+v2/delay/delay.go
+v2/errors.go
+v2/identity.go
+v2/image/image.go
+v2/internal/aetesting/fake.go
+v2/internal/api_common.go
+v2/internal/api_race_test.go
+v2/internal/api_test.go
+v2/internal/api.go
+v2/internal/app_id_test.go
+v2/internal/app_id.go
+v2/internal/identity_flex.go
+v2/internal/identity.go
+v2/internal/internal_vm_test.go
+v2/internal/internal.go
+v2/internal/log_test.go
+v2/internal/log.go
+v2/internal/main.go
+v2/internal/metadata.go
+v2/internal/net_test.go
+v2/internal/net.go
+v2/internal/search/search.pb.go
+v2/internal/search/search.proto
+v2/internal/transaction.go
+v2/LICENSE
+v2/log/api.go
+v2/mail/mail_test.go
+v2/mail/mail.go
+v2/memcache/memcache_test.go
+v2/memcache/memcache.go
+v2/module/module_test.go
+v2/module/module.go
+v2/namespace_test.go
+v2/namespace.go
+v2/runtime/runtime_test.go
+v2/runtime/runtime.go
+v2/search/doc.go
+v2/search/field.go
+v2/search/search_test.go
+v2/search/search.go
+v2/search/struct_test.go
+v2/search/struct.go
+v2/taskqueue/taskqueue_test.go
+v2/taskqueue/taskqueue.go
+v2/timeout.go
+v2/urlfetch/urlfetch.go
+v2/user/oauth.go
+v2/user/user_test.go
+v2/user/user.go
+xmpp/xmpp_test.go
+xmpp/xmpp.go
+--------------------------------------------------------------------------------
+
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner tha...
+
+
+* Other Licenses *
+BSD-3-Clause
+
+--------------------------------------------------------------------------------
+File matches:
+cmd/aefix/fix.go
+cmd/aefix/main_test.go
+cmd/aefix/main.go
+cmd/aefix/typecheck.go
+v2/cmd/aefix/fix.go
+v2/cmd/aefix/main_test.go
+v2/cmd/aefix/main.go
+v2/cmd/aefix/typecheck.go
+--------------------------------------------------------------------------------
+
+
+Copyright (c) 2011 The Go Authors.  All rights reserved. . All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+   1. Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+
+   2. Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following discla...
+
+
+--------------------------------------------------------------------------------
+Package Title: atomic (v1.7.0)
+
+Package Locator: git+github.com/uber-go/atomic$12f27ba2637fa0e13772a4f05fa46a5d18d53182
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MIT
+
+--------------------------------------------------------------------------------
+File matches:
+assert_test.go
+bool_ext.go
+bool_test.go
+bool.go
+doc.go
+duration_ext.go
+duration_test.go
+duration.go
+error_ext.go
+error_test.go
+error.go
+example_test.go
+float64_ext.go
+float64_test.go
+float64.go
+gen.go
+int32_test.go
+int32.go
+int64_test.go
+int64.go
+internal/gen-atomicint/main.go
+internal/gen-atomicwrapper/main.go
+LICENSE.txt
+nocmp_test.go
+nocmp.go
+stress_test.go
+string_ext.go
+string_test.go
+string.go
+tools/tools.go
+uint32_test.go
+uint32.go
+uint64_test.go
+uint64.go
+value_test.go
+value.go
+--------------------------------------------------------------------------------
+
+Copyright (c) 2016 Uber Technologies, Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright...
+
+
+--------------------------------------------------------------------------------
+Package Title: cast (v1.5.0)
+
+Package Locator: git+github.com/spf13/cast$2b0eb0f724e320b655240e331aef36d1175986c2
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MIT
+
+--------------------------------------------------------------------------------
+File matches:
+cast_test.go
+cast.go
+caste.go
+LICENSE
+--------------------------------------------------------------------------------
+
+The MIT License (MIT)
+
+Copyright (c) 2014 Steve Francia
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The ab...
+
+
+--------------------------------------------------------------------------------
+Package Title: circl (v1.6.0)
+
+Package Locator: git+github.com/cloudflare/circl$89e658c2ea39d3cfea7b7c7c8b34ebdbd6d21942
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+BSD-3-Clause
+
+--------------------------------------------------------------------------------
+File matches:
+blindsign/blindrsa/internal/common/pss.go
+--------------------------------------------------------------------------------
+
+Copyright (c) 2019 Cloudflare. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+   * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other mate...
+
+
+--------------------------------------------------------------------------------
+Package Title: circl (v1.3.7)
+
+Package Locator: git+github.com/cloudflare/circl$c48866b3068dfa83721c021dec03c777ba91abab
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+BSD-3-Clause
+
+--------------------------------------------------------------------------------
+File matches:
+blindsign/blindrsa/internal/common/pss.go
+blindsign/blindrsa/internal/common/rsa.go
+ecc/p384/LICENSE
+internal/sha3/doc.go
+internal/sha3/hashes.go
+internal/sha3/keccakf.go
+internal/sha3/sha3_s390x.s
+internal/sha3/sha3_test.go
+internal/sha3/sha3.go
+internal/sha3/shake.go
+internal/sha3/xor_generic.go
+internal/sha3/xor_unaligned.go
+internal/sha3/xor.go
+LICENSE
+tss/rsa/internal/pkcs1v15.go
+tss/rsa/internal/pss/pss.go
+tss/rsa/internal/pss/rsa.go
+--------------------------------------------------------------------------------
+
+Copyright (c) 2019 Cloudflare. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+   * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other mate...
+
+
+--------------------------------------------------------------------------------
+Package Title: cli (v1.1.7)
+
+Package Locator: git+github.com/hashicorp/cli$89d8cb579d5743d787fe3500594c9cf56abaefb5
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MPL-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+ui_writer.go
+--------------------------------------------------------------------------------
+
+Mozilla Public License, version 2.0
+
+1. Definitions
+
+1.1. “Contributor”
+
+     means each individual or legal entity that creates, contributes to the
+     creation of, or owns Covered Software.
+
+1.2. “Contributor Version”
+
+     means the combination of the Contributions of others (if any) used by a
+     Contributor and that particular Contributor’s Contribution.
+
+1.3. “Contribution”
+
+     means Covered Software of a particular Contributor.
+
+1.4. “Covered Software”
+
+     means Source Code Form ...
+
+
+--------------------------------------------------------------------------------
+Package Title: cobra (v1.6.1)
+
+Package Locator: git+github.com/spf13/cobra$b43be995ebb4bee335a787bd44498b91aef7619c
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+Apache-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+.golangci.yml
+active_help_test.go
+active_help.go
+args_test.go
+args.go
+bash_completions_test.go
+bash_completions.go
+bash_completionsV2_test.go
+bash_completionsV2.go
+cobra_test.go
+cobra.go
+command_notwin.go
+command_test.go
+command_win.go
+command.go
+completions_test.go
+completions.go
+doc/cmd_test.go
+doc/man_docs_test.go
+doc/man_docs.go
+doc/man_examples_test.go
+doc/md_docs_test.go
+doc/md_docs.go
+doc/rest_docs_test.go
+doc/rest_docs.go
+doc/util.go
+doc/yaml_docs_test.go
+doc/yaml_docs.go
+fish_completions_test.go
+fish_completions.go
+flag_groups_test.go
+flag_groups.go
+LICENSE.txt
+powershell_completions_test.go
+powershell_completions.go
+shell_completions.go
+zsh_completions_test.go
+zsh_completions.go
+--------------------------------------------------------------------------------
+
+                                Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that ...
+
+
+--------------------------------------------------------------------------------
+Package Title: color (v1.16.0)
+
+Package Locator: git+github.com/fatih/color$0f9779ed479afd460f0c2cc5a3d3eb69b9ba188b
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MIT
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE.md
+--------------------------------------------------------------------------------
+
+The MIT License (MIT)
+
+Copyright (c) 2013 Fatih Arslan
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The abo...
+
+
+--------------------------------------------------------------------------------
+Package Title: complete (v1.2.3)
+
+Package Locator: git+github.com/posener/complete$05b68ffc813dd10c420993cb1cf927b346c057b8
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MIT
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE.txt
+--------------------------------------------------------------------------------
+
+The MIT License
+
+Copyright (c) 2017 Eyal Posener
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above cop...
+
+
+--------------------------------------------------------------------------------
+Package Title: conc (v0.3.0)
+
+Package Locator: git+github.com/sourcegraph/conc$7b8c8f2875cb861bb61844c9bcaa1aed070adbd4
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MIT
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE
+--------------------------------------------------------------------------------
+
+MIT License
+
+Copyright (c) 2023 Sourcegraph
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyrigh...
+
+
+--------------------------------------------------------------------------------
+Package Title: copywrite (v0.22.0)
+
+Package Locator: git+github.com/hashicorp/copywrite$d5bc935e4801a02fdbd953f8f0ae7989eaef50cf
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MPL-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+.github/dependabot.yml
+.golangci.yaml
+.goreleaser.yaml
+.pre-commit-config.yaml
+cmd/debug.go
+cmd/dispatch.go
+cmd/headers.go
+cmd/init.go
+cmd/license.go
+cmd/report_prs.go
+cmd/report_repos.go
+cmd/report.go
+cmd/root.go
+cmd/utils_test.go
+cmd/utils.go
+config/config_test.go
+config/config.go
+dispatch/dispatch.go
+github/actions/core_test.go
+github/actions/core.go
+github/client.go
+github/repo.go
+LICENSE
+licensecheck/copyright_test.go
+licensecheck/copyright.go
+licensecheck/licensecheck_test.go
+licensecheck/licensecheck.go
+licensecheck/licensetext.go
+main.go
+repodata/repodata_test.go
+repodata/repodata.go
+--------------------------------------------------------------------------------
+
+Copyright (c) 2022 HashiCorp, Inc.
+
+Mozilla Public License Version 2.0
+==================================
+
+1. Definitions
+
+--------------
+
+1.1. "Contributor"
+    means each individual or legal entity that creates, contributes to
+    the creation of, or owns Covered Software.
+
+1.2. "Contributor Version"
+    means the combination of the Contributions of others (if any) used
+    by a Contributor and that particular Contributor's Contribution.
+
+1.3. "Contribution"
+    means Covered Software of a ...
+
+
+* Other Licenses *
+ssh-short, Python-2.0, CNRI-Python, BSD-2-Clause, BitTorrent-1.0, Artistic-1.0-cl8, AFL-1.2, AFL-1.1, Apache-2.0, BSD-3-Clause
+
+* ssh-short *
+--------------------------------------------------------------------------------
+File matches:
+addlicense/spdx.go
+--------------------------------------------------------------------------------
+
+
+As far as I am concerned, the code I have written for this software
+can be used freely for any purpose.  Any derived versions of this
+software must be clearly marked as such, and if the derived work is
+incompatible with the protocol description in the RFC file, it must be
+called by a name other than "ssh" or "Secure Shell".
+
+
+* Python-2.0 *
+--------------------------------------------------------------------------------
+File matches:
+addlicense/spdx.go
+--------------------------------------------------------------------------------
+
+
+1. This LICENSE AGREEMENT is between the Python Software Foundation ("PSF"), and the Individual or Organization ("Licensee") accessing and otherwise using this software ("Python") in source or binary form and its associated documentation.
+   2. Subject to the terms and conditions of this License Agreement, PSF hereby grants Licensee a nonexclusive, royalty-free, world-wide license to reproduce, analyze, test, perform and/or display publicly, prepare derivative works, distribute, and otherwise...
+
+* CNRI-Python *
+--------------------------------------------------------------------------------
+File matches:
+addlicense/spdx.go
+--------------------------------------------------------------------------------
+
+
+IMPORTANT: PLEASE READ THE FOLLOWING AGREEMENT CAREFULLY.
+BY CLICKING ON "ACCEPT" WHERE INDICATED BELOW, OR BY COPYING, INSTALLING OR OTHERWISE USING PYTHON 1.6, beta 1 SOFTWARE, YOU ARE DEEMED TO HAVE AGREED TO THE TERMS AND CONDITIONS OF THIS LICENSE AGREEMENT.
+   1. This LICENSE AGREEMENT is between the Corporation for National Research Initiatives, having an office at 1895 Preston White Drive, Reston, VA 20191 ("CNRI"), and the Individual or Organization ("Licensee") accessing and otherwi...
+
+* BSD-2-Clause *
+--------------------------------------------------------------------------------
+File matches:
+addlicense/spdx.go
+--------------------------------------------------------------------------------
+
+
+Copyright (c)  HashiCorp, Inc.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+   1. Redistributions of source code must retain the above copyright notice, this
+      list of conditions and the following disclaimer.
+
+   2. Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+
+      and/or other mat...
+
+* BitTorrent-1.0 *
+--------------------------------------------------------------------------------
+File matches:
+addlicense/spdx.go
+--------------------------------------------------------------------------------
+
+
+The contents of this file are subject to the BitTorrent Open Source License Version 1.0 (the License). You may not copy or use this file, in either source code or executable form, except in compliance with the License. You may obtain a copy of the License at http://www.bittorrent.com/license/.
+Software distributed under the License is distributed on an AS IS basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License for the specific language governing rights and limitatio...
+
+* Artistic-1.0-cl8 *
+--------------------------------------------------------------------------------
+File matches:
+addlicense/spdx.go
+--------------------------------------------------------------------------------
+
+
+Preamble
+The intent of this document is to state the conditions under which a Package may be copied, such that the Copyright Holder maintains some semblance of artistic control over the development of the package, while giving the users of the package the right to use and distribute the Package in a more-or-less customary fashion, plus the right to make reasonable modifications.
+Definitions:
+"Package" refers to the collection of files distributed by the Copyright Holder, and derivatives of th...
+
+* AFL-1.2 *
+--------------------------------------------------------------------------------
+File matches:
+addlicense/spdx.go
+--------------------------------------------------------------------------------
+
+
+Licensed under the Academic Free License version 1.2
+
+* AFL-1.1 *
+--------------------------------------------------------------------------------
+File matches:
+addlicense/spdx.go
+--------------------------------------------------------------------------------
+
+
+Licensed under the Academic Free License version 1.1.
+
+* Apache-2.0 *
+--------------------------------------------------------------------------------
+File matches:
+addlicense/LICENSE
+addlicense/main_test.go
+addlicense/main.go
+addlicense/testdata/expected/file.bzl
+addlicense/testdata/expected/file.c
+addlicense/testdata/expected/file.cc
+addlicense/testdata/expected/file.cjs
+addlicense/testdata/expected/file.cpp
+addlicense/testdata/expected/file.cs
+addlicense/testdata/expected/file.css
+addlicense/testdata/expected/file.dart
+addlicense/testdata/expected/file.el
+addlicense/testdata/expected/file.erl
+addlicense/testdata/expected/file.go
+addlicense/testdata/expected/file.groovy
+addlicense/testdata/expected/file.gv
+addlicense/testdata/expected/file.h
+addlicense/testdata/expected/file.hcl
+addlicense/testdata/expected/file.hh
+addlicense/testdata/expected/file.hpp
+addlicense/testdata/expected/file.hs
+addlicense/testdata/expected/file.html
+addlicense/testdata/expected/file.java
+addlicense/testdata/expected/file.js
+addlicense/testdata/expected/file.lisp
+addlicense/testdata/expected/file.m
+addlicense/testdata/expected/file.mjs
+addlicense/testdata/expected/file.mm
+addlicense/testdata/expected/file.php
+addlicense/testdata/expected/file.proto
+addlicense/testdata/expected/file.py
+addlicense/testdata/expected/file.rb
+addlicense/testdata/expected/file.rs
+addlicense/testdata/expected/file.sass
+addlicense/testdata/expected/file.scala
+addlicense/testdata/expected/file.scss
+addlicense/testdata/expected/file.sdl
+addlicense/testdata/expected/file.swift
+addlicense/testdata/expected/file.tf
+addlicense/testdata/expected/file.xml
+addlicense/testdata/expected/file1.Dockerfile
+addlicense/testdata/expected/file1.sh
+addlicense/testdata/expected/file2.Dockerfile
+addlicense/testdata/expected/file2.sh
+addlicense/testdata/expected/file2.xml
+addlicense/testdata/expected/file3.Dockerfile
+addlicense/testdata/expected/Gemfile
+addlicense/testdata/expected/multiline-comment.sentinel
+addlicense/testdata/expected/multiline-sharp.sentinel
+addlicense/testdata/expected/multiline-slash.sentinel
+addlicense/testdata/expected/no-policy.sentinel
+addlicense/testdata/expected/singleline-slash.sentinel
+addlicense/tmpl_test.go
+addlicense/tmpl.go
+--------------------------------------------------------------------------------
+
+
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
+
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a "NOTICE" text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+
+   APPENDIX: How to apply the Apache License to your work.
+
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets "[]"
+      replaced with your own identifying information. (Don't include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same "printed page" as the copyright notice for easier
+      identification within third-party archives.
+
+   Copyright [yyyy] [name of copyright owner]
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+
+* BSD-3-Clause *
+--------------------------------------------------------------------------------
+File matches:
+addlicense/testdata/multiyear_file.c
+--------------------------------------------------------------------------------
+
+
+Copyright (c) 2015-2017,2019 Google LLC All rights reserved. . All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+   1. Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+
+   2. Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+
+   3. Neither the name of the copyright holder nor the names of its
+      contributors may be used to endorse or promote products derived from
+      this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+--------------------------------------------------------------------------------
+Package Title: crypto (v0.32.0)
+
+Package Locator: git+go.googlesource.com/crypto$8929309228b460566ebf06dc56684799f352b0b0
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+BSD-3-Clause
+
+--------------------------------------------------------------------------------
+File matches:
+openpgp/packet/userattribute.go
+--------------------------------------------------------------------------------
+
+Copyright 2009 The Go Authors.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+   * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with t...
+
+
+* Other Licenses *
+openssl-ssleay
+
+--------------------------------------------------------------------------------
+File matches:
+chacha20/chacha_ppc64x.s
+--------------------------------------------------------------------------------
+
+
+LICENSE ISSUES
+  ==============
+
+  The OpenSSL toolkit stays under a dual license, i.e. both the conditions of
+  the OpenSSL License and the original SSLeay license apply to the toolkit.
+  See below for the actual license texts. Actually both licenses are BSD-style
+  Open Source licenses. In case of any license issues related to OpenSSL
+  please contact openssl-core@openssl.org.
+
+  OpenSSL License
+  ---------------
+
+Redistribution and use in source and binary forms, with or without
+modificati...
+
+
+--------------------------------------------------------------------------------
+Package Title: crypto (v0.38.0)
+
+Package Locator: git+go.googlesource.com/crypto$aae6e61070421a51c1ba3bd9bba4b9b3979ed488
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+BSD-3-Clause
+
+--------------------------------------------------------------------------------
+File matches:
+acme/acme_test.go
+acme/acme.go
+acme/autocert/autocert_test.go
+acme/autocert/autocert.go
+acme/autocert/cache_test.go
+acme/autocert/cache.go
+acme/autocert/example_test.go
+acme/autocert/internal/acmetest/ca.go
+acme/autocert/listener.go
+acme/autocert/renewal_test.go
+acme/autocert/renewal.go
+acme/http_test.go
+acme/http.go
+acme/internal/acmeprobe/prober.go
+acme/jws_test.go
+acme/jws.go
+acme/rfc8555_test.go
+acme/rfc8555.go
+acme/types_test.go
+acme/types.go
+argon2/_asm/blamka_amd64.go
+argon2/argon2_test.go
+argon2/argon2.go
+argon2/blake2b.go
+argon2/blamka_amd64.go
+argon2/blamka_generic.go
+argon2/blamka_ref.go
+bcrypt/base64.go
+bcrypt/bcrypt_test.go
+bcrypt/bcrypt.go
+blake2b/_asm/AVX2/blake2bAVX2_amd64_asm.go
+blake2b/_asm/standard/blake2b_amd64_asm.go
+blake2b/blake2b_generic.go
+blake2b/blake2b_ref.go
+blake2b/blake2b_test.go
+blake2b/blake2b.go
+blake2b/blake2bAVX2_amd64.go
+blake2b/blake2x.go
+blake2b/register.go
+blake2s/_asm/blake2s_amd64_asm.go
+blake2s/blake2s_386.go
+blake2s/blake2s_386.s
+blake2s/blake2s_amd64.go
+blake2s/blake2s_generic.go
+blake2s/blake2s_ref.go
+blake2s/blake2s_test.go
+blake2s/blake2s.go
+blake2s/blake2x.go
+blowfish/block.go
+blowfish/blowfish_test.go
+blowfish/cipher.go
+blowfish/const.go
+bn256/bn256_test.go
+bn256/bn256.go
+bn256/constants.go
+bn256/curve.go
+bn256/example_test.go
+bn256/gfp12.go
+bn256/gfp2.go
+bn256/gfp6.go
+bn256/optate.go
+bn256/twist.go
+cast5/cast5_test.go
+cast5/cast5.go
+chacha20/chacha_arm64.go
+chacha20/chacha_arm64.s
+chacha20/chacha_generic.go
+chacha20/chacha_noasm.go
+chacha20/chacha_ppc64x.go
+chacha20/chacha_ppc64x.s
+chacha20/chacha_s390x.go
+chacha20/chacha_s390x.s
+chacha20/chacha_test.go
+chacha20/vectors_test.go
+chacha20/xor.go
+chacha20poly1305/_asm/chacha20poly1305_amd64_asm.go
+chacha20poly1305/chacha20poly1305_amd64.go
+chacha20poly1305/chacha20poly1305_generic.go
+chacha20poly1305/chacha20poly1305_noasm.go
+chacha20poly1305/chacha20poly1305_test.go
+chacha20poly1305/chacha20poly1305_vectors_test.go
+chacha20poly1305/chacha20poly1305.go
+chacha20poly1305/xchacha20poly1305.go
+cryptobyte/asn1_test.go
+cryptobyte/asn1.go
+cryptobyte/asn1/asn1.go
+cryptobyte/builder.go
+cryptobyte/cryptobyte_test.go
+cryptobyte/example_test.go
+cryptobyte/string.go
+curve25519/curve25519_test.go
+curve25519/curve25519.go
+curve25519/vectors_test.go
+ed25519/ed25519_test.go
+ed25519/ed25519.go
+hkdf/example_test.go
+hkdf/hkdf_test.go
+hkdf/hkdf.go
+internal/alias/alias_purego.go
+internal/alias/alias_test.go
+internal/alias/alias.go
+internal/poly1305/_asm/sum_amd64_asm.go
+internal/poly1305/mac_noasm.go
+internal/poly1305/poly1305_test.go
+internal/poly1305/poly1305.go
+internal/poly1305/sum_asm.go
+internal/poly1305/sum_generic.go
+internal/poly1305/sum_loong64.s
+internal/poly1305/sum_ppc64x.s
+internal/poly1305/sum_s390x.go
+internal/poly1305/sum_s390x.s
+internal/poly1305/vectors_test.go
+internal/testenv/exec.go
+internal/testenv/testenv_notunix.go
+internal/testenv/testenv_unix.go
+internal/wycheproof/aead_test.go
+internal/wycheproof/aes_cbc_test.go
+internal/wycheproof/boring.go
+internal/wycheproof/dsa_test.go
+internal/wycheproof/ecdh_stdlib_test.go
+internal/wycheproof/ecdh_test.go
+internal/wycheproof/ecdsa_test.go
+internal/wycheproof/eddsa_test.go
+internal/wycheproof/hkdf_test.go
+internal/wycheproof/hmac_test.go
+internal/wycheproof/internal/dsa/dsa.go
+internal/wycheproof/notboring.go
+internal/wycheproof/rsa_oaep_decrypt_test.go
+internal/wycheproof/rsa_pss_test.go
+internal/wycheproof/rsa_signature_test.go
+internal/wycheproof/wycheproof_test.go
+LICENSE
+md4/example_test.go
+md4/md4_test.go
+md4/md4.go
+md4/md4block.go
+nacl/auth/auth_test.go
+nacl/auth/auth.go
+nacl/auth/example_test.go
+nacl/box/box_test.go
+nacl/box/box.go
+nacl/secretbox/example_test.go
+nacl/secretbox/secretbox_test.go
+nacl/secretbox/secretbox.go
+nacl/sign/sign_test.go
+nacl/sign/sign.go
+ocsp/ocsp_test.go
+ocsp/ocsp.go
+openpgp/armor/armor_test.go
+openpgp/armor/armor.go
+openpgp/armor/encode.go
+openpgp/canonical_text_test.go
+openpgp/canonical_text.go
+openpgp/clearsign/clearsign_test.go
+openpgp/clearsign/clearsign.go
+openpgp/elgamal/elgamal_test.go
+openpgp/elgamal/elgamal.go
+openpgp/errors/errors.go
+openpgp/keys.go
+openpgp/packet/compressed_test.go
+openpgp/packet/compressed.go
+openpgp/packet/config.go
+openpgp/packet/encrypted_key_test.go
+openpgp/packet/encrypted_key.go
+openpgp/packet/literal.go
+openpgp/packet/ocfb_test.go
+openpgp/packet/ocfb.go
+openpgp/packet/one_pass_signature.go
+openpgp/packet/opaque_test.go
+openpgp/packet/opaque.go
+openpgp/packet/packet_test.go
+openpgp/packet/packet.go
+openpgp/packet/private_key_test.go
+openpgp/packet/private_key.go
+openpgp/packet/public_key_test.go
+openpgp/packet/public_key_v3_test.go
+openpgp/packet/public_key_v3.go
+openpgp/packet/public_key.go
+openpgp/packet/reader.go
+openpgp/packet/signature_test.go
+openpgp/packet/signature_v3_test.go
+openpgp/packet/signature_v3.go
+openpgp/packet/signature.go
+openpgp/packet/symmetric_key_encrypted_test.go
+openpgp/packet/symmetric_key_encrypted.go
+openpgp/packet/symmetrically_encrypted_test.go
+openpgp/packet/symmetrically_encrypted.go
+openpgp/packet/userattribute_test.go
+openpgp/packet/userattribute.go
+openpgp/packet/userid_test.go
+openpgp/packet/userid.go
+openpgp/read_test.go
+openpgp/read.go
+openpgp/s2k/s2k_test.go
+openpgp/s2k/s2k.go
+openpgp/write_test.go
+openpgp/write.go
+otr/libotr_test_helper.c
+otr/otr_test.go
+otr/otr.go
+otr/smp.go
+pbkdf2/pbkdf2_test.go
+pbkdf2/pbkdf2.go
+pkcs12/bmp-string_test.go
+pkcs12/bmp-string.go
+pkcs12/crypto_test.go
+pkcs12/crypto.go
+pkcs12/errors.go
+pkcs12/internal/rc2/bench_test.go
+pkcs12/internal/rc2/rc2_test.go
+pkcs12/internal/rc2/rc2.go
+pkcs12/mac_test.go
+pkcs12/mac.go
+pkcs12/pbkdf_test.go
+pkcs12/pbkdf.go
+pkcs12/pkcs12_test.go
+pkcs12/pkcs12.go
+pkcs12/safebags.go
+poly1305/poly1305_compat.go
+ripemd160/ripemd160_test.go
+ripemd160/ripemd160.go
+ripemd160/ripemd160block.go
+salsa20/salsa/_asm/salsa20_amd64_asm.go
+salsa20/salsa/hsalsa20.go
+salsa20/salsa/salsa_test.go
+salsa20/salsa/salsa20_amd64_test.go
+salsa20/salsa/salsa20_amd64.go
+salsa20/salsa/salsa20_noasm.go
+salsa20/salsa/salsa20_ref.go
+salsa20/salsa/salsa208.go
+salsa20/salsa20_test.go
+salsa20/salsa20.go
+scrypt/example_test.go
+scrypt/scrypt_test.go
+scrypt/scrypt.go
+sha3/_asm/keccakf_amd64_asm.go
+sha3/allocations_test.go
+sha3/doc.go
+sha3/hashes_noasm.go
+sha3/hashes.go
+sha3/keccakf_amd64.go
+sha3/keccakf.go
+sha3/sha3_s390x.go
+sha3/sha3_s390x.s
+sha3/sha3_test.go
+sha3/sha3.go
+sha3/shake_noasm.go
+sha3/shake.go
+ssh/agent/client_test.go
+ssh/agent/client.go
+ssh/agent/example_test.go
+ssh/agent/forward.go
+ssh/agent/keyring_test.go
+ssh/agent/keyring.go
+ssh/agent/server_test.go
+ssh/agent/server.go
+ssh/agent/testdata_test.go
+ssh/benchmark_test.go
+ssh/buffer_test.go
+ssh/buffer.go
+ssh/certs_test.go
+ssh/certs.go
+ssh/channel.go
+ssh/cipher_test.go
+ssh/cipher.go
+ssh/client_auth_test.go
+ssh/client_auth.go
+ssh/client_test.go
+ssh/client.go
+ssh/common_test.go
+ssh/common.go
+ssh/connection.go
+ssh/doc.go
+ssh/example_test.go
+ssh/handshake_test.go
+ssh/handshake.go
+ssh/internal/bcrypt_pbkdf/bcrypt_pbkdf_test.go
+ssh/internal/bcrypt_pbkdf/bcrypt_pbkdf.go
+ssh/kex_test.go
+ssh/kex.go
+ssh/keys_test.go
+ssh/keys.go
+ssh/knownhosts/knownhosts_test.go
+ssh/knownhosts/knownhosts.go
+ssh/mac.go
+ssh/mempipe_test.go
+ssh/messages_test.go
+ssh/messages.go
+ssh/mlkem.go
+ssh/mux_test.go
+ssh/mux.go
+ssh/server_multi_auth_test.go
+ssh/server_test.go
+ssh/server.go
+ssh/session_test.go
+ssh/session.go
+ssh/ssh_gss.go
+ssh/tcpip_test.go
+ssh/tcpip.go
+ssh/terminal/terminal.go
+ssh/test/agent_unix_test.go
+ssh/test/cert_test.go
+ssh/test/dial_unix_test.go
+ssh/test/doc.go
+ssh/test/forward_unix_test.go
+ssh/test/multi_auth_test.go
+ssh/test/recording_client_test.go
+ssh/test/recording_server_test.go
+ssh/test/recording_test.go
+ssh/test/server_test.go
+ssh/test/session_test.go
+ssh/test/sshcli_test.go
+ssh/test/sshd_test_pw.c
+ssh/test/test_unix_test.go
+ssh/test/testdata_test.go
+ssh/testdata_test.go
+ssh/testdata/doc.go
+ssh/testdata/keys.go
+ssh/transport_test.go
+ssh/transport.go
+tea/cipher.go
+tea/tea_test.go
+twofish/twofish_test.go
+twofish/twofish.go
+x509roots/fallback/fallback.go
+x509roots/gen_fallback_bundle.go
+x509roots/nss/parser_test.go
+x509roots/nss/parser.go
+xtea/block.go
+xtea/cipher.go
+xtea/xtea_test.go
+xts/xts_test.go
+xts/xts.go
+--------------------------------------------------------------------------------
+
+Copyright 2009 The Go Authors.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+   * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with t...
+
+
+* Other Licenses *
+openssl-ssleay
+
+--------------------------------------------------------------------------------
+File matches:
+chacha20/chacha_ppc64x.s
+--------------------------------------------------------------------------------
+
+
+LICENSE ISSUES
+  ==============
+
+  The OpenSSL toolkit stays under a dual license, i.e. both the conditions of
+  the OpenSSL License and the original SSLeay license apply to the toolkit.
+  See below for the actual license texts. Actually both licenses are BSD-style
+  Open Source licenses. In case of any license issues related to OpenSSL
+  please contact openssl-core@openssl.org.
+
+  OpenSSL License
+  ---------------
+
+Redistribution and use in source and binary forms, with or without
+modificati...
+
+
+--------------------------------------------------------------------------------
+Package Title: doublestar (v4.8.1)
+
+Package Locator: git+github.com/bmatcuk/doublestar$b707fe4305f7f29b0ce53be76ef7f98fc8204cd9
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MIT
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE
+--------------------------------------------------------------------------------
+
+The MIT License (MIT)
+
+Copyright (c) 2014 Bob Matcuk
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above...
+
+
+--------------------------------------------------------------------------------
+Package Title: errwrap (v1.1.0)
+
+Package Locator: git+github.com/hashicorp/errwrap$7b00e5db719c64d14dd0caaacbd13e76254d02c0
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MPL-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE
+--------------------------------------------------------------------------------
+
+Mozilla Public License, version 2.0
+
+1. Definitions
+
+1.1. “Contributor”
+
+     means each individual or legal entity that creates, contributes to the
+     creation of, or owns Covered Software.
+
+1.2. “Contributor Version”
+
+     means the combination of the Contributions of others (if any) used by a
+     Contributor and that particular Contributor’s Contribution.
+
+1.3. “Contribution”
+
+     means Covered Software of a particular Contributor.
+
+1.4. “Covered Software”
+
+     means Source Code Form ...
+
+
+--------------------------------------------------------------------------------
+Package Title: exp (97b1e661b5df27f4fa041362fdee6953961e595e)
+
+Package Locator: git+go.googlesource.com/exp$97b1e661b5df27f4fa041362fdee6953961e595e
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+BSD-3-Clause
+
+
+Copyright (c) 2009 The Go Authors. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+   * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other ...
+
+
+* Other Licenses *
+Apache-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+shiny/materialdesign/icons/LICENSE
+--------------------------------------------------------------------------------
+
+
+Copyright [yyyy] [name of copyright owner]
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+See the License for the specifi...
+
+
+--------------------------------------------------------------------------------
+Package Title: exp (e7e105dedf7e2bd7a7db7003ed6711b3337f26b8)
+
+Package Locator: git+go.googlesource.com/exp$e7e105dedf7e2bd7a7db7003ed6711b3337f26b8
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+BSD-3-Clause
+
+--------------------------------------------------------------------------------
+File matches:
+cmd/gorelease/errors.go
+cmd/gorelease/gorelease.go
+cmd/gorelease/path_test.go
+cmd/gorelease/path.go
+cmd/gorelease/report.go
+cmd/macos-roots-test/main.go
+cmd/macos-roots-test/root_cgo_darwin.go
+cmd/macos-roots-test/root_darwin.go
+cmd/macos-roots-test/root_nocgo_darwin.go
+cmd/modgraphviz/main_test.go
+cmd/modgraphviz/main.go
+cmd/txtar/txtar_test.go
+cmd/txtar/txtar.go
+constraints/constraints_test.go
+constraints/constraints.go
+ebnf/ebnf_test.go
+ebnf/ebnf.go
+ebnf/parser.go
+ebnflint/doc.go
+ebnflint/ebnflint_test.go
+ebnflint/ebnflint.go
+errors/errors_test.go
+errors/errors.go
+errors/example_test.go
+errors/fmt/adaptor.go
+errors/fmt/doc.go
+errors/fmt/errors_test.go
+errors/fmt/errors.go
+errors/fmt/example_test.go
+errors/fmt/export_test.go
+errors/fmt/fmt_test.go
+errors/fmt/format_example_test.go
+errors/fmt/format.go
+errors/fmt/print.go
+errors/fmt/scan_test.go
+errors/fmt/scan.go
+errors/fmt/stringer_test.go
+errors/format.go
+errors/frame.go
+errors/internal/internal.go
+errors/stack_test.go
+errors/wrap_test.go
+errors/wrap.go
+event/adapter/gokit/bench_test.go
+event/adapter/gokit/gokit_test.go
+event/adapter/gokit/gokit.go
+event/adapter/logfmt/logfmt_test.go
+event/adapter/logfmt/logfmt.go
+event/adapter/logr/logr_test.go
+event/adapter/logr/logr.go
+event/adapter/logrus/bench_test.go
+event/adapter/logrus/logrus_test.go
+event/adapter/logrus/logrus.go
+event/adapter/stdlib/bench_test.go
+event/adapter/zap/bench_test.go
+event/adapter/zap/zap_test.go
+event/adapter/zap/zap.go
+event/adapter/zerolog/bench_test.go
+event/alloc_test.go
+event/bench_test.go
+event/common.go
+event/disabled.go
+event/doc.go
+event/event_test.go
+event/event.go
+event/eventtest/bench.go
+event/eventtest/eventtest.go
+event/export.go
+event/keys/keys.go
+event/label_test.go
+event/label.go
+event/metric.go
+event/otel/metric_test.go
+event/otel/metric.go
+event/otel/trace_test.go
+event/otel/trace.go
+event/severity/severity_test.go
+event/severity/severity.go
+event/source_test.go
+event/source.go
+io/i2c/devfs_nonlinux.go
+io/i2c/devfs.go
+io/i2c/driver/driver.go
+io/i2c/example_test.go
+io/i2c/example/displayip/main.go
+io/i2c/i2c_test.go
+io/i2c/i2c.go
+io/spi/devfs_nonlinux.go
+io/spi/devfs.go
+io/spi/driver/driver.go
+io/spi/example_test.go
+io/spi/spi.go
+jsonrpc2/conn.go
+jsonrpc2/defs.go
+jsonrpc2/frame.go
+jsonrpc2/internal/stack/gostacks/gostacks.go
+jsonrpc2/internal/stack/parse.go
+jsonrpc2/internal/stack/process.go
+jsonrpc2/internal/stack/stack_test.go
+jsonrpc2/internal/stack/stack.go
+jsonrpc2/internal/stack/stacktest/stacktest.go
+jsonrpc2/jsonrpc2_test.go
+jsonrpc2/jsonrpc2.go
+jsonrpc2/messages.go
+jsonrpc2/net.go
+jsonrpc2/serve_test.go
+jsonrpc2/serve.go
+jsonrpc2/wire_test.go
+jsonrpc2/wire.go
+LICENSE
+maps/maps_test.go
+maps/maps.go
+mmap/manual_test_program.go
+mmap/mmap_other.go
+mmap/mmap_test.go
+mmap/mmap_unix.go
+mmap/mmap_windows.go
+rand/arith128_test.go
+rand/example_test.go
+rand/exp.go
+rand/modulo_test.go
+rand/normal.go
+rand/race_test.go
+rand/rand_test.go
+rand/rand.go
+rand/regress_test.go
+rand/rng.go
+rand/zipf.go
+shiny/driver/driver_darwin.go
+shiny/driver/driver_fallback.go
+shiny/driver/driver_windows.go
+shiny/driver/driver_x11.go
+shiny/driver/driver.go
+shiny/driver/gldriver/buffer.go
+shiny/driver/gldriver/cocoa.go
+shiny/driver/gldriver/cocoa.m
+shiny/driver/gldriver/context.go
+shiny/driver/gldriver/egl.go
+shiny/driver/gldriver/gldriver.go
+shiny/driver/gldriver/other.go
+shiny/driver/gldriver/screen.go
+shiny/driver/gldriver/texture.go
+shiny/driver/gldriver/win32.go
+shiny/driver/gldriver/window.go
+shiny/driver/gldriver/x11.c
+shiny/driver/gldriver/x11.go
+shiny/driver/internal/drawer/drawer.go
+shiny/driver/internal/errscreen/errscreen.go
+shiny/driver/internal/event/event.go
+shiny/driver/internal/lifecycler/lifecycler.go
+shiny/driver/internal/swizzle/swizzle_amd64.go
+shiny/driver/internal/swizzle/swizzle_amd64.s
+shiny/driver/internal/swizzle/swizzle_common.go
+shiny/driver/internal/swizzle/swizzle_other.go
+shiny/driver/internal/swizzle/swizzle_test.go
+shiny/driver/internal/win32/key.go
+shiny/driver/internal/win32/syscall_windows.go
+shiny/driver/internal/win32/syscall.go
+shiny/driver/internal/win32/win32.go
+shiny/driver/internal/x11key/gen.go
+shiny/driver/internal/x11key/x11key.go
+shiny/driver/mtldriver_darwin.go
+shiny/driver/mtldriver/buffer.go
+shiny/driver/mtldriver/internal/appkit/appkit.go
+shiny/driver/mtldriver/internal/appkit/appkit.h
+shiny/driver/mtldriver/internal/appkit/appkit.m
+shiny/driver/mtldriver/internal/coreanim/coreanim.go
+shiny/driver/mtldriver/internal/coreanim/coreanim.h
+shiny/driver/mtldriver/internal/coreanim/coreanim.m
+shiny/driver/mtldriver/mtldriver.go
+shiny/driver/mtldriver/screen.go
+shiny/driver/mtldriver/texture.go
+shiny/driver/mtldriver/window.go
+shiny/driver/windriver/buffer.go
+shiny/driver/windriver/doc.go
+shiny/driver/windriver/other.go
+shiny/driver/windriver/screen.go
+shiny/driver/windriver/syscall_windows.go
+shiny/driver/windriver/syscall.go
+shiny/driver/windriver/texture.go
+shiny/driver/windriver/window.go
+shiny/driver/windriver/windraw.go
+shiny/driver/windriver/windriver.go
+shiny/driver/x11driver/buffer_fallback.go
+shiny/driver/x11driver/buffer.go
+shiny/driver/x11driver/screen.go
+shiny/driver/x11driver/shm_linux_ipc.go
+shiny/driver/x11driver/shm_openbsd_syscall.go
+shiny/driver/x11driver/shm_other.go
+shiny/driver/x11driver/shm_shmopen_syscall.go
+shiny/driver/x11driver/texture.go
+shiny/driver/x11driver/window.go
+shiny/driver/x11driver/x11driver.go
+shiny/example/basic/main.go
+shiny/example/basicgl/main.go
+shiny/example/fluid/main.go
+shiny/example/goban/asset/resize.go
+shiny/example/goban/board.go
+shiny/example/goban/main.go
+shiny/example/goban/xy_test.go
+shiny/example/goban/xy.go
+shiny/example/icongallery/main.go
+shiny/example/imageview/main.go
+shiny/example/layout/main.go
+shiny/example/textedit/main.go
+shiny/example/tile/main.go
+shiny/example/widgetgallery/main.go
+shiny/gesture/gesture.go
+shiny/iconvg/buffer_test.go
+shiny/iconvg/buffer.go
+shiny/iconvg/color.go
+shiny/iconvg/decode_test.go
+shiny/iconvg/decode.go
+shiny/iconvg/doc.go
+shiny/iconvg/encode_test.go
+shiny/iconvg/encode.go
+shiny/iconvg/example_test.go
+shiny/iconvg/iconvg.go
+shiny/iconvg/internal/gradient/gradient.go
+shiny/iconvg/rasterizer.go
+shiny/iconvg/upgrade_test.go
+shiny/iconvg/upgrade.go
+shiny/imageutil/imageutil_test.go
+shiny/imageutil/imageutil.go
+shiny/materialdesign/colornames/colornames_test.go
+shiny/materialdesign/colornames/colornames.go
+shiny/materialdesign/colornames/gen.go
+shiny/materialdesign/icons/gen.go
+shiny/materialdesign/icons/icons_test.go
+shiny/materialdesign/icons/icons.go
+shiny/screen/screen_test.go
+shiny/screen/screen.go
+shiny/text/caret.go
+shiny/text/example_test.go
+shiny/text/text_test.go
+shiny/text/text.go
+shiny/unit/unit.go
+shiny/widget/flex/flex_test.go
+shiny/widget/flex/flex.go
+shiny/widget/flow.go
+shiny/widget/glwidget/glwidget.go
+shiny/widget/image.go
+shiny/widget/label.go
+shiny/widget/node/node.go
+shiny/widget/padder.go
+shiny/widget/sheet.go
+shiny/widget/sizer.go
+shiny/widget/space.go
+shiny/widget/text.go
+shiny/widget/theme/theme_test.go
+shiny/widget/theme/theme.go
+shiny/widget/uniform.go
+shiny/widget/widget.go
+shootout/binary-tree-freelist.go
+shootout/binary-tree.c
+shootout/binary-tree.go
+shootout/chameneosredux.c
+shootout/chameneosredux.go
+shootout/fannkuch-parallel.go
+shootout/fannkuch.c
+shootout/fannkuch.go
+shootout/fasta.c
+shootout/fasta.go
+shootout/k-nucleotide-parallel.go
+shootout/k-nucleotide.c
+shootout/k-nucleotide.go
+shootout/mandelbrot.c
+shootout/mandelbrot.go
+shootout/meteor-contest.c
+shootout/meteor-contest.go
+shootout/nbody.c
+shootout/nbody.go
+shootout/pidigits.c
+shootout/pidigits.go
+shootout/regex-dna-parallel.go
+shootout/regex-dna.c
+shootout/regex-dna.go
+shootout/reverse-complement.c
+shootout/reverse-complement.go
+shootout/spectral-norm-parallel.go
+shootout/spectral-norm.c
+shootout/spectral-norm.go
+shootout/threadring.c
+shootout/threadring.go
+shootout/timing.sh
+slices/cmp.go
+slices/slices_race_test.go
+slices/slices_test.go
+slices/slices.go
+slices/sort_benchmark_test.go
+slices/sort_test.go
+slices/sort.go
+slices/zsortanyfunc.go
+slices/zsortordered.go
+slog/attr_test.go
+slog/attr.go
+slog/benchmarks/benchmarks_test.go
+slog/benchmarks/benchmarks.go
+slog/benchmarks/handlers.go
+slog/benchmarks/zap_benchmarks/zap_benchmarks_test.go
+slog/benchmarks/zap_benchmarks/zap_encoders_test.go
+slog/benchmarks/zap_benchmarks/zap_encoders.go
+slog/benchmarks/zerolog_benchmarks/zerolog_benchmarks_test.go
+slog/doc.go
+slog/example_custom_levels_test.go
+slog/example_level_handler_test.go
+slog/example_logvaluer_group_test.go
+slog/example_logvaluer_secret_test.go
+slog/example_test.go
+slog/example_wrap_test.go
+slog/handler_test.go
+slog/handler.go
+slog/internal/buffer/buffer_test.go
+slog/internal/buffer/buffer.go
+slog/internal/buffer/norace_test.go
+slog/internal/ignorepc.go
+slog/internal/testutil/testutil.go
+slog/json_handler_test.go
+slog/json_handler.go
+slog/level_test.go
+slog/level.go
+slog/logger_test.go
+slog/logger.go
+slog/norace_test.go
+slog/race_test.go
+slog/record_test.go
+slog/record.go
+slog/slogtest_test.go
+slog/slogtest/slogtest_119.go
+slog/slogtest/slogtest_120.go
+slog/text_handler_test.go
+slog/text_handler.go
+slog/value_119.go
+slog/value_120.go
+slog/value_access_benchmark_test.go
+slog/value_test.go
+slog/value.go
+sumdb/gosumcheck/main.go
+sumdb/internal/note/example_test.go
+sumdb/internal/note/note_test.go
+sumdb/internal/note/note.go
+sumdb/internal/sumweb/cache.go
+sumdb/internal/sumweb/client_test.go
+sumdb/internal/sumweb/client.go
+sumdb/internal/sumweb/encode_test.go
+sumdb/internal/sumweb/encode.go
+sumdb/internal/sumweb/server.go
+sumdb/internal/sumweb/test.go
+sumdb/internal/tkv/tkv.go
+sumdb/internal/tkv/tkvtest/mem_test.go
+sumdb/internal/tkv/tkvtest/mem.go
+sumdb/internal/tkv/tkvtest/test.go
+sumdb/internal/tlog/ct_test.go
+sumdb/internal/tlog/note_test.go
+sumdb/internal/tlog/note.go
+sumdb/internal/tlog/tile.go
+sumdb/internal/tlog/tlog_test.go
+sumdb/internal/tlog/tlog.go
+trace/base.go
+trace/batch.go
+trace/batchcursor_test.go
+trace/batchcursor.go
+trace/cmd/gotraceeventstats/main.go
+trace/cmd/gotraceraw/main.go
+trace/cmd/gotracevalidate/main.go
+trace/event_test.go
+trace/event.go
+trace/flightrecorder_test.go
+trace/flightrecorder.go
+trace/gen.bash
+trace/generation.go
+trace/internal/event/event.go
+trace/internal/event/go122/event.go
+trace/internal/event/requirements.go
+trace/internal/oldtrace/order.go
+trace/internal/oldtrace/parser.go
+trace/internal/raw/doc.go
+trace/internal/raw/event.go
+trace/internal/raw/reader.go
+trace/internal/raw/textreader.go
+trace/internal/raw/textwriter.go
+trace/internal/raw/writer.go
+trace/internal/testgen/go122/trace.go
+trace/internal/testtrace/expectation.go
+trace/internal/testtrace/format.go
+trace/internal/testtrace/validation.go
+trace/internal/version/version.go
+trace/oldtrace.go
+trace/order_test.go
+trace/order.go
+trace/parser.go
+trace/reader.go
+trace/resources.go
+trace/testdata/generate.go
+trace/testdata/generators/go122-confuse-seq-across-generations.go
+trace/testdata/generators/go122-create-syscall-reuse-thread-id.go
+trace/testdata/generators/go122-create-syscall-with-p.go
+trace/testdata/generators/go122-fail-first-gen-first.go
+trace/testdata/generators/go122-go-create-without-running-g.go
+trace/testdata/generators/go122-syscall-steal-proc-ambiguous.go
+trace/testdata/generators/go122-syscall-steal-proc-gen-boundary-bare-m.go
+trace/testdata/generators/go122-syscall-steal-proc-gen-boundary-reacquire-new-proc-bare-m.go
+trace/testdata/generators/go122-syscall-steal-proc-gen-boundary-reacquire-new-proc.go
+trace/testdata/generators/go122-syscall-steal-proc-gen-boundary.go
+trace/testdata/generators/go122-syscall-steal-proc-reacquire-new-proc-bare-m.go
+trace/testdata/generators/go122-syscall-steal-proc-reacquire-new-proc.go
+trace/testdata/generators/go122-syscall-steal-proc-self.go
+trace/testdata/generators/go122-syscall-steal-proc-simple-bare-m.go
+trace/testdata/generators/go122-syscall-steal-proc-simple.go
+trace/testdata/generators/go122-syscall-steal-proc-sitting-in-syscall.go
+trace/testdata/generators/go122-task-across-generations.go
+trace/value.go
+typeparams/common_test.go
+typeparams/common.go
+typeparams/copytermlist.go
+typeparams/example/findtypeparams/main.go
+typeparams/example/genericmethods/main.go
+typeparams/example/instantiation/main.go
+typeparams/example/interfaces/main.go
+typeparams/example/methoddecls/main.go
+typeparams/example/predicates/main.go
+typeparams/example/typesets/main.go
+typeparams/normalize_test.go
+typeparams/normalize.go
+typeparams/termlist.go
+typeparams/typeparams_go117.go
+typeparams/typeparams_go118.go
+typeparams/typeparams_test.go
+typeparams/typeterm.go
+utf8string/string_test.go
+utf8string/string.go
+--------------------------------------------------------------------------------
+
+Copyright 2009 The Go Authors.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+   * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other materials provided with t...
+
+
+* Other Licenses *
+Apache-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+shiny/materialdesign/icons/LICENSE
+--------------------------------------------------------------------------------
+
+
+Copyright [yyyy] [name of copyright owner]
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+See the License for the specifi...
+
+
+--------------------------------------------------------------------------------
+Package Title: fsnotify (v1.5.4)
+
+Package Locator: git+github.com/fsnotify/fsnotify$0f4b979323bea7ee6677faa4a88078ec558b1b80
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+BSD-3-Clause
+
+--------------------------------------------------------------------------------
+File matches:
+fen.go
+fsnotify_test.go
+fsnotify_unsupported.go
+fsnotify.go
+inotify_poller_test.go
+inotify_poller.go
+inotify_test.go
+inotify.go
+integration_darwin_test.go
+integration_test.go
+kqueue.go
+LICENSE
+open_mode_bsd.go
+open_mode_darwin.go
+windows.go
+--------------------------------------------------------------------------------
+
+Copyright (c) 2012 The Go Authors. All rights reserved.
+Copyright (c) 2012-2019 fsnotify Authors. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+   * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions ...
+
+
+--------------------------------------------------------------------------------
+Package Title: ghinstallation (v2.5.0)
+
+Package Locator: git+github.com/bradleyfalzon/ghinstallation$37b63e418659d0cd6a0a6ca9e5b7fb966e9daa26
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+Apache-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE
+--------------------------------------------------------------------------------
+
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner tha...
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/agext/levenshtein (v1.2.2)
+
+Package Locator: go+github.com/agext/levenshtein$v1.2.2
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+Apache-2.0
+
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that...
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/go-openapi/errors (v0.20.2)
+
+Package Locator: go+github.com/go-openapi/errors$v0.20.2
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+Apache-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+api_test.go
+api.go
+auth_test.go
+auth.go
+doc.go
+headers.go
+LICENSE
+middleware_test.go
+middleware.go
+parsing_test.go
+parsing.go
+schema_test.go
+schema.go
+--------------------------------------------------------------------------------
+
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner tha...
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/go-openapi/strfmt (v0.21.3)
+
+Package Locator: go+github.com/go-openapi/strfmt$v0.21.3
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+Apache-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+bson_test.go
+bson.go
+date_test.go
+date.go
+default_test.go
+default.go
+doc.go
+duration_test.go
+duration.go
+format_test.go
+format.go
+LICENSE
+time_test.go
+time.go
+--------------------------------------------------------------------------------
+
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner tha...
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/golang-jwt/jwt/v4 (v4.5.1)
+
+Package Locator: go+github.com/golang-jwt/jwt/v4$v4.5.1
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MIT
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE
+--------------------------------------------------------------------------------
+
+Copyright (c) 2012 Dave Grijalva
+Copyright (c) 2021 golang-jwt maintainers
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following ...
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/google/go-querystring (v1.1.0)
+
+Package Locator: go+github.com/google/go-querystring$v1.1.0
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+BSD-3-Clause
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE
+query/encode_test.go
+query/encode.go
+--------------------------------------------------------------------------------
+
+Copyright (c) 2013 Google. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+   * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other material...
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/grpc-ecosystem/grpc-gateway/v2 (v2.25.1)
+
+Package Locator: go+github.com/grpc-ecosystem/grpc-gateway/v2$v2.25.1
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+BSD-3-Clause
+
+--------------------------------------------------------------------------------
+File matches:
+internal/casing/LICENSE.md
+LICENSE
+runtime/pattern.go
+--------------------------------------------------------------------------------
+
+Copyright (c) 2015, Gengo, Inc.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+ ...
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/hashicorp/go-checkpoint (v0.5.0)
+
+Package Locator: go+github.com/hashicorp/go-checkpoint$v0.5.0
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MPL-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE
+--------------------------------------------------------------------------------
+
+Mozilla Public License, version 2.0
+
+1. Definitions
+
+1.1. “Contributor”
+
+     means each individual or legal entity that creates, contributes to the
+     creation of, or owns Covered Software.
+
+1.2. “Contributor Version”
+
+     means the combination of the Contributions of others (if any) used by a
+     Contributor and that particular Contributor’s Contribution.
+
+1.3. “Contribution”
+
+     means Covered Software of a particular Contributor.
+
+1.4. “Covered Software”
+
+     means Source Code Form ...
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/hashicorp/go-version (v1.7.0)
+
+Package Locator: go+github.com/hashicorp/go-version$v1.7.0
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MPL-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+constraint_test.go
+constraint.go
+LICENSE
+version_collection_test.go
+version_collection.go
+version_test.go
+version.go
+--------------------------------------------------------------------------------
+
+Copyright (c) 2014 HashiCorp, Inc.
+
+Mozilla Public License, version 2.0
+
+1. Definitions
+
+1.1. “Contributor”
+
+     means each individual or legal entity that creates, contributes to the
+     creation of, or owns Covered Software.
+
+1.2. “Contributor Version”
+
+     means the combination of the Contributions of others (if any) used by a
+     Contributor and that particular Contributor’s Contribution.
+
+1.3. “Contribution”
+
+     means Covered Software of a particular Contributor.
+
+1.4. “Covered Sof...
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/hashicorp/hcl/v2 (v2.23.0)
+
+Package Locator: go+github.com/hashicorp/hcl/v2$v2.23.0
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MPL-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+cmd/hcldec/diags_json.go
+cmd/hcldec/examples/sh-config-file/example.sh
+cmd/hcldec/main.go
+cmd/hcldec/spec_funcs.go
+cmd/hcldec/spec.go
+cmd/hcldec/type_expr.go
+cmd/hcldec/vars.go
+cmd/hclfmt/main.go
+cmd/hclspecsuite/diagnostics.go
+cmd/hclspecsuite/log.go
+cmd/hclspecsuite/main.go
+cmd/hclspecsuite/runner.go
+cmd/hclspecsuite/test_file.go
+cmd/hclspecsuite/traversals.go
+diagnostic_text_test.go
+diagnostic_text.go
+diagnostic_typeparams.go
+diagnostic.go
+didyoumean.go
+doc.go
+eval_context.go
+expr_call.go
+expr_list.go
+expr_map.go
+expr_unwrap.go
+ext/customdecode/customdecode.go
+ext/customdecode/expression_type.go
+ext/dynblock/expand_body_test.go
+ext/dynblock/expand_body.go
+ext/dynblock/expand_spec.go
+ext/dynblock/expr_wrap.go
+ext/dynblock/iteration.go
+ext/dynblock/options.go
+ext/dynblock/public.go
+ext/dynblock/schema.go
+ext/dynblock/unknown_body.go
+ext/dynblock/variables_hcldec.go
+ext/dynblock/variables_test.go
+ext/dynblock/variables.go
+ext/transform/doc.go
+ext/transform/error.go
+ext/transform/transform_test.go
+ext/transform/transform.go
+ext/transform/transformer.go
+ext/tryfunc/tryfunc_test.go
+ext/tryfunc/tryfunc.go
+ext/typeexpr/defaults_test.go
+ext/typeexpr/defaults.go
+ext/typeexpr/doc.go
+ext/typeexpr/get_type_test.go
+ext/typeexpr/get_type.go
+ext/typeexpr/public.go
+ext/typeexpr/type_string_test.go
+ext/typeexpr/type_type_test.go
+ext/typeexpr/type_type.go
+ext/userfunc/decode_test.go
+ext/userfunc/decode.go
+ext/userfunc/doc.go
+ext/userfunc/public.go
+gohcl/decode_test.go
+gohcl/decode.go
+gohcl/doc.go
+gohcl/encode_test.go
+gohcl/encode.go
+gohcl/schema_test.go
+gohcl/schema.go
+gohcl/types.go
+hcldec/block_labels.go
+hcldec/decode.go
+hcldec/doc.go
+hcldec/gob.go
+hcldec/public_test.go
+hcldec/public.go
+hcldec/schema.go
+hcldec/spec_test.go
+hcldec/spec.go
+hcldec/variables_test.go
+hcldec/variables.go
+hcled/doc.go
+hcled/navigation.go
+hclparse/parser.go
+hclsimple/hclsimple_test.go
+hclsimple/hclsimple.go
+hclsimple/testdata/test.hcl
+hclsyntax/diagnostics.go
+hclsyntax/didyoumean_test.go
+hclsyntax/didyoumean.go
+hclsyntax/doc.go
+hclsyntax/expression_ops.go
+hclsyntax/expression_static_test.go
+hclsyntax/expression_template_test.go
+hclsyntax/expression_template.go
+hclsyntax/expression_test.go
+hclsyntax/expression_typeparams_test.go
+hclsyntax/expression_vars_gen.go
+hclsyntax/expression_vars.go
+hclsyntax/expression.go
+hclsyntax/file.go
+hclsyntax/fuzz/fuzz_test.go
+hclsyntax/generate.go
+hclsyntax/keywords.go
+hclsyntax/navigation_test.go
+hclsyntax/navigation.go
+hclsyntax/node.go
+hclsyntax/parse_traversal_test.go
+hclsyntax/parser_template.go
+hclsyntax/parser_test.go
+hclsyntax/parser_traversal.go
+hclsyntax/parser.go
+hclsyntax/peeker_test.go
+hclsyntax/peeker.go
+hclsyntax/public_test.go
+hclsyntax/public.go
+hclsyntax/scan_string_lit_test.go
+hclsyntax/scan_string_lit.go
+hclsyntax/scan_string_lit.rl
+hclsyntax/scan_tokens_test.go
+hclsyntax/scan_tokens.go
+hclsyntax/scan_tokens.rl
+hclsyntax/structure_at_pos_test.go
+hclsyntax/structure_at_pos.go
+hclsyntax/structure_test.go
+hclsyntax/structure.go
+hclsyntax/token_test.go
+hclsyntax/token.go
+hclsyntax/unicode2ragel.rb
+hclsyntax/variables_test.go
+hclsyntax/variables.go
+hclsyntax/walk_test.go
+hclsyntax/walk.go
+hcltest/doc.go
+hcltest/mock_test.go
+hcltest/mock.go
+hclwrite/ast_attribute.go
+hclwrite/ast_block_test.go
+hclwrite/ast_block.go
+hclwrite/ast_body_test.go
+hclwrite/ast_body.go
+hclwrite/ast_expression.go
+hclwrite/ast_test.go
+hclwrite/ast.go
+hclwrite/doc.go
+hclwrite/examples_test.go
+hclwrite/format_test.go
+hclwrite/format.go
+hclwrite/fuzz/fuzz_test.go
+hclwrite/generate_test.go
+hclwrite/generate.go
+hclwrite/native_node_sorter.go
+hclwrite/node.go
+hclwrite/parser_test.go
+hclwrite/parser.go
+hclwrite/public.go
+hclwrite/round_trip_test.go
+hclwrite/tokens.go
+integrationtest/convertfunc_test.go
+integrationtest/doc.go
+integrationtest/hcldec_into_expr_test.go
+integrationtest/terraformlike_test.go
+json/ast.go
+json/didyoumean_test.go
+json/didyoumean.go
+json/doc.go
+json/fuzz/fuzz_test.go
+json/is.go
+json/navigation_test.go
+json/navigation.go
+json/parser_test.go
+json/parser.go
+json/peeker.go
+json/public_test.go
+json/public.go
+json/scanner_test.go
+json/scanner.go
+json/structure_test.go
+json/structure.go
+LICENSE
+merged_test.go
+merged.go
+ops_test.go
+ops.go
+pos_scanner_test.go
+pos_scanner.go
+pos_test.go
+pos.go
+schema.go
+scripts/gofmtcheck.sh
+specsuite/spec_test.go
+static_expr.go
+structure_at_pos.go
+structure.go
+tools.go
+traversal_for_expr_test.go
+traversal_for_expr.go
+traversal.go
+--------------------------------------------------------------------------------
+
+Copyright (c) 2014 HashiCorp, Inc.
+
+Mozilla Public License, version 2.0
+
+1. Definitions
+
+1.1. “Contributor”
+
+     means each individual or legal entity that creates, contributes to the
+     creation of, or owns Covered Software.
+
+1.2. “Contributor Version”
+
+     means the combination of the Contributions of others (if any) used by a
+     Contributor and that particular Contributor’s Contribution.
+
+1.3. “Contribution”
+
+     means Covered Software of a particular Contributor.
+
+1.4. “Covered Sof...
+
+
+* Other Licenses *
+Apache-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+fuzz/oss_fuzz_build.sh
+--------------------------------------------------------------------------------
+
+
+Copyright 2021 Google Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+See the License for the specific language gover...
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/hashicorp/yamux (v0.1.1)
+
+Package Locator: go+github.com/hashicorp/yamux$v0.1.1
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MPL-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE
+--------------------------------------------------------------------------------
+
+Mozilla Public License, version 2.0
+
+1. Definitions
+
+1.1. "Contributor"
+
+     means each individual or legal entity that creates, contributes to the
+     creation of, or owns Covered Software.
+
+1.2. "Contributor Version"
+
+     means the combination of the Contributions of others (if any) used by a
+     Contributor and that particular Contributor's Contribution.
+
+1.3. "Contribution"
+
+     means Covered Software of a particular Contributor.
+
+1.4. "Covered Software"
+
+     means Source Code Form ...
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/huandu/xstrings (v1.3.3)
+
+Package Locator: go+github.com/huandu/xstrings$v1.3.3
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MIT
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE
+--------------------------------------------------------------------------------
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Huan Du
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above co...
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/jedib0t/go-pretty (v4.3.0)
+
+Package Locator: go+github.com/jedib0t/go-pretty$v4.3.0
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MIT
+
+--------------------------------------------------------------------------------
+File matches:
+vendor/github.com/mattn/go-runewidth/LICENSE
+--------------------------------------------------------------------------------
+
+MIT License
+
+Copyright (c) 2018 jedib0t
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright no...
+
+
+* Other Licenses *
+Apache-2.0, BSD-3-Clause, BSD-2-Clause, ISC
+
+* Apache-2.0 *
+--------------------------------------------------------------------------------
+File matches:
+vendor/github.com/go-openapi/errors/api.go
+vendor/github.com/go-openapi/errors/auth.go
+vendor/github.com/go-openapi/errors/doc.go
+vendor/github.com/go-openapi/errors/headers.go
+vendor/github.com/go-openapi/errors/LICENSE
+vendor/github.com/go-openapi/errors/middleware.go
+vendor/github.com/go-openapi/errors/parsing.go
+vendor/github.com/go-openapi/errors/schema.go
+vendor/github.com/go-openapi/strfmt/bson.go
+vendor/github.com/go-openapi/strfmt/date.go
+vendor/github.com/go-openapi/strfmt/default.go
+vendor/github.com/go-openapi/strfmt/doc.go
+vendor/github.com/go-openapi/strfmt/duration.go
+vendor/github.com/go-openapi/strfmt/format.go
+vendor/github.com/go-openapi/strfmt/LICENSE
+vendor/github.com/go-openapi/strfmt/time.go
+--------------------------------------------------------------------------------
+
+
+Copyright 2015 go-swagger maintainers
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+See the License for the specific lan...
+
+* BSD-3-Clause *
+--------------------------------------------------------------------------------
+File matches:
+vendor/github.com/globalsign/mgo/internal/json/decode.go
+vendor/github.com/globalsign/mgo/internal/json/encode.go
+vendor/github.com/globalsign/mgo/internal/json/fold.go
+vendor/github.com/globalsign/mgo/internal/json/indent.go
+vendor/github.com/globalsign/mgo/internal/json/LICENSE
+vendor/github.com/globalsign/mgo/internal/json/scanner.go
+vendor/github.com/globalsign/mgo/internal/json/stream.go
+vendor/github.com/globalsign/mgo/internal/json/tags.go
+vendor/github.com/pmezard/go-difflib/LICENSE
+vendor/golang.org/x/sys/LICENSE
+vendor/golang.org/x/sys/windows/aliases.go
+vendor/golang.org/x/sys/windows/asm_windows_386.s
+vendor/golang.org/x/sys/windows/asm_windows_amd64.s
+vendor/golang.org/x/sys/windows/dll_windows.go
+vendor/golang.org/x/sys/windows/env_windows.go
+vendor/golang.org/x/sys/windows/eventlog.go
+vendor/golang.org/x/sys/windows/exec_windows.go
+vendor/golang.org/x/sys/windows/memory_windows.go
+vendor/golang.org/x/sys/windows/mksyscall.go
+vendor/golang.org/x/sys/windows/race.go
+vendor/golang.org/x/sys/windows/race0.go
+vendor/golang.org/x/sys/windows/security_windows.go
+vendor/golang.org/x/sys/windows/service.go
+vendor/golang.org/x/sys/windows/str.go
+vendor/golang.org/x/sys/windows/syscall_windows.go
+vendor/golang.org/x/sys/windows/syscall.go
+vendor/golang.org/x/sys/windows/types_windows_386.go
+vendor/golang.org/x/sys/windows/types_windows_amd64.go
+vendor/golang.org/x/sys/windows/types_windows.go
+--------------------------------------------------------------------------------
+
+
+Copyright (c) 2012 The Go Authors. All rights reserved. . All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+   1. Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+
+   2. Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclai...
+
+* BSD-2-Clause *
+--------------------------------------------------------------------------------
+File matches:
+vendor/github.com/globalsign/mgo/bson/bson.go
+vendor/github.com/globalsign/mgo/bson/decimal.go
+vendor/github.com/globalsign/mgo/bson/decode.go
+vendor/github.com/globalsign/mgo/bson/encode.go
+vendor/github.com/globalsign/mgo/bson/LICENSE
+vendor/github.com/globalsign/mgo/LICENSE
+vendor/github.com/pkg/profile/LICENSE
+--------------------------------------------------------------------------------
+
+
+Copyright (c) 2010-2013 Gustavo Niemeyer <gustavo@niemeyer.net>
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+   1. Redistributions of source code must retain the above copyright notice, this
+      list of conditions and the following disclaimer.
+
+   2. Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the docu...
+
+* ISC *
+--------------------------------------------------------------------------------
+File matches:
+vendor/github.com/davecgh/go-spew/LICENSE
+vendor/github.com/davecgh/go-spew/spew/bypass.go
+vendor/github.com/davecgh/go-spew/spew/bypasssafe.go
+vendor/github.com/davecgh/go-spew/spew/common.go
+vendor/github.com/davecgh/go-spew/spew/config.go
+vendor/github.com/davecgh/go-spew/spew/doc.go
+vendor/github.com/davecgh/go-spew/spew/dump.go
+vendor/github.com/davecgh/go-spew/spew/format.go
+vendor/github.com/davecgh/go-spew/spew/spew.go
+--------------------------------------------------------------------------------
+
+
+Copyright (c) 2012-2016 Dave Collins <dave@davec.name>
+Permission to use, copy, modify, and distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
+THE SOFTWARE IS PROVIDED "AS IS" AND ISC DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ISC BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/jedib0t/go-pretty/v6 (v6.4.6)
+
+Package Locator: go+github.com/jedib0t/go-pretty/v6$v6.4.6
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MIT
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE
+--------------------------------------------------------------------------------
+
+MIT License
+
+Copyright (c) 2018 jedib0t
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright no...
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/joho/godotenv (v1.3.0)
+
+Package Locator: go+github.com/joho/godotenv$v1.3.0
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MIT
+
+--------------------------------------------------------------------------------
+File matches:
+LICENCE
+--------------------------------------------------------------------------------
+
+Copyright (c) 2013 John Barton
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyrigh...
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/kballard/go-shellquote (95032a82bc51)
+
+Package Locator: go+github.com/kballard/go-shellquote$95032a82bc51
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MIT
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE
+--------------------------------------------------------------------------------
+
+Copyright (C) 2014 Kevin Ballard
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the "Software"),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice an...
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/Masterminds/goutils (v1.1.1)
+
+Package Locator: go+github.com/Masterminds/goutils$v1.1.1
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+Apache-2.0
+
+--------------------------------------------------------------------------------
+File matches:
+cryptorandomstringutils.go
+LICENSE.txt
+randomstringutils.go
+README.md
+stringutils.go
+wordutils.go
+--------------------------------------------------------------------------------
+
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner tha...
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/Masterminds/sprig/v3 (v3.2.3)
+
+Package Locator: go+github.com/Masterminds/sprig/v3$v3.2.3
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MIT
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE.txt
+--------------------------------------------------------------------------------
+
+Copyright (C) 2013-2020 Masterminds
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice...
+
+
+--------------------------------------------------------------------------------
+Package Title: github.com/mgutz/ansi (d51e80ef957d)
+
+Package Locator: go+github.com/mgutz/ansi$d51e80ef957d
+
+Package Depth: Direct
+--------------------------------------------------------------------------------
+
+* Declared Licenses *
+MIT
+
+--------------------------------------------------------------------------------
+File matches:
+LICENSE
+--------------------------------------------------------------------------------
+
+The MIT License (MIT)
+Copyright (c) 2013 Mario L. Gutierrez
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+Th...
+
+
+
+================================================================================
+                                    Licenses
+
+================================================================================
+
+* Apache-2.0 *
+
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner tha...
+
+* Apache-2.0 *
+
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner tha...
+
+* Apache-2.0 *
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that...
+
+* Apache-2.0 *
+
+                                Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that ...
+
+* AFL-1.1 *
+
+Academic Free License
+Version 1.1 The Academic Free License applies to any original work of authorship (the "Original Work") whose owner (the "Licensor") has placed the following notice immediately following the copyright notice for the Original Work:
+"Licensed under the Academic Free License version 1.1."
+Grant of License. Licensor hereby grants to any person obtaining a copy of the Original Work ("You") a world-wide, royalty-free, non-exclusive, perpetual, non-sublicenseable license
+   (1) ...
+
+* AFL-1.2 *
+
+Academic Free License
+Version 1.2 This Academic Free License applies to any original work of authorship (the "Original Work") whose owner (the "Licensor") has placed the following notice immediately following the copyright notice for the Original Work:
+Licensed under the Academic Free License version 1.2
+Grant of License. Licensor hereby grants to any person obtaining a copy of the Original Work ("You") a world-wide, royalty-free, non-exclusive, perpetual, non-sublicenseable license (1) to us...
+
+* Apache-2.0 *
+
+Apache License
+Version 2.0, January 2004
+http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting ...
+
+* Artistic-1.0-cl8 *
+
+The Artistic License
+Preamble
+The intent of this document is to state the conditions under which a Package may be copied, such that the Copyright Holder maintains some semblance of artistic control over the development of the package, while giving the users of the package the right to use and distribute the Package in a more-or-less customary fashion, plus the right to make reasonable modifications.
+Definitions:
+"Package" refers to the collection of files distributed by the Copyright Holder, ...
+
+* BSD-2-Clause *
+
+Copyright (c) <year> <owner>
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+   1. Redistributions of source code must retain the above copyright notice, this
+      list of conditions and the following disclaimer.
+
+   2. Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+
+   ...
+
+* BSD-3-Clause *
+
+Copyright (c) <year> <owner>
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+   1. Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+
+   2. Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+    ...
+
+* BitTorrent-1.0 *
+
+BitTorrent Open Source License
+Version 1.0
+This BitTorrent Open Source License (the "License") applies to the BitTorrent client and related software products as well as any updates or maintenance releases of that software ("BitTorrent Products") that are distributed by BitTorrent, Inc. ("Licensor"). Any BitTorrent Product licensed pursuant to this License is a Licensed Product. Licensed Product, in its entirety, is protected by U.S. copyright law. This License identifies the terms under which...
+
+* CNRI-Python *
+
+CNRI OPEN SOURCE LICENSE AGREEMENT
+IMPORTANT: PLEASE READ THE FOLLOWING AGREEMENT CAREFULLY.
+BY CLICKING ON "ACCEPT" WHERE INDICATED BELOW, OR BY COPYING, INSTALLING OR OTHERWISE USING PYTHON 1.6, beta 1 SOFTWARE, YOU ARE DEEMED TO HAVE AGREED TO THE TERMS AND CONDITIONS OF THIS LICENSE AGREEMENT.
+   1. This LICENSE AGREEMENT is between the Corporation for National Research Initiatives, having an office at 1895 Preston White Drive, Reston, VA 20191 ("CNRI"), and the Individual or Organization...
+
+* MIT *
+
+Copyright (C) 2013-2020 Masterminds
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice...
+
+* MIT *
+
+Copyright (C) 2014 Kevin Ballard
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the "Software"),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice an...
+
+* BSD-3-Clause *
+
+Copyright (c) 2009 The Go Authors. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+   * Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+   * Redistributions in binary form must reproduce the above
+copyright notice, this list of conditions and the following disclaimer
+in the documentation and/or other ...
+
+
+================================================================================
+
+                                   Copyrights
+
+================================================================================
+
+Academic Free License v1.1
+
+Copyright (c) HashiCorp, Inc.
+
+Copyright (c)  HashiCorp, Inc.
+Academic Free License
+Version 1.1 The Academic Free License applies to any original work of authorship (the "Original Work") whose owner (the "Licensor") has placed the following notice immediately following the copyright notice for the Original Work:
+"Licensed under the Academic Free License version 1.1."
+Grant of License. Licensor hereby grants to any person obtaining a copy of the Original Work ("You") a world-wide, royalty-free, non-exclusive, perpetual, non-sublicenseable license
+   (1) ...
+
+--------------------------------------------------------------------------------
+Academic Free License v1.2
+
+Copyright (c) HashiCorp, Inc.
+
+Copyright (c)  HashiCorp, Inc.
+Academic Free License
+Version 1.2 This Academic Free License applies to any original work of authorship (the "Original Work") whose owner (the "Licensor") has placed the following notice immediately following the copyright notice for the Original Work:
+Licensed under the Academic Free License version 1.2
+Grant of License. Licensor hereby grants to any person obtaining a copy of the Original Work ("You") a world-wide, royalty-free, non-exclusive, perpetual, non-sublicenseable license (1) to us...
+
+--------------------------------------------------------------------------------
+Apache License 2.0
+
+Copyright (c) 2011 Google Inc. All rights reserved.
+
+Copyright (c) 2018 Google LLC
+
+Copyright (c) 2015 go-swagger maintainers
+
+Copyright (c) 2014 Alexander Okoli
+
+Copyright (c) 2012 Google Inc. All rights reserved.
+
+Copyright (c) 2019 ghinstallation AUTHORS
+
+Copyright (c) 2016 ALRUX Inc.
+
+Copyright (c) 2013-2022 The Cobra Authors
+
+Copyright (c) 2022 Okta, Inc.
+
+Copyright (c) 2021 Google Inc.
+Apache License
+Version 2.0, January 2004
+http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting ...
+
+--------------------------------------------------------------------------------
+Artistic License 1.0 w/clause 8
+
+Copyright (c) HashiCorp, Inc.
+
+Copyright (c)  HashiCorp, Inc.
+The Artistic License
+Preamble
+The intent of this document is to state the conditions under which a Package may be copied, such that the Copyright Holder maintains some semblance of artistic control over the development of the package, while giving the users of the package the right to use and distribute the Package in a more-or-less customary fashion, plus the right to make reasonable modifications.
+Definitions:
+"Package" refers to the collection of files distributed by the Copyright Holder, ...
+
+--------------------------------------------------------------------------------
+BSD 2-Clause "Simplified" License
+
+Copyright (c) HashiCorp, Inc.
+
+Copyright (c) 2010-2013 Gustavo Niemeyer <gustavo@niemeyer.net>
+
+Copyright (c) 2014 Matthew Endsley
+
+Copyright (c)  HashiCorp, Inc.
+Copyright (c) <year> <owner>
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+   1. Redistributions of source code must retain the above copyright notice, this
+      list of conditions and the following disclaimer.
+
+   2. Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+
+   ...
+
+--------------------------------------------------------------------------------
+BSD 3-Clause "New" or "Revised" License
+
+Copyright (c) 2011 The Go Authors.  All rights reserved.
+
+Copyright (c) 2015-2017,2019 Google LLC All rights reserved.
+
+Copyright (c) 2012 The Go Authors. All rights reserved.
+
+Copyright (c) 2009 The Go Authors. All rights reserved.
+Copyright (c) <year> <owner>
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+   1. Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+
+   2. Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+    ...
+
+--------------------------------------------------------------------------------
+BitTorrent Open Source License v1.0
+
+Copyright (c) HashiCorp, Inc.
+
+Copyright (c)  HashiCorp, Inc.
+BitTorrent Open Source License
+Version 1.0
+This BitTorrent Open Source License (the "License") applies to the BitTorrent client and related software products as well as any updates or maintenance releases of that software ("BitTorrent Products") that are distributed by BitTorrent, Inc. ("Licensor"). Any BitTorrent Product licensed pursuant to this License is a Licensed Product. Licensed Product, in its entirety, is protected by U.S. copyright law. This License identifies the terms under which...
+
+--------------------------------------------------------------------------------
+CNRI Python License
+
+Copyright (c) HashiCorp, Inc.
+
+Copyright (c)  HashiCorp, Inc.
+CNRI OPEN SOURCE LICENSE AGREEMENT
+IMPORTANT: PLEASE READ THE FOLLOWING AGREEMENT CAREFULLY.
+BY CLICKING ON "ACCEPT" WHERE INDICATED BELOW, OR BY COPYING, INSTALLING OR OTHERWISE USING PYTHON 1.6, beta 1 SOFTWARE, YOU ARE DEEMED TO HAVE AGREED TO THE TERMS AND CONDITIONS OF THIS LICENSE AGREEMENT.
+   1. This LICENSE AGREEMENT is between the Corporation for National Research Initiatives, having an office at 1895 Preston White Drive, Reston, VA 20191 ("CNRI"), and the Individual or Organization...
+
+--------------------------------------------------------------------------------
+MIT License
+
+Copyright (c) 2013-2020 Masterminds
+
+Copyright (c) 2014 Kevin Ballard
+MIT License
+Copyright (c) <year> <copyright holders>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above...
+
+--------------------------------------------------------------------------------
+No Associated License
+
+Copyright (c) 2012-2023 The ANTLR Project. All rights reserved.
+
+Copyright (c) 2012-2022 The ANTLR Project. All rights reserved.
+
+Copyright (c) 2006, 2008 Junio C Hamano
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+
+Report Generated by FOSSA on 2025-5-28
