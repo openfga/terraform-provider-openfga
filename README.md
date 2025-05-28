@@ -2,7 +2,7 @@
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/openfga/terraform-provider-openfga.svg)](https://pkg.go.dev/github.com/openfga/terraform-provider-openfga)
 [![Release](https://img.shields.io/github/v/release/openfga/terraform-provider-openfga?sort=semver&color=green)](https://github.com/openfga/terraform-provider-openfga/releases)
-[![Go Report](https://goreportcard.com/badge/github.com/openfga/openfga)](https://goreportcard.com/report/github.com/openfga/openfga)
+[![Go Report](https://goreportcard.com/badge/github.com/openfga/terraform-provider-openfga)](https://goreportcard.com/report/github.com/openfga/terraform-provider-openfga)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fopenfga%2Fterraform-provider-openfga.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fopenfga%2Fterraform-provider-openfga?ref=badge_shield)
 [![Join our community](https://img.shields.io/badge/slack-cncf_%23openfga-40abb8.svg?logo=slack)](https://openfga.dev/community)
@@ -452,8 +452,7 @@ See [CONTRIBUTING](https://github.com/openfga/.github/blob/main/CONTRIBUTING.md)
 
 ## Author
 
-[OpenFGA](https://github.com/openfga)
-[Maurice Ackel](https://github.com/mauriceackel)
+[OpenFGA](https://github.com/openfga), [Maurice Ackel](https://github.com/mauriceackel)
 
 This provider was created by [Maurice Ackel](https://github.com/mauriceackel), and then donated to the OpenFGA team, and Maurice stayed on as a maintainer.
 
