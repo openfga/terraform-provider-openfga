@@ -1,3 +1,13 @@
+## 0.4.0 (May 28, 2025)
+
+NOTES:
+
+* This is the first release as the **official Terraform provider** in the **OpenFGA organization**. Thank you to everyone who made this possible 🎉
+
+SECURITY:
+
+* provider: Updated terraform provider SDK
+
 ## 0.3.2 (March 10, 2025)
 
 BUG FIXES:
