@@ -1,59 +1,69 @@
-## 0.4.0 (May 28, 2025)
+## [0.5.0] - 2025-06-06
 
-NOTES:
+### Breaking Changes
 
-* This is the first release as the **official Terraform provider** in the **OpenFGA organization**. Thank you to everyone who made this possible 🎉
+- provider: Renamed `scopes` to `api_scopes`, `audience` to `api_audience` and `token_endpoint_url` to `api_token_issuer`. Changed environment variable names accordingly.
 
-SECURITY:
+### Fixed
 
-* provider: Updated terraform provider SDK
+- goreleaser: Changed deprecated `archives.format` field to `archives.formats`.
 
-## 0.3.2 (March 10, 2025)
+## [0.4.0] - 2025-06-05
 
-BUG FIXES:
+### Notes
 
-* data_source/authorization_model: Fixed nil pointer for non-existing latest authorization model
-* data_source/\*_query: Added missing documentation
+- This is the first release as the **official Terraform provider** in the **OpenFGA organization**. Thank you to everyone who made this possible 🎉
 
-## 0.3.1 (February 27, 2025)
+### Security
 
-BUG FIXES:
+- provider: Updated terraform provider SDK
 
-* data_source/authorization_model_document: Fixed broken module file names
+## [0.3.2] - 2025-03-10
 
-## 0.3.0 (February 27, 2025)
+### Fixed
 
-FEATURES:
+- data_source/authorization_model: Fixed nil pointer for non-existing latest authorization model
+- data_source/\*_query: Added missing documentation
 
-* data_source/authorization_model_document: Added support for modular models
+## [0.3.1] - 2025-02-27
 
-## 0.2.1 (February 22, 2025)
+### Fixed
 
-BUG FIXES:
+- data_source/authorization_model_document: Fixed broken module file names
 
-* docs: Fixed missing provider attributes
+## [0.3.0] - 2025-02-27
 
-## 0.2.0 (February 22, 2025)
+### Added
 
-FEATURES:
+- data_source/authorization_model_document: Added support for modular models
 
-* provider: Added `scopes` and `audience` attributes
+## [0.2.1] - 2025-02-22
 
-## 0.1.0 (February 19, 2025)
+### Fixed
 
-FEATURES:
+- docs: Fixed missing provider attributes
 
-* provider: Provider added
-* resource/store: Resource added
-* data_source/store: Data source added
-* data_source/stores: Data source added
-* resource/authorization_model Resource added
-* data_source/authorization_model: Data source added
-* data_source/authorization_models: Data source added
-* data_source/authorization_model_document: Data source added
-* resource/relationship_tuple Resource added
-* data_source/relationship_tuple: Data source added
-* data_source/relationship_tuples: Data source added
-* data_source/check_query: Data source added
-* data_source/list_objects_query: Data source added
-* data_source/list_users_query: Data source added
+## [0.2.0] - 2025-02-22
+
+### Added
+
+- provider: Added `scopes` and `audience` attributes
+
+## [0.1.0] - 2025-02-19
+
+### Added
+
+- provider: Provider added
+- resource/store: Resource added
+- data_source/store: Data source added
+- data_source/stores: Data source added
+- resource/authorization_model Resource added
+- data_source/authorization_model: Data source added
+- data_source/authorization_models: Data source added
+- data_source/authorization_model_document: Data source added
+- resource/relationship_tuple Resource added
+- data_source/relationship_tuple: Data source added
+- data_source/relationship_tuples: Data source added
+- data_source/check_query: Data source added
+- data_source/list_objects_query: Data source added
+- data_source/list_users_query: Data source added
