@@ -18,7 +18,7 @@ Minor updates, performance improvements, code refinements, or other items which 
 Changes made to address a known vulnerability or security issue or fixes to resolve a bug impacting users in production will trigger a release as soon as the changes have been tested and are considered production-ready.  A CVE will also be issued if relevant.
 
 ## Versioning
-Releases of the OpenFGA Terraform provider will be versioned using dotted triples. For the purposes of this document, we will refer to the respective components of this triple as \<major\>.\<minor\>.\<patch\>. When release candidates are published, they will include the suffix "-rc" followed by a release candidate number which identifies them as "pre-releases".
+Releases of the OpenFGA Terraform provider will be versioned using dotted triples following the [Semantic Versioning](https://semver.org/) guidelines. For the purposes of this document, we will refer to the respective components of this triple as \<major\>.\<minor\>.\<patch\>. When release candidates are published, they will include a suffix, such as "-alpha" for early alpha builds, "-beta" for beta builds and "-rc" for release candidates, followed by a "." separator and then a number (e.g. `v1.0.0-beta.1`) which identifies them as "pre-releases".
 
 ### Major and Minor Releases
 Changes in the major and minor version components of the triple indicate changes in the functionality or performance of the OpenFGA Terraform provider which may include breaking changes requiring those integrating the provider in their project to make changes in their use of it when adopting the new version.  It is recommended to fully review the published release notes accompanying a new release before upgrading.
