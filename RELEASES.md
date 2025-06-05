@@ -28,6 +28,9 @@ While under v1.0.0, you may expect more frequent breaking changes between minor 
 ### Patch Releases
 Releases which increment only the "patch" component of the version triple may introduce new functionality, performance enhancements, bugfixes, or preview features while remaining backwards compatible with the previous release.  
 
+### Changelog
+Each release should be combined with a changelog entry in CHANGELOG.md, the CHANGELOG.md file should follow the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) convention.
+
 ## Release History
 Current and previous releases can be found [here](https://github.com/openfga/terraform-provider-openfga/releases).
 
