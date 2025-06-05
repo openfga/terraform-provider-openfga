@@ -14,7 +14,7 @@ provider "openfga" {
 provider "openfga" {
   api_url = "http://localhost:8080"
 
-  client_id          = var.openfga_client_id
-  client_secret      = var.openfga_client_secret
-  token_endpoint_url = var.openfga_token_endpoint_url
+  client_id        = var.openfga_client_id
+  client_secret    = var.openfga_client_secret
+  api_token_issuer = var.openfga_api_token_issuer
 }

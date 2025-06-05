@@ -29,7 +29,7 @@ If you configured your OpenFGA server to use [pre-shared key authentication](htt
 
 ### OIDC authentication
 
-If you configured your OpenFGA server to use [OIDC authentication](https://openfga.dev/docs/getting-started/setup-openfga/configure-openfga#oidc), set the `client_id`, `client_secret` and `token_endpoint_url` fields in the provider configuration.
+If you configured your OpenFGA server to use [OIDC authentication](https://openfga.dev/docs/getting-started/setup-openfga/configure-openfga#oidc), set the `client_id`, `client_secret` and `api_token_issuer` fields in the provider configuration.
 
 -> This will make the provider obtain an access token with the provided credentials. If you already obtained a valid access token via other means, use the `api_token` field instead.
 
@@ -52,9 +52,9 @@ provider "openfga" {
 provider "openfga" {
   api_url = "http://localhost:8080"
 
-  client_id          = var.openfga_client_id
-  client_secret      = var.openfga_client_secret
-  token_endpoint_url = var.openfga_token_endpoint_url
+  client_id        = var.openfga_client_id
+  client_secret    = var.openfga_client_secret
+  api_token_issuer = var.openfga_api_token_issuer
 }
 ```
 
@@ -63,10 +63,10 @@ provider "openfga" {
 
 ### Optional
 
+- `api_audience` (String) Audience for client credentials authentication. This can also be sourced from the `FGA_API_AUDIENCE` environment variable.
+- `api_scopes` (String) Scopes for client credentials authentication. This can also be sourced from the `FGA_API_SCOPES` environment variable.
 - `api_token` (String) Access token for authentication to the OpenFGA server. This can also be sourced from the `FGA_API_TOKEN` environment variable.
+- `api_token_issuer` (String) The issuer URL or full token endpoint URL for client credentials authentication. If only the issuer URL is provided, the `oauth/token` path is used to retrieve an access token. This can also be sourced from the `FGA_API_TOKEN_ISSUER` environment variable.
 - `api_url` (String) URL of the OpenFGA server. This can also be sourced from the `FGA_API_URL` environment variable.
-- `audience` (String) Audience for client credentials authentication. This can also be sourced from the `FGA_AUDIENCE` environment variable.
 - `client_id` (String) Client ID for client credentials authentication. This can also be sourced from the `FGA_CLIENT_ID` environment variable.
 - `client_secret` (String, Sensitive) Client secret for client credentials authentication. This can also be sourced from the `FGA_CLIENT_SECRET` environment variable.
-- `scopes` (String) Scopes for client credentials authentication. This can also be sourced from the `FGA_SCOPES` environment variable.
-- `token_endpoint_url` (String) The token endpoint URL for client credentials authentication. This can also be sourced from the `FGA_TOKEN_ENDPOINT_URL` environment variable.
