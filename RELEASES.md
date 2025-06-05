@@ -23,6 +23,8 @@ Releases of the OpenFGA Terraform provider will be versioned using dotted triple
 ### Major and Minor Releases
 Changes in the major and minor version components of the triple indicate changes in the functionality or performance of the OpenFGA Terraform provider which may include breaking changes requiring those integrating the provider in their project to make changes in their use of it when adopting the new version.  It is recommended to fully review the published release notes accompanying a new release before upgrading.
 
+While under v1.0.0, you may expect more frequent breaking changes between minor releases. We will aim to avoid breaking changes between patch releases
+
 ### Patch Releases
 Releases which increment only the "patch" component of the version triple may introduce new functionality, performance enhancements, bugfixes, or preview features while remaining backwards compatible with the previous release.  
 
