@@ -104,12 +104,12 @@ provider "openfga" {
 
 ```terraform
 provider "openfga" {
-  api_url            = "http://openfga:8080" # or use FGA_API_URL
-  client_id          = "..."                 # or use FGA_CLIENT_ID
-  client_secret      = var.client_secret     # or use FGA_CLIENT_SECRET
-  token_endpoint_url = "http://example.com"  # or use FGA_TOKEN_ENDPOINT_URL
-  audience           = "..."                 # or use FGA_AUDIENCE
-  scopes             = "..."                 # or use FGA_SCOPES
+  api_url          = "http://openfga:8080" # or use FGA_API_URL
+  client_id        = "..."                 # or use FGA_CLIENT_ID
+  client_secret    = var.client_secret     # or use FGA_CLIENT_SECRET
+  api_token_issuer = "http://example.com"  # or use FGA_API_TOKEN_ISSUER
+  api_audience     = "..."                 # or use FGA_API_AUDIENCE
+  api_scopes       = "..."                 # or use FGA_API_SCOPES
 }
 ```
 
@@ -126,9 +126,9 @@ The available environment variables are:
 - `FGA_API_TOKEN`
 - `FGA_CLIENT_ID`
 - `FGA_CLIENT_SECRET`
-- `FGA_SCOPES`
-- `FGA_AUDIENCE`
-- `FGA_TOKEN_ENDPOINT_URL`
+- `FGA_API_SCOPES`
+- `FGA_API_AUDIENCE`
+- `FGA_API_TOKEN_ISSUER`
 
 ### Using the Provider
 
