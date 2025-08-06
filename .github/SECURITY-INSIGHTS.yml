@@ -14,11 +14,11 @@ repository:
   accepts-automated-change-request: true
   no-third-party-packages: false
   core-team:
-  - name: Maurice Ackel
-    affiliation: Netlight
-    email: maurice.ackel@netlight.com
-    social: https://github.com/mauriceackel
-    primary: true
+    - name: Maurice Ackel
+      affiliation: Netlight
+      email: maurice.ackel@netlight.com
+      social: https://github.com/mauriceackel
+      primary: true
 
   license:
     url: https://raw.githubusercontent.com/openfga/terraform-provider-openfga/main/LICENSE
