@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 
 	"github.com/openfga/go-sdk/client"
+	internalError "github.com/openfga/terraform-provider-openfga/internal/apierror"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -162,6 +163,10 @@ func (r *RelationshipTupleResource) Read(ctx context.Context, req resource.ReadR
 
 	relationshipTupleModel, err := r.client.ReadRelationshipTuple(ctx, state.StoreId.ValueString(), state.RelationshipTupleModel)
 	if err != nil {
+		if internalError.IsExpectedOneResultError(err) {
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read relationship tuple, got error: %s", err))
 		return
 	}
