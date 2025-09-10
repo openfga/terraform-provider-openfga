@@ -63,6 +63,26 @@ func TestHandleAPIError(t *testing.T) {
 			givenErr:      createValidationOtherCodeError(),
 			expectedValue: false,
 		},
+		{
+			name:          "returns true for error implementing StatusCode() with 404",
+			givenErr:      createStatusCoderError(http.StatusNotFound),
+			expectedValue: true,
+		},
+		{
+			name:          "returns false for error implementing StatusCode() with 500",
+			givenErr:      createStatusCoderError(http.StatusInternalServerError),
+			expectedValue: false,
+		},
+		{
+			name:          "returns true for error implementing ResponseStatusCode() with 404",
+			givenErr:      createResponseStatusCoderError(http.StatusNotFound),
+			expectedValue: true,
+		},
+		{
+			name:          "returns false for error implementing ResponseStatusCode() with 500",
+			givenErr:      createResponseStatusCoderError(http.StatusInternalServerError),
+			expectedValue: false,
+		},
 	}
 
 	for _, tc := range testCases {
@@ -131,5 +151,37 @@ func createValidationOtherCodeError() error {
 		resp: createHttpErrorResponse(http.StatusBadRequest),
 		code: openfga.ERRORCODE_TYPE_NOT_FOUND,
 		msg:  "type_not_found",
+	}
+}
+
+// Mock error type that implements StatusCode()
+type statusCoderErr struct {
+	statusCode int
+	msg        string
+}
+
+func (e statusCoderErr) Error() string   { return e.msg }
+func (e statusCoderErr) StatusCode() int { return e.statusCode }
+
+func createStatusCoderError(statusCode int) error {
+	return statusCoderErr{
+		statusCode: statusCode,
+		msg:        fmt.Sprintf("error with status code %d", statusCode),
+	}
+}
+
+// Mock error type that implements ResponseStatusCode() (different from validationErr)
+type responseStatusCoderErr struct {
+	statusCode int
+	msg        string
+}
+
+func (e responseStatusCoderErr) Error() string           { return e.msg }
+func (e responseStatusCoderErr) ResponseStatusCode() int { return e.statusCode }
+
+func createResponseStatusCoderError(statusCode int) error {
+	return responseStatusCoderErr{
+		statusCode: statusCode,
+		msg:        fmt.Sprintf("error with response status code %d", statusCode),
 	}
 }
