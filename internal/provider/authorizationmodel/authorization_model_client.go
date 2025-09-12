@@ -54,6 +54,11 @@ func (wrapper *AuthorizationModelClient) CreateAuthorizationModel(ctx context.Co
 }
 
 func (wrapper *AuthorizationModelClient) ReadAuthorizationModel(ctx context.Context, storeId string, model AuthorizationModelModel) (*AuthorizationModelModel, error) {
+	// If the authorization model ID is empty, return a not found error
+	if model.GetId() == "" {
+		return nil, fmt.Errorf("authorization model not found: empty ID")
+	}
+
 	options := client.ClientReadAuthorizationModelOptions{
 		StoreId:              openfga.PtrString(storeId),
 		AuthorizationModelId: openfga.PtrString(model.GetId()),
@@ -63,6 +68,13 @@ func (wrapper *AuthorizationModelClient) ReadAuthorizationModel(ctx context.Cont
 	if err != nil {
 		return nil, err
 	}
+
+	// Check if the response or AuthorizationModel is nil
+	if response == nil || response.AuthorizationModel == nil {
+		return nil, fmt.Errorf("authorization model not found: nil response")
+	}
+
+	fmt.Printf("READAUTHORIZATIONMODEL RESPONSE %v:", response.AuthorizationModel)
 
 	authorizationModel := *response.AuthorizationModel
 
