@@ -17,7 +17,9 @@ func TestAccStoreResource(t *testing.T) {
 	var storeID string
 
 	resource.Test(t, resource.TestCase{
-		PreCheck:                 func() { acceptance.TestAccPreCheck(t) },
+		PreCheck: func() {
+			acceptance.TestAccPreCheck(t)
+		},
 		ProtoV6ProviderFactories: acceptance.TestAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			// Create and Read testing
@@ -51,10 +53,13 @@ func TestAccStoreResource(t *testing.T) {
 			// Drift testing: delete externally, then plan and apply recreate
 			{
 				PreConfig: func() {
-					// Delete the store externally before this step runs
 					if storeID != "" {
 						cmd := exec.Command("curl", "-X", "DELETE", "http://localhost:8080/stores/"+storeID)
-						cmd.Run()
+						err := cmd.Run()
+						if err != nil {
+							t.Fatal(err)
+						}
+
 					}
 				},
 				Config: testAccStoreResourceConfig("store-1"),

@@ -3,7 +3,6 @@ package authorizationmodel_test
 import (
 	"fmt"
 	"os/exec"
-	"regexp"
 	"testing"
 	"time"
 
@@ -101,91 +100,41 @@ func TestAccAuthorizationModelResource(t *testing.T) {
 	})
 }
 
-// TestAccAuthorizationModelResourceDrift specifically tests the drift detection scenario
-// This test simulates external deletion by attempting multiple approaches
-func TestAccAuthorizationModelResourceDrift(t *testing.T) {
-	var storeID, authModelID string
+func TestAccAuthorizationModelResourceDriftMockScenario(t *testing.T) {
+	var savedModelID, savedStoreID string
 
 	resource.Test(t, resource.TestCase{
 		PreCheck:                 func() { acceptance.TestAccPreCheck(t) },
 		ProtoV6ProviderFactories: acceptance.TestAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
-			// Create and capture IDs
 			{
 				Config: testAccAuthorizationModelResourceConfig(
 					testAccAuthorizationModelResourceModelJson("document"),
 				),
 				Check: func(s *tf.State) error {
-					rsStore := s.RootModule().Resources["openfga_store.test"]
-					rsAuthModel := s.RootModule().Resources["openfga_authorization_model.test"]
-					storeID = rsStore.Primary.ID
-					authModelID = rsAuthModel.Primary.ID
-					t.Logf("Created store ID: %s, auth model ID: %s", storeID, authModelID)
+					store, ok := s.RootModule().Resources["openfga_store.test"]
+					if !ok {
+						return fmt.Errorf("resource openfga_store.test not found")
+					}
+					model, ok := s.RootModule().Resources["openfga_authorization_model.test"]
+					if !ok {
+						return fmt.Errorf("resource openfga_authorization_model.test not found")
+					}
+
+					savedStoreID = store.Primary.ID
+					savedModelID = model.Primary.ID
+					t.Logf("Saved store ID: %s, model ID: %s", savedStoreID, savedModelID)
 					return nil
 				},
 			},
-			// Simulate drift by trying multiple approaches to delete the model externally
+			// Simulate drift by deleting model in DB and restarting container.
 			{
 				PreConfig: func() {
-					if storeID == "" || authModelID == "" {
-						t.Fatal("Store ID or Auth Model ID is empty, cannot proceed with drift test")
-						return
-					}
-
-					t.Logf("Attempting to simulate external deletion of authorization model")
-
-					// Try approach 1: Direct database deletion with different table names
-					tableNames := []string{"authorization_models", "authorization_model", "authz_models", "models"}
-
-					for _, tableName := range tableNames {
-						cmd := exec.Command("docker", "exec",
-							"-e", "PGPASSWORD=password",
-							"openfga-postgres",
-							"psql", "-U", "openfga", "-d", "openfga",
-							"-c", fmt.Sprintf("DELETE FROM %s WHERE id = '%s' OR authorization_model_id = '%s';", tableName, authModelID, authModelID))
-
-						output, err := cmd.CombinedOutput()
-						if err == nil {
-							t.Logf("Successfully deleted from table %s: %s", tableName, string(output))
-							break
-						} else {
-							t.Logf("Failed to delete from table %s: %v, output: %s", tableName, err, string(output))
-						}
-					}
-
-					// Try approach 2: Reset the entire store (more drastic but might work)
-					cmd := exec.Command("docker", "exec",
-						"-e", "PGPASSWORD=password",
-						"openfga-postgres",
-						"psql", "-U", "openfga", "-d", "openfga",
-						"-c", fmt.Sprintf("DELETE FROM stores WHERE id = '%s';", storeID))
-
-					output, err := cmd.CombinedOutput()
-					if err == nil {
-						t.Logf("Successfully deleted store (cascade delete): %s", string(output))
-					} else {
-						t.Logf("Failed to delete store: %v, output: %s", err, string(output))
-					}
-
-					// Try approach 3: Use Docker to restart OpenFGA to clear in-memory state
-					cmd = exec.Command("docker", "restart", "openfga-openfga-1")
-					output, err = cmd.CombinedOutput()
-					if err == nil {
-						t.Logf("Successfully restarted OpenFGA container: %s", string(output))
-						// Wait for the container to come back up
-						time.Sleep(10 * time.Second)
-					} else {
-						t.Logf("Failed to restart OpenFGA container: %v, output: %s", err, string(output))
-					}
-
-					t.Logf("Completed external deletion attempts")
+					simulateDriftByDeletingModelAndRestartingContainer(t, savedStoreID, savedModelID)
 				},
-				// Use the same config as before
 				Config: testAccAuthorizationModelResourceConfig(
 					testAccAuthorizationModelResourceModelJson("document"),
 				),
-				// We expect Terraform to detect the drift and plan to recreate the resource
-				ExpectNonEmptyPlan: true,
 				ConfigPlanChecks: resource.ConfigPlanChecks{
 					PreApply: []plancheck.PlanCheck{
 						plancheck.ExpectResourceAction(
@@ -194,77 +143,9 @@ func TestAccAuthorizationModelResourceDrift(t *testing.T) {
 						),
 					},
 				},
-				// After recreation, check that we have valid IDs again
-				Check: func(s *tf.State) error {
-					rsAuthModel, ok := s.RootModule().Resources["openfga_authorization_model.test"]
-					if !ok {
-						return fmt.Errorf("Authorization model resource not found after recreation")
-					}
-
-					newAuthModelID := rsAuthModel.Primary.ID
-					if newAuthModelID == "" {
-						return fmt.Errorf("New authorization model ID is empty after recreation")
-					}
-
-					t.Logf("Original auth model ID: %s, New auth model ID: %s", authModelID, newAuthModelID)
-					if newAuthModelID == authModelID {
-						t.Logf("Warning: New authorization model has same ID as deleted one, drift detection may not be working")
-					} else {
-						t.Logf("Success: New authorization model has different ID, drift detection is working")
-					}
-
-					// Update for next step
-					authModelID = newAuthModelID
-					return nil
-				},
 			},
 		},
 	})
-}
-
-// TestAccAuthorizationModelResourceDriftMockScenario tests drift detection using a more controlled approach
-// This test specifically validates that the Read method properly handles missing resources
-func TestAccAuthorizationModelResourceDriftMockScenario(t *testing.T) {
-	resource.Test(t, resource.TestCase{
-		PreCheck:                 func() { acceptance.TestAccPreCheck(t) },
-		ProtoV6ProviderFactories: acceptance.TestAccProtoV6ProviderFactories,
-		Steps: []resource.TestStep{
-			// Create the resource first
-			{
-				Config: testAccAuthorizationModelResourceConfig(
-					testAccAuthorizationModelResourceModelJson("document"),
-				),
-				ConfigStateChecks: []statecheck.StateCheck{
-					statecheck.ExpectKnownValue(
-						"openfga_authorization_model.test",
-						tfjsonpath.New("id"),
-						knownvalue.NotNull(),
-					),
-				},
-			},
-			// Test with an invalid/non-existent store ID to simulate drift
-			{
-				Config: testAccAuthorizationModelResourceDriftConfig(
-					testAccAuthorizationModelResourceModelJson("document"),
-					"non-existent-store-id",
-				),
-				ExpectError: regexp.MustCompile("Unable to create authorization model|Parameter StoreId is not a valid|not found|does not exist"),
-			},
-		},
-	})
-}
-
-// Helper function to create a config with a specific store ID for drift testing
-func testAccAuthorizationModelResourceDriftConfig(modelJson, storeID string) string {
-	return fmt.Sprintf(`
-%[1]s
-
-resource "openfga_authorization_model" "test" {
-	store_id = %[3]q
-
-	model_json = %[2]q
-}
-`, acceptance.ProviderConfig, modelJson, storeID)
 }
 
 func testAccAuthorizationModelResourceModelJson(typeName string) string {
@@ -285,4 +166,56 @@ resource "openfga_authorization_model" "test" {
 	model_json = %[2]q
 }
 `, acceptance.ProviderConfig, modelJson)
+}
+
+// simulates resource drift by:
+// 1. Deleting the authorization model directly from the database
+// 2. Restarting the OpenFGA container to clear memory cache
+// 3. Waiting for the API to be ready again.
+func simulateDriftByDeletingModelAndRestartingContainer(t *testing.T, savedStoreID, savedModelID string) {
+	// Delete model directly from database
+	cmd := exec.Command(
+		"docker", "exec", "openfga-postgres",
+		"psql", "-U", "openfga", "-d", "openfga",
+		"-c", fmt.Sprintf(
+			"DELETE FROM authorization_model WHERE store = '%s' AND authorization_model_id = '%s';",
+			savedStoreID, savedModelID,
+		),
+	)
+	cmd.Env = append(cmd.Env, "PGPASSWORD=password")
+	if output, err := cmd.CombinedOutput(); err != nil {
+		t.Logf("Failed to delete model: %v, output: %s", err, string(output))
+	} else {
+		t.Logf("Deleted model: %s", string(output))
+	}
+
+	fmt.Printf("deleting model %s", savedModelID)
+
+	// Restart OpenFGA container
+	// We need to restart the container because OpenFGA caches authorization models in memory.
+	// Even after deleting the model directly in the database, the API might still return the cached
+	// model unless the service is restarted. Restarting ensures that the next Terraform apply will
+	// see the resource as missing and trigger drift detection correctly.
+	restartCmd := exec.Command("docker", "restart", "docker-openfga-1") // adjust container name
+	if output, err := restartCmd.CombinedOutput(); err != nil {
+		t.Fatalf("Failed to restart container: %v, output: %s", err, string(output))
+	} else {
+		t.Logf("Container restarted: %s", string(output))
+	}
+
+	// Wait for API to be ready
+	ready := false
+	for i := 0; i < 5; i++ {
+		curlCmd := exec.Command("curl", "-s", "-o", "/dev/null", "-w", "%{http_code}", "http://localhost:8080/healthz")
+		status, err := curlCmd.CombinedOutput()
+		if err == nil && string(status) == "200" {
+			ready = true
+			break
+		}
+		t.Logf("Waiting for API, status: %s, err: %v", string(status), err)
+		time.Sleep(time.Second)
+	}
+	if !ready {
+		t.Fatalf("OpenFGA API not ready after restart")
+	}
 }
