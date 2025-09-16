@@ -125,10 +125,12 @@ func (r *AuthorizationModelResource) Read(ctx context.Context, req resource.Read
 
 	authorizationModelModel, err := r.client.ReadAuthorizationModel(ctx, state.StoreId.ValueString(), state.AuthorizationModelModel)
 	if err != nil {
+
 		if internalError.IsStatusNotFound(err) {
 			resp.State.RemoveResource(ctx)
 			return
 		}
+
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read authorization model, got error: %s", err))
 		return
 	}

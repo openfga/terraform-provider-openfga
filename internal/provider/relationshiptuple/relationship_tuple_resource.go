@@ -195,6 +195,10 @@ func (r *RelationshipTupleResource) Delete(ctx context.Context, req resource.Del
 
 	err := r.client.DeleteRelationshipTuple(ctx, state.StoreId.ValueString(), state.AuthorizationModelId.ValueStringPointer(), state.RelationshipTupleWithConditionModel)
 	if err != nil {
+		if internalError.IsExpectedOneResultError(err) {
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete relationship tuple, got error: %s", err))
 		return
 	}

@@ -154,7 +154,7 @@ func createValidationOtherCodeError() error {
 	}
 }
 
-// Mock error type that implements StatusCode()
+// Mock error type that implements StatusCode().
 type statusCoderErr struct {
 	statusCode int
 	msg        string
@@ -170,7 +170,7 @@ func createStatusCoderError(statusCode int) error {
 	}
 }
 
-// Mock error type that implements ResponseStatusCode() (different from validationErr)
+// Mock error type that implements ResponseStatusCode() (different from validationErr).
 type responseStatusCoderErr struct {
 	statusCode int
 	msg        string
