@@ -116,6 +116,10 @@ func (r *StoreResource) Read(ctx context.Context, req resource.ReadRequest, resp
 	storeModel, err := r.client.ReadStore(ctx, state.StoreModel)
 	if err != nil {
 		if internalError.IsStatusNotFound(err) {
+			resp.Diagnostics.AddWarning(
+				"Store not found",
+				fmt.Sprintf("Store %q no longer exists; removing from state.", storeModel.Id),
+			)
 			resp.State.RemoveResource(ctx)
 			return
 		}
