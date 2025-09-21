@@ -127,6 +127,12 @@ func (r *AuthorizationModelResource) Read(ctx context.Context, req resource.Read
 	if err != nil {
 
 		if internalError.IsStatusNotFound(err) {
+			resp.Diagnostics.AddWarning(
+				"authorization model not found",
+				fmt.Sprintf("Authorization model %q in store %q no longer exists; removing from state.",
+					state.Id.ValueString(),
+					state.StoreId.ValueString()),
+			)
 			resp.State.RemoveResource(ctx)
 			return
 		}

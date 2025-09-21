@@ -164,6 +164,13 @@ func (r *RelationshipTupleResource) Read(ctx context.Context, req resource.ReadR
 	relationshipTupleModel, err := r.client.ReadRelationshipTuple(ctx, state.StoreId.ValueString(), state.RelationshipTupleModel)
 	if err != nil {
 		if internalError.IsExpectedOneResultError(err) {
+			resp.Diagnostics.AddWarning(
+				"relationship tuple not found",
+				fmt.Sprintf("relationship tuple (user: %q, relation: %q, object: %q) no longer exists; removing from state.",
+					state.User.ValueString(),
+					state.Relation.ValueString(),
+					state.Object.ValueString()),
+			)
 			resp.State.RemoveResource(ctx)
 			return
 		}
