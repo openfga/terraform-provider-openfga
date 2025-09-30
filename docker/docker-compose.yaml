@@ -1,33 +1,6 @@
 version: '3.8'
+
 services:
-  postgres:
-    image: postgres:15
-    container_name: openfga-postgres
-    environment:
-      - POSTGRES_USER=openfga
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=openfga
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U openfga -d openfga"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-
-  openfga-migrate:
-    image: openfga/openfga:latest
-    command: migrate
-    environment:
-      - OPENFGA_DATASTORE_ENGINE=postgres
-      - OPENFGA_DATASTORE_URI=postgres://openfga:password@postgres:5432/openfga?sslmode=disable
-    depends_on:
-      postgres:
-        condition: service_healthy
-    restart: "no"
-
   openfga:
     image: openfga/openfga:latest
     command: run
@@ -35,12 +8,4 @@ services:
       - "8080:8080"
     environment:
       - OPENFGA_LOG_LEVEL=info
-      - OPENFGA_DATASTORE_ENGINE=postgres
-      - OPENFGA_DATASTORE_URI=postgres://openfga:password@postgres:5432/openfga?sslmode=disable
-    depends_on:
-      openfga-migrate:
-        condition: service_completed_successfully
-      postgres:
-        condition: service_healthy
-volumes:
-  postgres_data:
+      - OPENFGA_STORAGE_TYPE=memory
