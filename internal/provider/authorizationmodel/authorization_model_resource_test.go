@@ -114,4 +114,3 @@ resource "openfga_authorization_model" "test" {
 }
 `, acceptance.ProviderConfig, modelJson)
 }
-
