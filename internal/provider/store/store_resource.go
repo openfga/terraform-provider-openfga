@@ -11,6 +11,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 
 	"github.com/openfga/go-sdk/client"
+
+	internalError "github.com/openfga/terraform-provider-openfga/internal/apierror"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -113,6 +115,15 @@ func (r *StoreResource) Read(ctx context.Context, req resource.ReadRequest, resp
 
 	storeModel, err := r.client.ReadStore(ctx, state.StoreModel)
 	if err != nil {
+		if internalError.IsStatusNotFound(err) {
+			resp.Diagnostics.AddWarning(
+				"Store not found",
+				fmt.Sprintf("Store %q no longer exists; removing from state.", state.Id.ValueString()),
+			)
+			resp.State.RemoveResource(ctx)
+			return
+		}
+
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read store, got error: %s", err))
 		return
 	}
@@ -141,6 +152,10 @@ func (r *StoreResource) Delete(ctx context.Context, req resource.DeleteRequest, 
 
 	err := r.client.DeleteStore(ctx, state.StoreModel)
 	if err != nil {
+		if internalError.IsStatusNotFound(err) {
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete store, got error: %s", err))
 		return
 	}

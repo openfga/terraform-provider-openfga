@@ -2,6 +2,7 @@ package relationshiptuple_test
 
 import (
 	"fmt"
+	"os/exec"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
@@ -15,6 +16,8 @@ import (
 )
 
 func TestAccRelationshipTupleResource(t *testing.T) {
+	var storeID string
+
 	resource.Test(t, resource.TestCase{
 		PreCheck:                 func() { acceptance.TestAccPreCheck(t) },
 		ProtoV6ProviderFactories: acceptance.TestAccProtoV6ProviderFactories,
@@ -57,6 +60,12 @@ func TestAccRelationshipTupleResource(t *testing.T) {
 						}),
 					),
 				},
+				Check: func(s *terraform.State) error {
+					// Capture the store ID for later use in drift testing
+					rs := s.RootModule().Resources["openfga_store.test"]
+					storeID = rs.Primary.ID
+					return nil
+				},
 			},
 			// ImportState testing
 			{
@@ -93,6 +102,58 @@ func TestAccRelationshipTupleResource(t *testing.T) {
 						plancheck.ExpectResourceAction(
 							"openfga_relationship_tuple.test",
 							plancheck.ResourceActionDestroyBeforeCreate,
+						),
+					},
+				},
+				ConfigStateChecks: []statecheck.StateCheck{
+					statecheck.ExpectKnownValue(
+						"openfga_relationship_tuple.test",
+						tfjsonpath.New("store_id"),
+						knownvalue.NotNull(),
+					),
+					statecheck.ExpectKnownValue(
+						"openfga_relationship_tuple.test",
+						tfjsonpath.New("user"),
+						knownvalue.StringExact("user:user-2"),
+					),
+					statecheck.ExpectKnownValue(
+						"openfga_relationship_tuple.test",
+						tfjsonpath.New("relation"),
+						knownvalue.StringExact("viewer"),
+					),
+					statecheck.ExpectKnownValue(
+						"openfga_relationship_tuple.test",
+						tfjsonpath.New("object"),
+						knownvalue.StringExact("document:document-1"),
+					),
+					statecheck.ExpectKnownValue(
+						"openfga_relationship_tuple.test",
+						tfjsonpath.New("condition"),
+						knownvalue.ObjectExact(map[string]knownvalue.Check{
+							"name":         knownvalue.StringExact("non_expired_grant"),
+							"context_json": knownvalue.StringExact(`{"grant_duration":"10m","grant_time":"2023-01-01T00:00:00Z"}`),
+						}),
+					),
+				},
+			},
+			// Drift testing: delete externally, then plan and apply recreate
+			{
+				PreConfig: func() {
+					if storeID != "" {
+						jsonBody := `{"deletes":{"tuple_keys":[{"user":"user:user-2","relation":"viewer","object":"document:document-1","condition":{"name":"non_expired_grant","context":{"grant_time":"2023-01-01T00:00:00Z","grant_duration":"10m"}}}]}}`
+						cmd := exec.Command("curl", "-X", "POST", "-H", "Content-Type: application/json", "-d", jsonBody, "http://localhost:8080/stores/"+storeID+"/write")
+						err := cmd.Run()
+						if err != nil {
+							t.Fatal(err)
+						}
+					}
+				},
+				Config: testAccRelationshipTupleResourceConfig("user-2"),
+				ConfigPlanChecks: resource.ConfigPlanChecks{
+					PreApply: []plancheck.PlanCheck{
+						plancheck.ExpectResourceAction(
+							"openfga_relationship_tuple.test",
+							plancheck.ResourceActionCreate,
 						),
 					},
 				},

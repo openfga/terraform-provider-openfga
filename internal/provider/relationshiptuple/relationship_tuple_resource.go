@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 
 	"github.com/openfga/go-sdk/client"
+	internalError "github.com/openfga/terraform-provider-openfga/internal/apierror"
 )
 
 // Ensure provider defined types fully satisfy framework interfaces.
@@ -162,6 +163,17 @@ func (r *RelationshipTupleResource) Read(ctx context.Context, req resource.ReadR
 
 	relationshipTupleModel, err := r.client.ReadRelationshipTuple(ctx, state.StoreId.ValueString(), state.RelationshipTupleModel)
 	if err != nil {
+		if internalError.IsExpectedOneResultError(err) {
+			resp.Diagnostics.AddWarning(
+				"relationship tuple not found",
+				fmt.Sprintf("relationship tuple (user: %q, relation: %q, object: %q) no longer exists; removing from state.",
+					state.User.ValueString(),
+					state.Relation.ValueString(),
+					state.Object.ValueString()),
+			)
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to read relationship tuple, got error: %s", err))
 		return
 	}
@@ -190,6 +202,10 @@ func (r *RelationshipTupleResource) Delete(ctx context.Context, req resource.Del
 
 	err := r.client.DeleteRelationshipTuple(ctx, state.StoreId.ValueString(), state.AuthorizationModelId.ValueStringPointer(), state.RelationshipTupleWithConditionModel)
 	if err != nil {
+		if internalError.IsExpectedOneResultError(err) {
+			resp.State.RemoveResource(ctx)
+			return
+		}
 		resp.Diagnostics.AddError("Client Error", fmt.Sprintf("Unable to delete relationship tuple, got error: %s", err))
 		return
 	}
