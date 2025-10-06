@@ -1,25 +1,39 @@
-# See GitHub's documentation for more information on this file:
-# https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/configuration-options-for-dependency-updates
+# yaml-language-server: $schema=https://json.schemastore.org/dependabot-2.0.json
 version: 2
 updates:
   - package-ecosystem: "gomod"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "monday"
+    groups:
+      dependencies:
+        patterns:
+          - "*"
     commit-message:
       prefix: "chore"
       include: "scope"
   - package-ecosystem: "gomod"
     directory: "/tools"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "monday"
+    groups:
+      dependencies:
+        patterns:
+          - "*"
     commit-message:
       prefix: "chore"
       include: "scope"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "monday"
+    groups:
+      dependencies:
+        patterns:
+          - "*"
     commit-message:
       prefix: "chore"
       include: "scope"
