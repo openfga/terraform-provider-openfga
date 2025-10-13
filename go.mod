@@ -7,11 +7,11 @@ toolchain go1.24.1
 require (
 	github.com/hashicorp/terraform-plugin-framework v1.16.1
 	github.com/hashicorp/terraform-plugin-framework-jsontypes v0.2.0
-	github.com/hashicorp/terraform-plugin-framework-validators v0.18.0
+	github.com/hashicorp/terraform-plugin-framework-validators v0.19.0
 	github.com/hashicorp/terraform-plugin-go v0.29.0
 	github.com/hashicorp/terraform-plugin-testing v1.13.3
 	github.com/openfga/api/proto v0.0.0-20250127102726-f9709139a369
-	github.com/openfga/go-sdk v0.7.2
+	github.com/openfga/go-sdk v0.7.3
 	github.com/openfga/language/pkg/go v0.2.0-beta.2
 	google.golang.org/protobuf v1.36.10
 )
