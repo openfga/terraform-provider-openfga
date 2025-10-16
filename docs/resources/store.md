@@ -39,6 +39,8 @@ resource "openfga_store" "example" {
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 # Import with store ID
 terraform import openfga_store.example <store_id>

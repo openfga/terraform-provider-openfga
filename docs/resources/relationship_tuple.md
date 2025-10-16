@@ -82,6 +82,8 @@ Optional:
 
 Import is supported using the following syntax:
 
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
 ```shell
 # Import with store ID, user, relation and object (validated against latest authorization model)
 terraform import openfga_relationship_tuple.example <store_id>/<user>/<relation>/<object>
