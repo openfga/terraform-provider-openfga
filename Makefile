@@ -3,7 +3,7 @@ default: fmt lint install generate
 VERSION ?=
 GOOS := $(shell go env GOOS)
 GOARCH := $(shell go env GOARCH)
-INSTALL_DIR := $(HOME)/.terraform.d/plugins/openfga/openfga/openfga/$(VERSION)/$(GOOS)_$(GOARCH)
+INSTALL_DIR := $(HOME)/.terraform.d/plugins/registry.terraform.io/openfga/openfga/$(VERSION)/$(GOOS)_$(GOARCH)
 
 # Standard Go build (for general development)
 build:
@@ -28,7 +28,11 @@ install-local: build-local
 
 # Clean up local Terraform provider installations
 clean:
-	rm -rf $(HOME)/.terraform.d/plugins/openfga/openfga/openfga/
+ifdef VERSION
+	rm -rf $(HOME)/.terraform.d/plugins/registry.terraform.io/openfga/openfga/$(VERSION)
+else
+	rm -rf $(HOME)/.terraform.d/plugins/registry.terraform.io/openfga/openfga/
+endif
 
 lint:
 	golangci-lint run
