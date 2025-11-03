@@ -49,4 +49,4 @@ test:
 testacc:
 	TF_ACC=1 go test -v -cover -timeout=120m -p=1 ./...
 
-.PHONY: fmt lint test testacc build install build-local install-local generate clean
+.PHONY: default fmt lint test testacc build install build-local install-local generate clean
