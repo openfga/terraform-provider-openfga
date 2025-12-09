@@ -15,10 +15,10 @@ jobs:
     name: Validate PR Title
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: read  # Minimal permission - only needs to read PR metadata
+      pull-requests: read
     steps:
       - name: PR Conventional Commit Validation
-        uses: amannn/action-semantic-pull-request@0723387faaf9b38adef4571c0c5057fb9920ac94 # v5.5.3
+        uses: amannn/action-semantic-pull-request@v6  # v6.1.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -32,7 +32,6 @@ jobs:
             perf
             chore
             revert
-          # Ensure subject doesn't start with uppercase
           subjectPattern: ^(?![A-Z]).+$
           subjectPatternError: |
             The subject "{subject}" found in the pull request title "{title}"
@@ -41,7 +40,7 @@ jobs:
   label-pr:
     name: Label PR
     runs-on: ubuntu-latest
-    needs: validate-pr-title  # Only label if validation passes
+    needs: validate-pr-title
     permissions:
       pull-requests: write
       contents: read
@@ -51,12 +50,13 @@ jobs:
         with:
           script: |
             const title = context.payload.pull_request.title;
-            const typeMatch = title.match(/^(\w+)(\(.+\))?!?:/);
+            // Match conventional commit format: type(scope)?: description
+            const typeMatch = title.match(/^(feat|fix|docs|test|refactor|ci|perf|chore|revert)(\([^)]+\))?!?:/);
             if (!typeMatch) {
               console.log('No conventional commit type found in title');
               return;
             }
-            
+
             const type = typeMatch[1];
             const typeToLabel = {
               feat: 'feature',
@@ -69,7 +69,7 @@ jobs:
               chore: 'chore',
               revert: 'revert'
             };
-            
+
             const label = typeToLabel[type];
             if (label) {
               console.log(`Adding label "${label}" for type "${type}"`);
