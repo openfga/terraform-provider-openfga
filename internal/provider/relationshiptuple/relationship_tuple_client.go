@@ -6,6 +6,7 @@ import (
 
 	openfga "github.com/openfga/go-sdk"
 	"github.com/openfga/go-sdk/client"
+	internalError "github.com/openfga/terraform-provider-openfga/internal/apierror"
 )
 
 type RelationshipTupleClient struct {
@@ -78,7 +79,7 @@ func (wrapper *RelationshipTupleClient) ReadRelationshipTuple(ctx context.Contex
 	tuples := response.Tuples
 
 	if len(tuples) != 1 {
-		return nil, fmt.Errorf("expected one result but received: %d", len(tuples))
+		return nil, fmt.Errorf("%w but received: %d", internalError.ErrNotExactlyOne, len(tuples))
 	}
 
 	tuple := tuples[0].Key
