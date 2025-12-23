@@ -15,14 +15,13 @@ jobs:
     name: Validate PR Title
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: write
+      pull-requests: read
     steps:
       - name: PR Conventional Commit Validation
         uses: ytanikin/pr-conventional-commits@b72758283dcbee706975950e96bc4bf323a8d8c0 # v1.4.2
         with:
           task_types: '["feat","fix","docs","test","refactor","ci","perf","chore","revert"]'
-          add_scope_label: 'true'
-          custom_labels: '{"feat": "feature", "fix": "fix", "docs": "documentation", "test": "test", "refactor": "refactor", "ci": "CI/CD", "perf": "performance", "chore": "chore", "revert": "revert"}'
+          add_label: 'false'
 
   test:
     name: Test
