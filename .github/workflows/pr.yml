@@ -22,7 +22,6 @@ jobs:
         with:
           task_types: '["feat","fix","docs","test","refactor","ci","perf","chore","revert"]'
           add_label: 'false'
-          custom_labels: '{"feat": "feature", "fix": "fix", "docs": "documentation", "test": "test", "refactor": "refactor", "ci": "CI/CD", "perf": "performance", "chore": "chore", "revert": "revert"}'
 
   test:
     name: Test
