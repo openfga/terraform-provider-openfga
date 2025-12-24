@@ -48,40 +48,8 @@ jobs:
       - name: Add label based on PR title type
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
-          script: |
-            const title = context.payload.pull_request.title;
-            // Match conventional commit format: type(scope)?: description
-            const typeMatch = title.match(/^(feat|fix|docs|test|refactor|ci|perf|chore|revert)(\([^)]+\))?!?:/);
-            if (!typeMatch) {
-              console.log('No conventional commit type found in title');
-              return;
-            }
-
-            const type = typeMatch[1];
-            const typeToLabel = {
-              feat: 'feature',
-              fix: 'fix',
-              docs: 'documentation',
-              test: 'test',
-              refactor: 'refactor',
-              ci: 'CI/CD',
-              perf: 'performance',
-              chore: 'chore',
-              revert: 'revert'
-            };
-
-            const label = typeToLabel[type];
-            if (label) {
-              console.log(`Adding label "${label}" for type "${type}"`);
-              await github.rest.issues.addLabels({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.payload.pull_request.number,
-                labels: [label]
-              });
-            } else {
-              console.log(`No label mapping found for type "${type}"`);
-            }
+          task_types: '["feat","fix","docs","test","refactor","ci","perf","chore","revert"]'
+          add_label: 'false'
 
   test:
     name: Test
