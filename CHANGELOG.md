@@ -1,9 +1,5 @@
 ## [0.5.1] - 2026-02-19
 
-### Fixed
-
-- fix: code scanning alert workflow does not contain permissions (#58)
-
 ### Added
 
 - feat: remove resource from state when resource is not found (#67) - Thanks @EmiiFont
