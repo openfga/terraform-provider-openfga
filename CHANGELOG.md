@@ -2,7 +2,7 @@
 
 ### Fixed
 
-- fix: code scanning alert Workflow does not contain permissions (#58)
+- fix: code scanning alert workflow does not contain permissions (#58)
 
 ### Added
 
