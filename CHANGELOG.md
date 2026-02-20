@@ -10,10 +10,6 @@
 
 - provider: Renamed `scopes` to `api_scopes`, `audience` to `api_audience` and `token_endpoint_url` to `api_token_issuer`. Changed environment variable names accordingly.
 
-### Fixed
-
-- goreleaser: Changed deprecated `archives.format` field to `archives.formats`.
-
 ## [0.4.0] - 2025-06-05
 
 ### Notes
