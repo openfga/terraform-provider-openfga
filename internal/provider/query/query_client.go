@@ -46,8 +46,8 @@ func (query CheckQueryModel) ToCheckRequest() (*client.ClientCheckRequest, error
 
 func (wrapper *QueryClient) Check(ctx context.Context, storeId string, authorizationModelId string, model CheckQueryModel) (types.Bool, error) {
 	options := client.ClientCheckOptions{
-		StoreId:              openfga.PtrString(storeId),
-		AuthorizationModelId: openfga.PtrString(authorizationModelId),
+		StoreId:              openfga.ToPtr(storeId),
+		AuthorizationModelId: openfga.ToPtr(authorizationModelId),
 	}
 
 	body, err := model.ToCheckRequest()
@@ -90,8 +90,8 @@ func (query ListObjectsQueryModel) ToListObjectsRequest() (*client.ClientListObj
 
 func (wrapper *QueryClient) ListObjects(ctx context.Context, storeId string, authorizationModelId string, model ListObjectsQueryModel) (types.List, error) {
 	options := client.ClientListObjectsOptions{
-		StoreId:              openfga.PtrString(storeId),
-		AuthorizationModelId: openfga.PtrString(authorizationModelId),
+		StoreId:              openfga.ToPtr(storeId),
+		AuthorizationModelId: openfga.ToPtr(authorizationModelId),
 	}
 
 	body, err := model.ToListObjectsRequest()
@@ -146,8 +146,8 @@ func (query ListUsersQueryModel) ToListUsersRequest() (*client.ClientListUsersRe
 
 func (wrapper *QueryClient) ListUsers(ctx context.Context, storeId string, authorizationModelId string, model ListUsersQueryModel) (types.List, error) {
 	options := client.ClientListUsersOptions{
-		StoreId:              openfga.PtrString(storeId),
-		AuthorizationModelId: openfga.PtrString(authorizationModelId),
+		StoreId:              openfga.ToPtr(storeId),
+		AuthorizationModelId: openfga.ToPtr(authorizationModelId),
 	}
 
 	body, err := model.ToListUsersRequest()
