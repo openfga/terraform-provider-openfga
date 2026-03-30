@@ -33,7 +33,7 @@ func (model AuthorizationModelModel) ToCreateRequest() (*client.ClientWriteAutho
 
 func (wrapper *AuthorizationModelClient) CreateAuthorizationModel(ctx context.Context, storeId string, model AuthorizationModelModel) (*AuthorizationModelModel, error) {
 	options := client.ClientWriteAuthorizationModelOptions{
-		StoreId: openfga.PtrString(storeId),
+		StoreId: openfga.ToPtr(storeId),
 	}
 
 	body, err := model.ToCreateRequest()
@@ -55,8 +55,8 @@ func (wrapper *AuthorizationModelClient) CreateAuthorizationModel(ctx context.Co
 
 func (wrapper *AuthorizationModelClient) ReadAuthorizationModel(ctx context.Context, storeId string, model AuthorizationModelModel) (*AuthorizationModelModel, error) {
 	options := client.ClientReadAuthorizationModelOptions{
-		StoreId:              openfga.PtrString(storeId),
-		AuthorizationModelId: openfga.PtrString(model.GetId()),
+		StoreId:              openfga.ToPtr(storeId),
+		AuthorizationModelId: openfga.ToPtr(model.GetId()),
 	}
 
 	response, err := wrapper.client.ReadAuthorizationModel(ctx).Options(options).Execute()
@@ -71,7 +71,7 @@ func (wrapper *AuthorizationModelClient) ReadAuthorizationModel(ctx context.Cont
 
 func (wrapper *AuthorizationModelClient) ReadLatestAuthorizationModel(ctx context.Context, storeId string) (*AuthorizationModelModel, error) {
 	options := client.ClientReadLatestAuthorizationModelOptions{
-		StoreId: openfga.PtrString(storeId),
+		StoreId: openfga.ToPtr(storeId),
 	}
 
 	response, err := wrapper.client.ReadLatestAuthorizationModel(ctx).Options(options).Execute()
@@ -90,8 +90,8 @@ func (wrapper *AuthorizationModelClient) ReadLatestAuthorizationModel(ctx contex
 
 func (wrapper *AuthorizationModelClient) ListAuthorizationModels(ctx context.Context, storeId string) (*[]AuthorizationModelModel, error) {
 	options := client.ClientReadAuthorizationModelsOptions{
-		StoreId:           openfga.PtrString(storeId),
-		ContinuationToken: openfga.PtrString(""),
+		StoreId:           openfga.ToPtr(storeId),
+		ContinuationToken: openfga.ToPtr(""),
 	}
 
 	authorizationModels := []openfga.AuthorizationModel{}

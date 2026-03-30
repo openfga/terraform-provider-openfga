@@ -30,7 +30,7 @@ func (model RelationshipTupleWithConditionModel) ToCreateRequest() (*client.Clie
 
 func (wrapper *RelationshipTupleClient) CreateRelationshipTuple(ctx context.Context, storeId string, authorizationModelId *string, model RelationshipTupleWithConditionModel) (*RelationshipTupleWithConditionModel, error) {
 	options := client.ClientWriteOptions{
-		StoreId:              openfga.PtrString(storeId),
+		StoreId:              openfga.ToPtr(storeId),
 		AuthorizationModelId: authorizationModelId,
 	}
 
@@ -58,15 +58,15 @@ func (model RelationshipTupleModel) ToReadRequest() *client.ClientReadRequest {
 	tuple := model.ToTuple()
 
 	return &client.ClientReadRequest{
-		User:     openfga.PtrString(tuple.GetUser()),
-		Relation: openfga.PtrString(tuple.GetRelation()),
-		Object:   openfga.PtrString(tuple.GetObject()),
+		User:     openfga.ToPtr(tuple.GetUser()),
+		Relation: openfga.ToPtr(tuple.GetRelation()),
+		Object:   openfga.ToPtr(tuple.GetObject()),
 	}
 }
 
 func (wrapper *RelationshipTupleClient) ReadRelationshipTuple(ctx context.Context, storeId string, model RelationshipTupleModel) (*RelationshipTupleWithConditionModel, error) {
 	options := client.ClientReadOptions{
-		StoreId: openfga.PtrString(storeId),
+		StoreId: openfga.ToPtr(storeId),
 	}
 
 	body := model.ToReadRequest()
@@ -89,8 +89,8 @@ func (wrapper *RelationshipTupleClient) ReadRelationshipTuple(ctx context.Contex
 
 func (wrapper *RelationshipTupleClient) ListRelationshipTuples(ctx context.Context, storeId string, query *RelationshipTupleModel) (*[]RelationshipTupleWithConditionModel, error) {
 	options := client.ClientReadOptions{
-		StoreId:           openfga.PtrString(storeId),
-		ContinuationToken: openfga.PtrString(""),
+		StoreId:           openfga.ToPtr(storeId),
+		ContinuationToken: openfga.ToPtr(""),
 	}
 
 	body := client.ClientReadRequest{}
@@ -110,7 +110,7 @@ func (wrapper *RelationshipTupleClient) ListRelationshipTuples(ctx context.Conte
 			tuples = append(tuples, element.Key)
 		}
 
-		options.ContinuationToken = openfga.PtrString(response.ContinuationToken)
+		options.ContinuationToken = openfga.ToPtr(response.ContinuationToken)
 	}
 
 	relationshipTupleModels := []RelationshipTupleWithConditionModel{}
@@ -132,7 +132,7 @@ func (model RelationshipTupleModel) ToDeleteRequest() *client.ClientDeleteTuples
 
 func (wrapper *RelationshipTupleClient) DeleteRelationshipTuple(ctx context.Context, storeId string, authorizationModelId *string, model RelationshipTupleWithConditionModel) error {
 	options := client.ClientWriteOptions{
-		StoreId:              openfga.PtrString(storeId),
+		StoreId:              openfga.ToPtr(storeId),
 		AuthorizationModelId: authorizationModelId,
 	}
 

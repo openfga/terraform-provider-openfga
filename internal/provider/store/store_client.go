@@ -38,7 +38,7 @@ func (wrapper *StoreClient) CreateStore(ctx context.Context, model StoreModel) (
 
 func (wrapper *StoreClient) ReadStore(ctx context.Context, model StoreModel) (*StoreModel, error) {
 	options := client.ClientGetStoreOptions{
-		StoreId: openfga.PtrString(model.GetId()),
+		StoreId: openfga.ToPtr(model.GetId()),
 	}
 
 	response, err := wrapper.client.GetStore(ctx).Options(options).Execute()
@@ -51,7 +51,7 @@ func (wrapper *StoreClient) ReadStore(ctx context.Context, model StoreModel) (*S
 
 func (wrapper *StoreClient) ListStores(ctx context.Context) (*[]StoreModel, error) {
 	options := client.ClientListStoresOptions{
-		ContinuationToken: openfga.PtrString(""),
+		ContinuationToken: openfga.ToPtr(""),
 	}
 
 	stores := []openfga.Store{}
@@ -64,7 +64,7 @@ func (wrapper *StoreClient) ListStores(ctx context.Context) (*[]StoreModel, erro
 
 		stores = append(stores, response.Stores...)
 
-		options.ContinuationToken = openfga.PtrString(response.ContinuationToken)
+		options.ContinuationToken = openfga.ToPtr(response.ContinuationToken)
 	}
 
 	storeModels := []StoreModel{}
@@ -80,7 +80,7 @@ func (wrapper *StoreClient) ListStores(ctx context.Context) (*[]StoreModel, erro
 
 func (wrapper *StoreClient) DeleteStore(ctx context.Context, model StoreModel) error {
 	options := client.ClientDeleteStoreOptions{
-		StoreId: openfga.PtrString(model.GetId()),
+		StoreId: openfga.ToPtr(model.GetId()),
 	}
 
 	_, err := wrapper.client.DeleteStore(ctx).Options(options).Execute()
