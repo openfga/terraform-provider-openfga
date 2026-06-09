@@ -18,10 +18,34 @@ jobs:
     name: Test
     uses: ./.github/workflows/test.yml
 
+  verify-version:
+    name: Verify Version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        with:
+          persist-credentials: false
+
+      - name: Verify tag matches the release-please manifest
+        run: |
+          TAG_VERSION="${GITHUB_REF#refs/tags/v}"
+          MANIFEST_VERSION=$(jq -r '.["."]' .release-please-manifest.json)
+
+          echo "Tag: $TAG_VERSION | Manifest: $MANIFEST_VERSION"
+
+          if [[ "$TAG_VERSION" != "$MANIFEST_VERSION" ]]; then
+            echo "ERROR: Tag version does not match manifest version"
+            exit 1
+          fi
+          echo "All versions verified: $TAG_VERSION"
+
   release:
     name: Release
     runs-on: ubuntu-latest
-    needs: test
+    needs: [test, verify-version]
+    # GoReleaser creates the GitHub release as a draft (see `release.draft` in
+    # .goreleaser.yml); the `undraft-release` job below publishes it once all
+    # assets are uploaded. This is required to be safe with immutable releases.
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
@@ -45,3 +69,13 @@ jobs:
           # GitHub sets the GITHUB_TOKEN secret automatically.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
+
+  # Publishes the draft release created by GoReleaser. Running this only after
+  # all assets are uploaded keeps the published (immutable) release complete.
+  undraft-release:
+    name: Undraft Release
+    needs: [release]
+    permissions:
+      contents: write
+    uses: openfga/.github/.github/workflows/undraft-release.yml@main
+

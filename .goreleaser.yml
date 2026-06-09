@@ -56,8 +56,11 @@ release:
     - glob: 'terraform-registry-manifest.json'
       name_template: '{{ .ProjectName }}_{{ .Version }}_manifest.json'
   prerelease: auto
-  # If you want to manually examine the release before its live, uncomment this line:
-  # draft: true
+  # The release is created as a draft so that all assets (archives, checksums,
+  # signatures, provenance) are uploaded before the release is published. The
+  # `undraft-release` job in the release workflow publishes it once everything is
+  # attached. This is required to be safe with GitHub immutable releases.
+  draft: true
 changelog:
   use: github-native
 git:
