@@ -10,7 +10,7 @@ require (
 	github.com/hashicorp/terraform-plugin-testing v1.16.0
 	github.com/openfga/api/proto v0.0.0-20260319214821-f153694bfc20
 	github.com/openfga/go-sdk v0.8.2
-	github.com/openfga/language/pkg/go v0.2.1
+	github.com/openfga/language/pkg/go v0.3.0
 	google.golang.org/protobuf v1.36.11
 )
 
