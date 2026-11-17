@@ -56,11 +56,14 @@ release:
     - glob: 'terraform-registry-manifest.json'
       name_template: '{{ .ProjectName }}_{{ .Version }}_manifest.json'
   prerelease: auto
-  # The release is created as a draft so that all assets (archives, checksums,
-  # signatures, provenance) are uploaded before the release is published. The
-  # `undraft-release` job in the release workflow publishes it once everything is
-  # attached. This is required to be safe with GitHub immutable releases.
+  # release-please creates a draft release named after the tag with the
+  # CHANGELOG notes. GoReleaser uploads the assets to that draft instead of
+  # creating a second one, and keeps its notes. The `undraft-release` job in the
+  # release workflow publishes it once everything is attached, which is required
+  # to be safe with GitHub immutable releases.
   draft: true
+  use_existing_draft: true
+  mode: keep-existing
 changelog:
   use: github-native
 git:

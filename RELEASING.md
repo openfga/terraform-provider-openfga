@@ -95,26 +95,9 @@ In addition to these duties, if the release is a security fix the release manage
 
 ## Artifacts
 
-### Binaries
+Each release has 17 files: 14 provider zips, the checksums file, its signature, and the registry manifest.
 
-#### MacOS
-- terraform-provider-openfga_X.Y.Z_darwin_amd64.tar.gz
-- terraform-provider-openfga_X.Y.Z_darwin_arm64.tar.gz
-
-#### Linux
-- terraform-provider-openfga_X.Y.Z_linux_386.tar.gz
-- terraform-provider-openfga_X.Y.Z_linux_amd64.tar.gz
-- terraform-provider-openfga_X.Y.Z_linux_arm.tar.gz
-- terraform-provider-openfga_X.Y.Z_linux_arm64.tar.gz
-
-#### Windows
-- terraform-provider-openfga_X.Y.Z_windows_386.tar.gz
-- terraform-provider-openfga_X.Y.Z_windows_amd64.tar.gz
-- terraform-provider-openfga_X.Y.Z_windows_arm.tar.gz
-- terraform-provider-openfga_X.Y.Z_windows_arm64.tar.gz
-
-#### FreeBSD
-- terraform-provider-openfga_X.Y.Z_freebsd_386.tar.gz
-- terraform-provider-openfga_X.Y.Z_freebsd_amd64.tar.gz
-- terraform-provider-openfga_X.Y.Z_freebsd_arm.tar.gz
-- terraform-provider-openfga_X.Y.Z_freebsd_arm64.tar.gz
+- `terraform-provider-openfga_X.Y.Z_<os>_<arch>.zip` for darwin (amd64, arm64), linux, windows and freebsd (386, amd64, arm, arm64)
+- `terraform-provider-openfga_X.Y.Z_SHA256SUMS`
+- `terraform-provider-openfga_X.Y.Z_SHA256SUMS.sig`
+- `terraform-provider-openfga_X.Y.Z_manifest.json`
