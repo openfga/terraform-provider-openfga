@@ -4,6 +4,13 @@
 
 - chore: Bumped `google.golang.org/grpc` to v1.79.3 to resolve [CVE-2026-33186](https://github.com/grpc/grpc-go/security/advisories/GHSA-p77j-4mvh-x3m3)
 
+## [0.5.2](https://github.com/openfga/terraform-provider-openfga/compare/v0.5.1...v0.5.2) (2026-11-17)
+
+
+### Miscellaneous
+
+* release 0.5.2 ([3cc624c](https://github.com/openfga/terraform-provider-openfga/commit/3cc624c4935acad1d2015039d417a9f08e57cc2e))
+
 ## [0.5.1] - 2026-02-19
 
 ### Added
