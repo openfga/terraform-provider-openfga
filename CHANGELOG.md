@@ -1,15 +1,10 @@
-## [Unreleased]
-
-### Security
-
-- chore: Bumped `google.golang.org/grpc` to v1.79.3 to resolve [CVE-2026-33186](https://github.com/grpc/grpc-go/security/advisories/GHSA-p77j-4mvh-x3m3)
-
 ## [0.5.2](https://github.com/openfga/terraform-provider-openfga/compare/v0.5.1...v0.5.2) (2026-11-17)
 
 
-### Miscellaneous
+### Security
 
-* release 0.5.2 ([3cc624c](https://github.com/openfga/terraform-provider-openfga/commit/3cc624c4935acad1d2015039d417a9f08e57cc2e))
+* bump github.com/openfga/go-sdk to v0.8.4 to resolve [GHSA-4gwj-8j4m-8hm2](https://github.com/openfga/go-sdk/security/advisories/GHSA-4gwj-8j4m-8hm2) ([#131](https://github.com/openfga/terraform-provider-openfga/issues/131)) ([57e7d8c](https://github.com/openfga/terraform-provider-openfga/commit/57e7d8cbe975fb1fbb6cb05e86d1f909d0c9cfdf))
+* bump `google.golang.org/grpc` to v1.79.3 to resolve [CVE-2026-33186](https://github.com/grpc/grpc-go/security/advisories/GHSA-p77j-4mvh-x3m3)
 
 ## [0.5.1] - 2026-02-19
 
